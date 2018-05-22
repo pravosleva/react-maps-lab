@@ -6,6 +6,7 @@ import reducer from './reducers';
 import Routes from './routes';
 
 const store = createStore(reducer);
+
 render(
   <Provider store={store}>
     <Routes />

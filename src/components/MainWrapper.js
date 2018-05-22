@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 
 export const MainFlexWrapper = styled('div')`
+  font-family: Montserrat;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
