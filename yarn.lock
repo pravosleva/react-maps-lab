@@ -6586,6 +6586,10 @@ sw-toolbox@^3.4.0:
     path-to-regexp "^1.0.1"
     serviceworker-cache-polyfill "^4.0.0"
 
+sweetalert2@^7.20.10:
+  version "7.20.10"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-7.20.10.tgz#83d6f5aee40c7b1582bd01e99fd9f81b76cdccbb"
+
 symbol-observable@^1.0.4, symbol-observable@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
