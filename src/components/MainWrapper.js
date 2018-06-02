@@ -1,17 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 
 export const MainFlexWrapper = styled('div')`
   font-family: Montserrat;
   display: flex;
-  flex-flow: row nowrap;
-    /*align-items: center;*/
-  justify-content: flex-start;
   align-items: stretch;
   align-content: center;
 
   width: 100%;
+  height: calc(100vh);
 `;
 
 export const MainFlexElement = styled('div')`
@@ -19,8 +17,10 @@ export const MainFlexElement = styled('div')`
     padding: 20px;
     width: 250px;
     max-width: 250px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
   }
   &:nth-child(2n) {
     width: calc(100% - 250px);
   }
+  ${(props) => props.bordered && css`border: 1px dashed red;`}
 `;

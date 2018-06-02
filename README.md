@@ -8,9 +8,9 @@ $ npm start
 ```
 
 ## TODO:
-- [x] [Example1](http:localhost:3000/example1)
-- [x] [Example2](http:localhost:3000/example2)
-- [ ] Example3
+- [x] [Example1](http://localhost:3000/example1)
+- [x] [Example2](http://localhost:3000/example2)
+- [ ] Example3 like uremont.com new style: Marker and label.
 
 # Original ReadMe
 
