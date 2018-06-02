@@ -63,9 +63,8 @@ const mapState = ({ counter }) => ({
 const IncreaseFunctional = withStateHandlers(
   { localCount: 0 },
   {
-    onClick: ({ localCount }, props) => async() => {
-      // console.log(props);
-      await props.dispatch(addCounter());
+    onClick: ({ localCount }, props) => () => {
+      props.dispatch(addCounter());
       return { localCount: localCount + 1 }
     },
   }
