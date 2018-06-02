@@ -4,7 +4,7 @@ import { Home } from '../components/Home';
 import NotFound from '../components/NotFound';
 import {
   Example1,
-  Example2,
+  // Example2,
   Example3,
 } from '../components/Examples';
 // import { InputSearch } from '../components/Input';
@@ -48,12 +48,12 @@ const routes = [
     main: () => <Example1 />,
     link: { text: 'Example1' },
   },
-  {
-    path: '/example2',
-    exact: true,
-    main: () => <Example2 />,
-    link: { text: 'Example2' },
-  },
+  // {
+  //   path: '/example2',
+  //   exact: true,
+  //   main: () => <Example2 />,
+  //   link: { text: 'Example2' },
+  // },
   {
     path: '/example3',
     exact: true,

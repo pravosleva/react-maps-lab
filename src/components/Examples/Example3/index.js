@@ -42,7 +42,7 @@ const tstButton = (props) => {
         <WrapperElement>
           <Button onClick={async () => {
             await props.onClick();
-            await props.dispatch(addCounter());
+            // await props.dispatch(addCounter());
           }}>
             {`Local counter: ${props.localCount} Global counter: ${props.globalCount}`}
           </Button>
@@ -63,7 +63,11 @@ const mapState = ({ counter }) => ({
 const IncreaseFunctional = withStateHandlers(
   { localCount: 0 },
   {
-    onClick: ({ localCount }) => () => ({ localCount: localCount + 1 }),
+    onClick: ({ localCount }, props) => async() => {
+      // console.log(props);
+      await props.dispatch(addCounter());
+      return { localCount: localCount + 1 }
+    },
   }
 );
 
