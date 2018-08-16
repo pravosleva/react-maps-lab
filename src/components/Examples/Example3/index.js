@@ -1,5 +1,8 @@
 import React from 'react';
-import { compose, withProps, withHandlers, withStateHandlers } from 'recompose'; // , withState,
+import {
+  // compose, withProps, withHandlers,
+  withStateHandlers,
+} from 'recompose'; // , withState,
 
 import { connect } from 'react-redux';
 import { addCounter } from '../../../actions';

@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'; // , Redirect
 import { Home } from '../components/Home';
 import NotFound from '../components/NotFound';
 import {
   Example1,
-  // Example2,
+  Example2,
   Example3,
 } from '../components/Examples';
 // import { InputSearch } from '../components/Input';
@@ -31,10 +31,6 @@ const Descr = styled('div')`
   color: gray;
 `;
 
-const mapState = ({ markers }) => ({
-  markers
-});
-
 const routes = [
   {
     path: '/',
@@ -46,19 +42,19 @@ const routes = [
     path: '/example1',
     exact: true,
     main: () => <Example1 />,
-    link: { text: 'Example1' },
+    link: { text: 'Example1', descr: 'Simplest map with a marker usage sample' },
   },
-  // {
-  //   path: '/example2',
-  //   exact: true,
-  //   main: () => <Example2 />,
-  //   link: { text: 'Example2' },
-  // },
+  {
+    path: '/example2',
+    exact: true,
+    main: () => <Example2 />,
+    link: { text: 'Example2', descr: 'react-geolocated usage example. And also open console then drag & drop the map...' },
+  },
   {
     path: '/example3',
     exact: true,
     main: () => <Example3 />,
-    link: { text: 'Example3', descr: 'withStateHandlers btn example' },
+    link: { text: 'Example3', descr: 'hoc withStateHandlers () example' },
   },
 ];
 
@@ -68,18 +64,18 @@ class Routes extends React.Component {
     searchField: PropTypes.string.isRequired,
   }
 
-  state = { isMounted: false }
+  state = { isMntd: false }
 
   async componentDidMount() {
-    this.state.isMounted = true;
+    this.state.isMntd = true;
 
-    if(!this.isMounted) {
+    if(!this.isMntd) {
       this.props.dispatch(updateSearchField({ target: { value: 'tst' } }));
     }
   }
 
   async componentWillUnMount() {
-    this.state.isMounted = false;
+    this.state.isMntd = false;
   }
 
   handler = (e) => this.props.dispatch(updateSearchField(e))
@@ -98,20 +94,19 @@ class Routes extends React.Component {
             */}
             <ul style={{ listStyleType: 'none', padding: 0 }}>
               {
-                routes.map((route, index) => {
-                  if (route.link) {
-                    return (
-                      <li key={index}>
-                        <Link to={route.path}>{route.link.text}</Link>
-                        {route.link.descr ? <Descr style={{ paddingLeft: '15px' }}>{route.link.descr}</Descr> : null}
-                      </li>
-                    )
-                  }
-                })
+                routes.map((route, index) => (
+                  route.link ? (
+                    <li key={index}>
+                      <Link to={route.path}>{route.link.text}</Link>
+                      {route.link.descr ? <Descr style={{ paddingLeft: '15px' }}>{route.link.descr}</Descr> : null}
+                    </li>
+                  ) : null
+                ))
               }
               <li>
-                <a href='#' onClick={
-                  (e) => {
+                <a
+                  href='/'
+                  onClick={(e) => {
                     e.preventDefault();
                     Swal({
                       title: 'Are you sure?',

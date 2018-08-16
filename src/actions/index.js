@@ -20,3 +20,8 @@ export const updateMarkers = (markers) => ({
   type: actionType.UPDATE_MARKERS,
   payload: markers,
 });
+
+export const updateUserGeoParams = (obj) => ({
+  type: actionType.UPDATE_GEO_PARAMS,
+  payload: obj,
+});
