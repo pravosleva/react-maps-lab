@@ -1,21 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { compose, withProps } from 'recompose';
+import { compose, withProps, withHandlers } from 'recompose';
 import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   Marker,
-  // withHandlers,
 } from 'react-google-maps';
-// import { geolocated } from 'react-geolocated';
 import Geo from './Geo';
 import { updateUserGeoParams } from '../../../actions';
+import { specialLog } from '../specialLog';
+// specialLog('look', null, ['tst']);
+
 
 const mapState = ({ userGeoParams, dispatch }) => ({
   userGeoParams,
   dispatch,
 });
+
+const refs = { map: {} };
 
 const MyMapComponent = connect(mapState)(compose(
   withProps({
@@ -24,18 +27,70 @@ const MyMapComponent = connect(mapState)(compose(
     containerElement: <div style={{ height: `100vh` }} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
-  // withHandlers(() => ({
-  //   onMapMounted: () => (ref) => {
-  //     refs.map = ref;
-  //   }
-  // })),
+  withHandlers(() => ({
+    onMapMounted: () => (ref) => {
+      refs.map = ref;
+    },
+
+    /* COULD BE HELPFUL */
+    // onMarkerClustererClick: () => (markerClusterer) => {
+    //   const clickedMarkers = markerClusterer.getMarkers();
+    //
+    //   console.log(markerClusterer);
+    // },
+    // onMarkerDownClick: (props) => (marker) => {
+    //   console.log(props);
+    //   const newCenter = {
+    //     lat: marker.latLng.lat(),
+    //     lng: marker.latLng.lng(),
+    //   };
+
+    //   refs.map.panTo(newCenter);
+    // },
+  })),
   withScriptjs,
   withGoogleMap,
 )((props) =>
   <GoogleMap
+    // ref='map'
     defaultZoom={8}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
     center={props.userGeoParams.mapCenter}
+    ref={props.onMapMounted}
+    onDragEnd={async () => {
+      console.clear();
+
+      const getCoords = () => ({ lat: refs.map.getCenter().lat(), lng: refs.map.getCenter().lng() });
+      const getRectangle = () => refs.map.getBounds();
+      const bounds = refs.map.getBounds();
+
+      // https://developers.google.com/maps/documentation/javascript/reference/map#Map.getBounds
+      await specialLog(
+        '1) BOUNDS\n\trefs.map.getBounds()',
+        null,
+        [getRectangle(), 'https://developers.google.com/maps/documentation/javascript/reference/map#Map.getBounds']
+      );
+
+      // debounce () should be used...
+      // await props.onChangeMapCenter(getCoords())
+      await (() => {
+        console.log('onDragEnd ()');
+        return Promise.resolve();
+      })()
+        .then(async () => {
+          const mapCenter = getCoords();
+
+          await specialLog('2) CENTER\n{\n\tlat: refs.map.getCenter().lat()\n\tlng: refs.map.getCenter().lng()\n}', null, [mapCenter]);
+        })
+        .then(async () => {
+          const ne = bounds.getNorthEast();
+          const sw = bounds.getSouthWest();
+
+          await specialLog('3.1)\nbounds= refs.map.getBounds()', null, [bounds]);
+          await specialLog('3.2)\nne= bounds.getNorthEast()\n\tne.lat()\n\tne.lng()', null, [ne, ne.lat(), ne.lng()]);
+          await specialLog('3.3)\nsw= bounds.getSouthWest()\n\tsw.lat()\n\tsw.lng()', null, [sw, sw.lat(), sw.lng()]);
+        });
+      }}
   >
     {
       props.isMarkerShown && (
