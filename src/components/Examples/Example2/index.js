@@ -66,7 +66,7 @@ const MyMapComponent = connect(mapState)(compose(
 
       // https://developers.google.com/maps/documentation/javascript/reference/map#Map.getBounds
       await specialLog(
-        '1) BOUNDS\n\trefs.map.getBounds()',
+        '1) BOUNDS\nrefs.map.getBounds()',
         null,
         [getRectangle(), 'https://developers.google.com/maps/documentation/javascript/reference/map#Map.getBounds']
       );
@@ -80,15 +80,15 @@ const MyMapComponent = connect(mapState)(compose(
         .then(async () => {
           const mapCenter = getCoords();
 
-          await specialLog('2) CENTER\n{\n\tlat: refs.map.getCenter().lat()\n\tlng: refs.map.getCenter().lng()\n}', null, [mapCenter]);
+          await specialLog('2) CENTER\nrefs.map.getCenter().lat()\nrefs.map.getCenter().lng()', null, [mapCenter.lat, mapCenter.lng]);
         })
         .then(async () => {
           const ne = bounds.getNorthEast();
           const sw = bounds.getSouthWest();
 
           await specialLog('3.1)\nbounds= refs.map.getBounds()', null, [bounds]);
-          await specialLog('3.2)\nne= bounds.getNorthEast()\n\tne.lat()\n\tne.lng()', null, [ne, ne.lat(), ne.lng()]);
-          await specialLog('3.3)\nsw= bounds.getSouthWest()\n\tsw.lat()\n\tsw.lng()', null, [sw, sw.lat(), sw.lng()]);
+          await specialLog('3.2)\nne= bounds.getNorthEast()\nne.lat()\nne.lng()', null, [ne, ne.lat(), ne.lng()]);
+          await specialLog('3.3)\nsw= bounds.getSouthWest()\nsw.lat()\nsw.lng()', null, [sw, sw.lat(), sw.lng()]);
         });
       }}
   >

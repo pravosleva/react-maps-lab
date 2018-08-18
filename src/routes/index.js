@@ -6,6 +6,7 @@ import {
   Example1,
   Example2,
   Example3,
+  Example4,
 } from '../components/Examples';
 // import { InputSearch } from '../components/Input';
 
@@ -54,7 +55,13 @@ const routes = [
     path: '/example3',
     exact: true,
     main: () => <Example3 />,
-    link: { text: 'Example3', descr: 'hoc withStateHandlers () example' },
+    link: { text: 'Example3', descr: 'HOC & withStateHandlers () example' },
+  },
+  {
+    path: '/example4',
+    exact: true,
+    main: () => <Example4 />,
+    link: { text: 'Example4', descr: 'Markers and clustering. Markers taken from store & put to HOC state...' },
   },
 ];
 

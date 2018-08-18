@@ -1,6 +1,4 @@
-# Google Maps api usage
-
-With react-google-maps.
+# Google Maps api usage with `react-google-maps`
 
 ```
 $ npm i
@@ -9,8 +7,13 @@ $ npm start
 
 ## TODO:
 - [x] [Example1](http://localhost:3000/example1)
+Simplest map with a marker usage sample.
 - [x] [Example2](http://localhost:3000/example2)
-- [ ] Example3 like uremont.com new style: Marker and label.
+`react-geolocated` usage example. And also open console then drag & drop the map...
+- [x] [Example3](http://localhost:3000/example3)
+hoc `withStateHandlers` example.
+- [ ] [Example4](http://localhost:3000/example4)
+Markers and clustering experience.
 
 # Original ReadMe
 

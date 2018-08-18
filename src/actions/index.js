@@ -21,6 +21,16 @@ export const updateMarkers = (markers) => ({
   payload: markers,
 });
 
+export const updateActiveMarkerKey = (markerKey) => ({
+  type: actionType.UPDATE_ACTIVE_MARKER_KEY,
+  payload: markerKey,
+});
+
+export const updateMapCenter = (mapCenter) => ({
+  type: actionType.UPDATE_MAP_CENTER,
+  payload: mapCenter,
+});
+
 export const updateUserGeoParams = (obj) => ({
   type: actionType.UPDATE_GEO_PARAMS,
   payload: obj,
