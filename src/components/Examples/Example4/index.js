@@ -33,8 +33,6 @@ const InfoHeader = styled('h1')`
   font-weight: 600;
 `;
 
-// const refs = { map: {} };
-
 const MyMapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDvWOdmtDGOybXpF7XEdixoIImLcCDTzdQ",
@@ -43,8 +41,8 @@ const MyMapComponent = compose(
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withHandlers(() => ({
-    onMarkerClustererClick: () => async (markerClusterer) => {
-      const clickedMarkers = markerClusterer.getMarkers();
+    onMarkerClustererClick: () => async (obj) => {
+      const clickedMarkers = obj.markerClusterer_.getMarkers();
 
       await specialLog(
         '1) onMarkerClustererClick ()\nconst clickedMarkers = markerClusterer.getMarkers();',
@@ -52,15 +50,16 @@ const MyMapComponent = compose(
         [clickedMarkers],
       );
     },
-    mapMoved: () => () => {
-      console.log('Map moved...');
+    mapMoved: (props) => async () => {
+      console.clear();
+      await specialLog('Map moved. props in HOC:', null, [props]);
     },
   })),
   withScriptjs,
   withGoogleMap,
 )((props) =>
   <GoogleMap
-    defaultZoom={8}
+    defaultZoom={5}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
     center={props.mapCenter}
     // onZoomChanged={props.onZoomChanged}
@@ -71,7 +70,7 @@ const MyMapComponent = compose(
       averageCenter
       enableRetinaIcons
       styles={props.styles}
-      // imagePath='/static/img/map/cluster/m'
+      // imagePath='/img/map/m'
       gridSize={100}
       minimumClusterSize={2}
     >
@@ -84,7 +83,7 @@ const MyMapComponent = compose(
           <Marker
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={onClick}
-            // icon='/static/img/map/marker-24px.png'
+            icon='/img/map/marker-24px.png'
             key={marker.markerKey || Math.random()}
           >
             {
