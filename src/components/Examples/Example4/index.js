@@ -43,9 +43,6 @@ const MyMapComponent = compose(
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withHandlers(() => ({
-    // onMapMounted: () => (ref) => {
-    //   refs.map = ref;
-    // },
     onMarkerClustererClick: () => async (markerClusterer) => {
       const clickedMarkers = markerClusterer.getMarkers();
 
@@ -55,6 +52,9 @@ const MyMapComponent = compose(
         [clickedMarkers],
       );
     },
+    mapMoved: () => () => {
+      console.log('Map moved...');
+    },
   })),
   withScriptjs,
   withGoogleMap,
@@ -63,6 +63,8 @@ const MyMapComponent = compose(
     defaultZoom={8}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
     center={props.mapCenter}
+    // onZoomChanged={props.onZoomChanged}
+    onDragEnd={props.mapMoved}
   >
     <MarkerClusterer
       onClick={(arg) => props.resetActiveMarkerKey().then(() => props.onMarkerClustererClick(arg))}
@@ -70,8 +72,8 @@ const MyMapComponent = compose(
       enableRetinaIcons
       styles={props.styles}
       // imagePath='/static/img/map/cluster/m'
-      gridSize={10}
-      minimumClusterSize={5}
+      gridSize={100}
+      minimumClusterSize={2}
     >
     {
       props.items.map((marker) => {
@@ -124,6 +126,9 @@ class MyFancyComponent extends React.PureComponent {
     this.props.dispatch(updateActiveMarkerKey('nothing'));
     return Promise.resolve();
   }
+  // onZoomChange = (arg) => {
+  //   console.log(arg);
+  // }
 
   render() {
     return (
@@ -134,6 +139,7 @@ class MyFancyComponent extends React.PureComponent {
         activeMarkerKey={this.props.activeMarkerKey}
         resetActiveMarkerKey={this.resetActiveMarkerKey}
         mapCenter={this.props.mapCenter}
+        // onZoomChange={this.onZoomChange}
       />
     )
   }
