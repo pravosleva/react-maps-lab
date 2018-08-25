@@ -7,13 +7,15 @@ $ npm start
 
 ## TODO:
 - [x] [Example1](http://localhost:3000/example1)
-Simplest map with a marker usage sample.
+HOC. Simplest map with a marker usage sample.
 - [x] [Example2](http://localhost:3000/example2)
-`react-geolocated` usage example. And also open console then drag & drop the map...
-- [x] [Example3](http://localhost:3000/example3)
-hoc `withStateHandlers` example.
-- [ ] [Example4](http://localhost:3000/example4)
-Markers and clustering experience.
+HOC & `react-geolocated` usage example. And also open console then drag & drop the map...
+- [x] Example3
+HOC `withStateHandlers` example.
+- [x] Example4
+HOC. Markers and MarkerClusterers.
+- [x] Example5
+HOC, but this pattern is better then Example4.
 
 # Original ReadMe
 

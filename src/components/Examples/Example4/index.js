@@ -12,7 +12,6 @@ import styled from 'styled-components';
 import { specialLog } from '../specialLog'; // specialLog('look', null, ['tst']);
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import { updateActiveMarkerKey, updateMapCenter } from '../../../actions';
-import NoSSR from 'react-no-ssr';
 
 
 const mapState = ({ markers, dispatch }) => ({
@@ -99,72 +98,70 @@ const MyMapComponent = compose(
   withScriptjs,
   withGoogleMap,
 )((props) =>
-  <NoSSR>
-    <GoogleMap
-      ref={props.onMapLoaded}
-      defaultZoom={5}
-      defaultCenter={{ lat: -34.397, lng: 150.644 }}
-      center={props.mapCenter}
-      // zoom={props.zoom}
-      onZoomChanged={async () => {
-        await specialLog('onZoomChanged: () => {}\nrefs.map.getZoom ()', null, [refs.map.getZoom()]);
-      }}
-      onChangeMapCenter={props.onChangeMapCenter}
-      onDragEnd={props.mapMoved}
-      disableDefaultUI
-      defaultOptions={{
-        // these following 7 options turn certain controls off
-        streetViewControl: false,
-        scaleControl: false,
-        mapTypeControl: false,
-        panControl: false,
-        zoomControl: true,
-        rotateControl: false,
-        fullscreenControl: false,
-      }}
+  <GoogleMap
+    ref={props.onMapLoaded}
+    defaultZoom={5}
+    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    center={props.mapCenter}
+    // zoom={props.zoom}
+    onZoomChanged={async () => {
+      await specialLog('onZoomChanged: () => {}\nrefs.map.getZoom ()', null, [refs.map.getZoom()]);
+    }}
+    onChangeMapCenter={props.onChangeMapCenter}
+    onDragEnd={props.mapMoved}
+    disableDefaultUI
+    defaultOptions={{
+      // these following 7 options turn certain controls off
+      streetViewControl: false,
+      scaleControl: false,
+      mapTypeControl: false,
+      panControl: false,
+      zoomControl: true,
+      rotateControl: false,
+      fullscreenControl: false,
+    }}
+  >
+    <MarkerClusterer
+      onClick={(arg) => props.resetActiveMarkerKey().then(() => props.onMarkerClustererClick(arg))}
+      averageCenter
+      enableRetinaIcons
+      styles={props.clusterStyles}
+      // imagePath='img/map/m'
+      gridSize={100}
+      minimumClusterSize={2}
     >
-      <MarkerClusterer
-        onClick={(arg) => props.resetActiveMarkerKey().then(() => props.onMarkerClustererClick(arg))}
-        averageCenter
-        enableRetinaIcons
-        styles={props.clusterStyles}
-        // imagePath='img/map/m'
-        gridSize={100}
-        minimumClusterSize={2}
-      >
-      {
-        props.items.map((marker) => {
-          const onClick = () => props.onMarkerClick(marker);
-          const onCloseClick = () => props.onCloseClick(marker);
+    {
+      props.items.map((marker) => {
+        const onClick = () => props.onMarkerClick(marker);
+        const onCloseClick = () => props.onCloseClick(marker);
 
-          return (
-            <Marker
-              position={{ lat: marker.lat, lng: marker.lng }}
-              onClick={onClick}
-              icon='/img/map/marker-24px.png'
-              key={marker.markerKey || Math.random()}
-            >
-              {
-                (props.activeMarkerKey === marker.markerKey)
-                ? (
-                  <InfoWindow onCloseClick={onCloseClick}>
-                    <InfoWindowWrapper>
-                      <InfoHeader>hello world, mf</InfoHeader>
-                      <code style={{ lineHeight: '35px' }}>{marker.lat}, {marker.lng}</code><br />
-                      <code>{marker.description}</code>
-                      <hr className='style-two' />
-                      <em>Something else...</em>
-                    </InfoWindowWrapper>
-                  </InfoWindow>
-                ) : null
-              }
-            </Marker>
-          )
-        })
-      }
-      </MarkerClusterer>
-    </GoogleMap>
-  </NoSSR>
+        return (
+          <Marker
+            position={{ lat: marker.lat, lng: marker.lng }}
+            onClick={onClick}
+            icon='/img/map/marker-24px.png'
+            key={marker.markerKey || Math.random()}
+          >
+            {
+              (props.activeMarkerKey === marker.markerKey)
+              ? (
+                <InfoWindow onCloseClick={onCloseClick}>
+                  <InfoWindowWrapper>
+                    <InfoHeader>hello world, mf</InfoHeader>
+                    <code style={{ lineHeight: '35px' }}>{marker.lat}, {marker.lng}</code><br />
+                    <code>{marker.description}</code>
+                    <hr className='style-two' />
+                    <em>Something else...</em>
+                  </InfoWindowWrapper>
+                </InfoWindow>
+              ) : null
+            }
+          </Marker>
+        )
+      })
+    }
+    </MarkerClusterer>
+  </GoogleMap>
 );
 
 class MyFancyComponent extends React.PureComponent {
