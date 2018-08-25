@@ -1,5 +1,5 @@
 import * as actionType from '../actions/ActionType';
-import * as bigDataSample from './dataSample/bigData.json';
+import * as bigDataSample from './dataSample/bigData_10k.json';
 
 const markers = (
   state = {

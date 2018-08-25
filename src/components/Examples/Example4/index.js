@@ -32,6 +32,28 @@ const InfoHeader = styled('h1')`
   font-size: 18px;
   font-weight: 600;
 `;
+const clusterStyles = [
+  {
+    textColor: 'white',
+    url: 'img/map/m5.png',
+    height: 60,
+    width: 60,
+  },
+ {
+    textColor: 'white',
+    url: 'img/map/m4.png',
+    height: 54,
+    width: 54,
+  },
+ {
+    textColor: 'white',
+    url: 'img/map/m3.png',
+    height: 42,
+    width: 42,
+  }
+];
+
+const refs = { map: {} };
 
 const MyMapComponent = compose(
   withProps({
@@ -41,6 +63,14 @@ const MyMapComponent = compose(
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withHandlers(() => ({
+    onMapLoaded: () => async (ref) => {
+      refs.map = ref;
+      // await specialLog(
+      //   '0) onMapLoaded ()\nmap.getCenter();',
+      //   null,
+      //   [JSON.stringify(ref.getCenter())],
+      // );
+    },
     onMarkerClustererClick: () => async (obj) => {
       const clickedMarkers = obj.markerClusterer_.getMarkers();
 
@@ -59,18 +89,34 @@ const MyMapComponent = compose(
   withGoogleMap,
 )((props) =>
   <GoogleMap
+    ref={props.onMapLoaded}
     defaultZoom={5}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
     center={props.mapCenter}
-    // onZoomChanged={props.onZoomChanged}
+    onZoomChanged={async () => {
+      await props.onChangeZoom(refs.map.getZoom());
+      // console.log('onZoomChanged ()');
+    }}
+    onChangeMapCenter={props.onChangeMapCenter}
     onDragEnd={props.mapMoved}
+    disableDefaultUI
+    defaultOptions={{
+      // these following 7 options turn certain controls off see link below
+      streetViewControl: false,
+      scaleControl: false,
+      mapTypeControl: false,
+      panControl: false,
+      zoomControl: true,
+      rotateControl: false,
+      fullscreenControl: false,
+    }}
   >
     <MarkerClusterer
       onClick={(arg) => props.resetActiveMarkerKey().then(() => props.onMarkerClustererClick(arg))}
       averageCenter
       enableRetinaIcons
-      styles={props.styles}
-      // imagePath='/img/map/m'
+      styles={props.clusterStyles}
+      imagePath='img/map/m'
       gridSize={100}
       minimumClusterSize={2}
     >
@@ -93,7 +139,8 @@ const MyMapComponent = compose(
                   <InfoWindowWrapper>
                     <InfoHeader>hello world, mf</InfoHeader>
                     <code style={{ lineHeight: '35px' }}>{marker.lat}, {marker.lng}</code><br />
-                    <em>Something else...</em>
+                    <em>Something else...</em><br />
+                    <code>{marker.description}</code>
                   </InfoWindowWrapper>
                 </InfoWindow>
               ) : null
@@ -111,6 +158,7 @@ class MyFancyComponent extends React.PureComponent {
     items: this.props.items.map((e) => ({
       ...e,
       markerKey: Math.random(),
+      description: 'bla bla bla'.repeat(50),
     })),
   }
 
@@ -125,9 +173,8 @@ class MyFancyComponent extends React.PureComponent {
     this.props.dispatch(updateActiveMarkerKey('nothing'));
     return Promise.resolve();
   }
-  // onZoomChange = (arg) => {
-  //   console.log(arg);
-  // }
+  onChangeZoom = (arg) => console.log(arg)
+  onChangeMapCenter = (arg) => console.log(arg)
 
   render() {
     return (
@@ -138,7 +185,9 @@ class MyFancyComponent extends React.PureComponent {
         activeMarkerKey={this.props.activeMarkerKey}
         resetActiveMarkerKey={this.resetActiveMarkerKey}
         mapCenter={this.props.mapCenter}
-        // onZoomChange={this.onZoomChange}
+        clusterStyles={clusterStyles}
+        onChangeZoom={this.onChangeZoom}
+        onChangeMapCenter={this.onChangeMapCenter}
       />
     )
   }
