@@ -6,8 +6,8 @@ import {
   Example1,
   Example2,
   Example3,
-  Example4,
-  Example5,
+  Example4, // Bad pattern
+  Example5, // Good pattern
 } from '../components/Examples';
 // import { InputSearch } from '../components/Input';
 
@@ -62,34 +62,20 @@ const routes = [
     path: '/example4',
     exact: true,
     main: () => <Example4 />,
-    link: { text: 'Example4', descr: 'Markers and clustering. Markers taken from store & put to HOC state & Big data sample.' },
+    link: { text: 'Example4', descr: 'Markers and clustering. Markers taken from the store and put to HOC state as modified array. Big data 700 kB sample. Attention! Antipattern commented (use Example5 instead)' },
   },
   {
     path: '/example5',
     exact: true,
     main: () => <Example5 />,
-    link: { text: 'Example5', descr: 'Markers and clustering. Something else...' },
+    link: { text: 'Example5', descr: 'Better HOC pattern of Example4.' },
   },
 ];
 
 class Routes extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    searchField: PropTypes.string.isRequired,
-  }
-
-  state = { isMntd: false }
-
-  async componentDidMount() {
-    this.state.isMntd = true;
-
-    if(!this.isMntd) {
-      this.props.dispatch(updateSearchField({ target: { value: 'tst' } }));
-    }
-  }
-
-  async componentWillUnMount() {
-    this.state.isMntd = false;
+    searchField: PropTypes.string,
   }
 
   handler = (e) => this.props.dispatch(updateSearchField(e))
@@ -174,7 +160,9 @@ class Routes extends React.Component {
   }
 };
 
-// export default Routes;
+Routes.defaultProps = {
+  searchField: '',
+};
 
 function mapStateToProps ({ searchField }) {
   return {

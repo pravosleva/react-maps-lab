@@ -9,8 +9,7 @@ import {
   InfoWindow,
 } from 'react-google-maps';
 import styled from 'styled-components';
-import { specialLog } from '../specialLog';
-// specialLog('look', null, ['tst']);
+import { specialLog } from '../specialLog'; // specialLog('look', null, ['tst']);
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import { updateActiveMarkerKey, updateMapCenter } from '../../../actions';
 import NoSSR from 'react-no-ssr';
@@ -35,6 +34,7 @@ const InfoHeader = styled('h1')`
 `;
 const clusterStyles = [
   {
+    fontFamily: 'Montserrat',
     textColor: 'white',
     textSize: 16,
     url: 'img/map/m1.png',
@@ -42,6 +42,7 @@ const clusterStyles = [
     width: 30,
   },
   {
+    fontFamily: 'Montserrat',
     textColor: 'white',
     textSize: 16,
     url: 'img/map/m2.png',
@@ -49,6 +50,7 @@ const clusterStyles = [
     width: 36,
   },
   {
+    fontFamily: 'Montserrat',
     textColor: 'white',
     textSize: 16,
     url: 'img/map/m3.png',
@@ -56,6 +58,7 @@ const clusterStyles = [
     width: 42,
   },
   {
+    fontFamily: 'Montserrat',
     textColor: 'white',
     textSize: 16,
     url: 'img/map/m4.png',
@@ -63,6 +66,7 @@ const clusterStyles = [
     width: 54,
   },
   {
+    fontFamily: 'Montserrat',
     textColor: 'white',
     textSize: 16,
     url: 'img/map/m5.png',
@@ -71,36 +75,25 @@ const clusterStyles = [
   },
 ];
 
-const refs = { map: {} };
+const refs = { map: {} }; // Antipattern too (Example 5 is better!)
 
 const MyMapComponent = compose(
   withProps({
-    googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDvWOdmtDGOybXpF7XEdixoIImLcCDTzdQ",
+    googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDvWOdmtDGOybXpF7XEdixoIImLcCDTzdQ',
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `100vh` }} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withHandlers(() => ({
-    onMapLoaded: () => async (ref) => {
+    onMapLoaded: () => (ref) => {
       refs.map = ref;
-      // await specialLog(
-      //   '0) onMapLoaded ()\nmap.getCenter();',
-      //   null,
-      //   [JSON.stringify(ref.getCenter())],
-      // );
     },
-    onMarkerClustererClick: () => async (obj) => {
-      const clickedMarkers = obj.markerClusterer_.getMarkers();
-
-      await specialLog(
-        '1) onMarkerClustererClick ()\nconst clickedMarkers = markerClusterer.getMarkers();',
-        null,
-        [clickedMarkers],
-      );
+    onMarkerClustererClick: () => async (arg) => {
+      await specialLog('HOC | onMarkerClustererClick: () => (arg) => {}\narg.getMarkers ()', null, [arg.getMarkers()]);
     },
     mapMoved: (props) => async () => {
       console.clear();
-      await specialLog('Map moved. props in HOC:', null, [props]);
+      await specialLog('HOC | mapMoved: (props) => () => {}\nprops', null, [props]);
     },
   })),
   withScriptjs,
@@ -114,14 +107,13 @@ const MyMapComponent = compose(
       center={props.mapCenter}
       // zoom={props.zoom}
       onZoomChanged={async () => {
-        await props.onChangeZoom(refs.map.getZoom());
-        // console.log('onZoomChanged ()');
+        await specialLog('onZoomChanged: () => {}\nrefs.map.getZoom ()', null, [refs.map.getZoom()]);
       }}
       onChangeMapCenter={props.onChangeMapCenter}
       onDragEnd={props.mapMoved}
       disableDefaultUI
       defaultOptions={{
-        // these following 7 options turn certain controls off see link below
+        // these following 7 options turn certain controls off
         streetViewControl: false,
         scaleControl: false,
         mapTypeControl: false,
@@ -159,8 +151,9 @@ const MyMapComponent = compose(
                     <InfoWindowWrapper>
                       <InfoHeader>hello world, mf</InfoHeader>
                       <code style={{ lineHeight: '35px' }}>{marker.lat}, {marker.lng}</code><br />
-                      <em>Something else...</em><br />
                       <code>{marker.description}</code>
+                      <hr className='style-two' />
+                      <em>Something else...</em>
                     </InfoWindowWrapper>
                   </InfoWindow>
                 ) : null
