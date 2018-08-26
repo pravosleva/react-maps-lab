@@ -13,12 +13,15 @@ import { specialLog } from '../specialLog'; // specialLog('look', null, ['tst'])
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import { updateActiveMarkerKey, updateMapCenter } from '../../../actions';
 
+// ABOUT: minZoom and maxZoom seems to not work
+// https://github.com/tomchentw/react-google-maps/issues/173
 
 const mapState = ({ markers, dispatch }) => ({
   items: markers.items,
   activeMarkerKey: markers.activeMarkerKey,
   mapCenter: markers.mapCenter,
   dispatch,
+  specialKey: markers.specialKey,
 });
 
 const InfoWindowWrapper = styled('div')`
@@ -98,8 +101,8 @@ const MyMapComponent = compose(
 )((props) =>
   <GoogleMap
     ref={props.onMapLoaded}
-    defaultZoom={5}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    defaultZoom={3}
+    defaultCenter={{ lat: Number(props.items[0].lat), lng: Number(props.items[0].lng) }}
     center={props.mapCenter}
     onZoomChanged={async () => {
       await specialLog('onZoomChanged: () => {}\nrops.map.getZoom ()', null, [props.map.getZoom()]);
@@ -126,6 +129,7 @@ const MyMapComponent = compose(
       // imagePath='img/map/m'
       gridSize={100}
       minimumClusterSize={2}
+      key={props.specialKey}
     >
     {
       props.items.map((marker) => {
@@ -190,6 +194,19 @@ class MyFancyComponent extends React.PureComponent {
   }
   onChangeMapCenter = (arg) => console.log(arg)
 
+  // https://www.youtube.com/watch?v=p_m4TrYGtCo
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.items.length !== this.state.items.length) {
+      this.setState({
+        items: nextProps.items.map((e) => ({
+          ...e,
+          markerKey: Math.random(),
+          description: 'bla bla bla'.repeat(50),
+        })),
+      });
+    }
+  }
+
   render() {
     return (
       <MyMapComponent
@@ -203,6 +220,7 @@ class MyFancyComponent extends React.PureComponent {
         mapCenter={this.props.mapCenter}
         clusterStyles={clusterStyles}
         onChangeMapCenter={this.onChangeMapCenter}
+        specialKey={this.props.specialKey}
       />
     )
   }
