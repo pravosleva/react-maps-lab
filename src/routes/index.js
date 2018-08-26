@@ -63,7 +63,7 @@ const routes = [
     path: '/example4',
     exact: true,
     main: () => <Example4 />,
-    link: { text: 'Example4', descr: 'Markers and clustering. Markers taken from the store and put to HOC state as modified array. Big data 700 kB sample. Attention! Antipattern commented (use Example5 instead)' },
+    link: { text: 'Example4', descr: 'Markers and clustering. Markers taken from the store and put to HOC state as modified array. Big data 700 kB sample by default. Attention! Antipattern commented (use Example5 instead)' },
   },
   {
     path: '/example5',
