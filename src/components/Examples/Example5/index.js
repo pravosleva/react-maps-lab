@@ -13,12 +13,15 @@ import { specialLog } from '../specialLog'; // specialLog('look', null, ['tst'])
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import { updateActiveMarkerKey, updateMapCenter } from '../../../actions';
 
+// ABOUT: minZoom and maxZoom seems to not work
+// https://github.com/tomchentw/react-google-maps/issues/173
 
 const mapState = ({ markers, dispatch }) => ({
   items: markers.items,
   activeMarkerKey: markers.activeMarkerKey,
   mapCenter: markers.mapCenter,
   dispatch,
+  specialKey: markers.specialKey,
 });
 
 const InfoWindowWrapper = styled('div')`
@@ -126,6 +129,7 @@ const MyMapComponent = compose(
       // imagePath='img/map/m'
       gridSize={100}
       minimumClusterSize={2}
+      key={props.specialKey}
     >
     {
       props.items.map((marker) => {
@@ -203,6 +207,7 @@ class MyFancyComponent extends React.PureComponent {
         mapCenter={this.props.mapCenter}
         clusterStyles={clusterStyles}
         onChangeMapCenter={this.onChangeMapCenter}
+        specialKey={this.props.specialKey}
       />
     )
   }

@@ -35,3 +35,8 @@ export const updateUserGeoParams = (obj) => ({
   type: actionType.UPDATE_GEO_PARAMS,
   payload: obj,
 });
+
+export const updateReactSelectSelectedOption = (obj) => ({
+  type: actionType.UPDATE_REACT_SELECT_SELECTED_OPTION,
+  payload: obj,
+});
