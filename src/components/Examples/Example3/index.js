@@ -10,7 +10,6 @@ import { addCounter } from '../../../actions';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import NoSSR from 'react-no-ssr';
 
 
 const WrapperContainer = styled('div')`
@@ -40,18 +39,16 @@ const Button = styled('button')`
 
 const tstButton = (props) => {
   return (
-    <NoSSR>
-      <WrapperContainer>
-        <WrapperElement>
-          <Button onClick={async () => {
-            await props.onClick();
-            // await props.dispatch(addCounter());
-          }}>
-            {`Local counter: ${props.localCount} Global counter: ${props.globalCount}`}
-          </Button>
-        </WrapperElement>
-      </WrapperContainer>
-    </NoSSR>
+    <WrapperContainer>
+      <WrapperElement>
+        <Button onClick={async () => {
+          await props.onClick();
+          // await props.dispatch(addCounter());
+        }}>
+          {`Local counter: ${props.localCount} Global counter: ${props.globalCount}`}
+        </Button>
+      </WrapperElement>
+    </WrapperContainer>
   )
 };
 

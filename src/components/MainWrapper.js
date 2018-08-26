@@ -18,6 +18,7 @@ export const MainFlexElement = styled('div')`
     width: 350px;
     max-width: 350px;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, .2);
+    overflow-y: auto;
   }
   &:nth-child(2n) {
     width: calc(100% - 250px);
