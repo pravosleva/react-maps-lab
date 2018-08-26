@@ -101,8 +101,8 @@ const MyMapComponent = compose(
 )((props) =>
   <GoogleMap
     ref={props.onMapLoaded}
-    defaultZoom={5}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    defaultZoom={3}
+    defaultCenter={{ lat: Number(props.items[0].lat), lng: Number(props.items[0].lng) }}
     center={props.mapCenter}
     onZoomChanged={async () => {
       await specialLog('onZoomChanged: () => {}\nrops.map.getZoom ()', null, [props.map.getZoom()]);
@@ -193,6 +193,19 @@ class MyFancyComponent extends React.PureComponent {
     return Promise.resolve();
   }
   onChangeMapCenter = (arg) => console.log(arg)
+
+  // https://www.youtube.com/watch?v=p_m4TrYGtCo
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.items.length !== this.state.items.length) {
+      this.setState({
+        items: nextProps.items.map((e) => ({
+          ...e,
+          markerKey: Math.random(),
+          description: 'bla bla bla'.repeat(50),
+        })),
+      });
+    }
+  }
 
   render() {
     return (

@@ -69,7 +69,7 @@ const routes = [
     path: '/example5',
     exact: true,
     main: () => <Example5 />,
-    link: { text: 'Example5', descr: 'Better HOC pattern of Example4.' },
+    link: { text: 'Example5', descr: 'Better HOC pattern for Google Map instead of Example4 with componentWillReceiveProps () method.' },
   },
 ];
 

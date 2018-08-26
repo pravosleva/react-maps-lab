@@ -4,7 +4,7 @@ import * as bigDataSample100k from './dataSample/bigData_100k.json';
 
 const markers = (
   state = {
-    items: bigDataSample100k,
+    items: bigDataSample10k,
     activeMarkerKey: 'activeMarkerKey',
     mapCenter: { lat: -31.563910, lng: 147.154312 },
     selectedOption: { value: 'bigData_10k', label: 'Big data 700 kB' },
