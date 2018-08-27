@@ -167,11 +167,12 @@ const MyMapComponent = compose(
 
 class MyFancyComponent extends React.PureComponent {
   state={
-    items: this.props.items.map((e) => ({
-      ...e,
-      markerKey: Math.random(),
-      description: 'bla bla bla'.repeat(50),
-    })),
+    // items: this.props.items.map((e) => ({
+    //   ...e,
+    //   markerKey: Math.random(),
+    //   description: 'bla bla bla'.repeat(50),
+    // })),
+    items: this.props.items,
     map: null,
   }
 
@@ -214,11 +215,12 @@ class MyFancyComponent extends React.PureComponent {
   static getDerivedStateFromProps(nextProps, prevState) {
     return {
       ...prevState,
-      items: nextProps.items.map((e) => ({
-        ...e,
-        markerKey: Math.random(),
-        description: 'bla bla bla'.repeat(50),
-      })),
+      // items: nextProps.items.map((e) => ({
+      //   ...e,
+      //   markerKey: Math.random(),
+      //   description: 'bla bla bla'.repeat(50),
+      // })),
+      items: nextProps.items,
     };
   }
   // READ MORE ABOUT
