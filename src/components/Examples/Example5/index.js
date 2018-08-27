@@ -167,7 +167,11 @@ const MyMapComponent = compose(
 
 class MyFancyComponent extends React.PureComponent {
   state={
-    items: this.props.items,
+    items: this.props.items.map((e) => ({
+      ...e,
+      markerKey: Math.random(),
+      description: 'bla bla bla'.repeat(50),
+    })),
     map: null,
   }
 
@@ -192,27 +196,31 @@ class MyFancyComponent extends React.PureComponent {
 
   // WAY 1
   // https://www.youtube.com/watch?v=p_m4TrYGtCo
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.items.length !== this.state.items.length) {
-  //     this.setState({
-  //       items: nextProps.items.map((e) => ({
-  //         ...e,
-  //         markerKey: Math.random(),
-  //         description: 'bla bla bla'.repeat(50),
-  //       })),
-  //     });
-  //   }
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.items.length !== this.state.items.length) {
+      this.setState({
+        items: nextProps.items.map((e) => ({
+          ...e,
+          markerKey: Math.random(),
+          description: 'bla bla bla'.repeat(50),
+        })),
+      });
+    }
+  }
   // DEPRECATED in React 16.3
 
   // WAY 2
   // https://habr.com/post/353328/
-  static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      ...prevState,
-      items: nextProps.items,
-    };
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   return {
+  //     ...prevState,
+  //     items: nextProps.items.map((e) => ({
+  //       ...e,
+  //       markerKey: Math.random(),
+  //       description: 'bla bla bla'.repeat(50),
+  //     })),
+  //   };
+  // }
   // READ MORE ABOUT
   // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
 
