@@ -6,7 +6,6 @@ const markers = (
   state = {
     items: bigDataSample10k,
     activeMarkerKey: 'activeMarkerKey',
-    mapCenter: { lat: -31.563910, lng: 147.154312 },
     selectedOption: { value: 'bigData_10k', label: 'Big data 700 kB' },
     specialKey: Math.random(),
   },
@@ -22,11 +21,6 @@ const markers = (
       return {
         ...state,
         activeMarkerKey: action.payload,
-      };
-    case actionType.UPDATE_MAP_CENTER:
-      return {
-        ...state,
-        mapCenter: action.payload,
       };
     case actionType.UPDATE_REACT_SELECT_SELECTED_OPTION:
       let data = [];

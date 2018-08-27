@@ -11,13 +11,12 @@ import {
 import styled from 'styled-components';
 import { specialLog } from '../specialLog'; // specialLog('look', null, ['tst']);
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer';
-import { updateActiveMarkerKey, updateMapCenter } from '../../../actions';
+import { updateActiveMarkerKey } from '../../../actions';
 
 
 const mapState = ({ markers, dispatch }) => ({
   items: markers.items,
   activeMarkerKey: markers.activeMarkerKey,
-  mapCenter: markers.mapCenter,
   dispatch,
 });
 
@@ -102,7 +101,7 @@ const MyMapComponent = compose(
     ref={props.onMapLoaded}
     defaultZoom={5}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
-    center={props.mapCenter}
+    // center={props.mapCenter}
     // zoom={props.zoom}
     onZoomChanged={async () => {
       await specialLog('onZoomChanged: () => {}\nrefs.map.getZoom ()', null, [refs.map.getZoom()]);
@@ -176,7 +175,7 @@ class MyFancyComponent extends React.PureComponent {
 
   handleMarkerClick = async (marker) => {
     await this.props.dispatch(updateActiveMarkerKey(marker.markerKey));
-    await this.props.dispatch(updateMapCenter({ lat: marker.lat, lng: marker.lng }));
+    // await this.props.dispatch(updateMapCenter({ lat: marker.lat, lng: marker.lng }));
   }
   onCloseClick = async (marker) => {
     await this.props.dispatch(updateActiveMarkerKey('nothing'));
@@ -196,7 +195,7 @@ class MyFancyComponent extends React.PureComponent {
         items={this.state.items}
         activeMarkerKey={this.props.activeMarkerKey}
         resetActiveMarkerKey={this.resetActiveMarkerKey}
-        mapCenter={this.props.mapCenter}
+        // mapCenter={this.props.mapCenter}
         clusterStyles={clusterStyles}
         // onChangeZoom={this.onChangeZoom}
         onChangeMapCenter={this.onChangeMapCenter}

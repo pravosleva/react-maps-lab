@@ -51,7 +51,7 @@ const routes = [
     path: '/example2',
     exact: true,
     main: () => <Example2 />,
-    link: { text: 'Example2', descr: 'react-geolocated usage example. And also open console then drag & drop the map...' },
+    link: { text: 'Example2', descr: 'react-geolocated usage example (but only for external routing for the port!). And also open console then drag & drop the map...' },
   },
   {
     path: '/example3',
@@ -63,13 +63,13 @@ const routes = [
     path: '/example4',
     exact: true,
     main: () => <Example4 />,
-    link: { text: 'Example4', descr: 'Markers and clustering. Markers taken from the store and put to HOC state as modified array. Big data 700 kB sample by default. Attention! Antipattern commented (use Example5 instead)' },
+    link: { text: 'Example4', descr: `Markers and clustering. Markers taken from the store and put to HOC state as modified array. Big json data sample. Attention! Antipattern commented (use Example5 instead)` },
   },
   {
     path: '/example5',
     exact: true,
     main: () => <Example5 />,
-    link: { text: 'Example5', descr: 'Better HOC pattern for Google Map instead of Example4 with componentWillReceiveProps () method.' },
+    link: { text: 'Example5', descr: 'Better HOC pattern for Google Map instead of Example4. Map: minZoom & maxZoom as fixed options. Clusterer: maxZoom as fixed param.' },
   },
 ];
 
@@ -104,14 +104,16 @@ class Routes extends React.Component {
                       {
                         route.link.text === 'Example5'
                         ? (
-                          <Select
-                            value={this.props.selectedOption}
-                            onChange={async (e) => {
-                              // console.log(e);
-                              await this.props.dispatch(updateReactSelectSelectedOption(e));
-                            }}
-                            options={options}
-                          />
+                          <div style={{ 'padding': '0 10px 10px 15px' }}>
+                            <Select
+                              value={this.props.selectedOption}
+                              onChange={async (e) => {
+                                // console.log(e);
+                                await this.props.dispatch(updateReactSelectSelectedOption(e));
+                              }}
+                              options={options}
+                            />
+                          </div>
                         ) : null
                       }
                     </li>

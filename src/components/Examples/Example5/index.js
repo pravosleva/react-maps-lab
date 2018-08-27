@@ -11,21 +11,17 @@ import {
 import styled from 'styled-components';
 import { specialLog } from '../specialLog'; // specialLog('look', null, ['tst']);
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer';
-import { updateActiveMarkerKey, updateMapCenter } from '../../../actions';
+import { updateActiveMarkerKey } from '../../../actions';
 
-// ABOUT: minZoom and maxZoom seems to not work
-// https://github.com/tomchentw/react-google-maps/issues/173
 
 const mapState = ({ markers, dispatch }) => ({
   items: markers.items,
   activeMarkerKey: markers.activeMarkerKey,
-  mapCenter: markers.mapCenter,
   dispatch,
   specialKey: markers.specialKey,
 });
 
 const InfoWindowWrapper = styled('div')`
-    /* border: 1px solid gray; */
   padding: 10px;
 `;
 const InfoHeader = styled('h1')`
@@ -103,7 +99,6 @@ const MyMapComponent = compose(
     ref={props.onMapLoaded}
     defaultZoom={3}
     defaultCenter={{ lat: Number(props.items[0].lat), lng: Number(props.items[0].lng) }}
-    center={props.mapCenter}
     onZoomChanged={async () => {
       await specialLog('onZoomChanged: () => {}\nrops.map.getZoom ()', null, [props.map.getZoom()]);
     }}
@@ -120,6 +115,10 @@ const MyMapComponent = compose(
       rotateControl: false,
       fullscreenControl: false,
     }}
+    options={{
+      minZoom: 2, // UI settings
+      maxZoom: 18, // UI settings
+    }}
   >
     <MarkerClusterer
       onClick={(arg) => props.resetActiveMarkerKey().then(() => props.onMarkerClustererClick(arg))}
@@ -130,6 +129,7 @@ const MyMapComponent = compose(
       gridSize={100}
       minimumClusterSize={2}
       key={props.specialKey}
+      maxZoom={18} // Markers will be drawed separately up to val= 18
     >
     {
       props.items.map((marker) => {
@@ -183,7 +183,7 @@ class MyFancyComponent extends React.PureComponent {
   }
   handleMarkerClick = async (marker) => {
     await this.props.dispatch(updateActiveMarkerKey(marker.markerKey));
-    await this.props.dispatch(updateMapCenter({ lat: marker.lat, lng: marker.lng }));
+    // panTo({ lat, lng })
   }
   onCloseClick = async (marker) => {
     await this.props.dispatch(updateActiveMarkerKey('nothing'));
@@ -194,18 +194,35 @@ class MyFancyComponent extends React.PureComponent {
   }
   onChangeMapCenter = (arg) => console.log(arg)
 
+  // WAY 1
   // https://www.youtube.com/watch?v=p_m4TrYGtCo
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.items.length !== this.state.items.length) {
-      this.setState({
-        items: nextProps.items.map((e) => ({
-          ...e,
-          markerKey: Math.random(),
-          description: 'bla bla bla'.repeat(50),
-        })),
-      });
-    }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.items.length !== this.state.items.length) {
+  //     this.setState({
+  //       items: nextProps.items.map((e) => ({
+  //         ...e,
+  //         markerKey: Math.random(),
+  //         description: 'bla bla bla'.repeat(50),
+  //       })),
+  //     });
+  //   }
+  // }
+  // DEPRECATED in React 16.3
+
+  // WAY 2
+  // https://habr.com/post/353328/
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return {
+      ...prevState,
+      items: nextProps.items.map((e) => ({
+        ...e,
+        markerKey: Math.random(),
+        description: 'bla bla bla'.repeat(50),
+      })),
+    };
   }
+  // READ MORE ABOUT
+  // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
 
   render() {
     return (
@@ -217,7 +234,6 @@ class MyFancyComponent extends React.PureComponent {
         items={this.state.items}
         activeMarkerKey={this.props.activeMarkerKey}
         resetActiveMarkerKey={this.resetActiveMarkerKey}
-        mapCenter={this.props.mapCenter}
         clusterStyles={clusterStyles}
         onChangeMapCenter={this.onChangeMapCenter}
         specialKey={this.props.specialKey}
