@@ -40,36 +40,42 @@ const routes = [
     exact: true,
     main: () => <Home />,
     link: { text: 'Home' },
+    exampleOf: 'react-google-maps',
   },
   {
     path: '/example1',
     exact: true,
     main: () => <Example1 />,
     link: { text: 'Example1', descr: 'Simplest map with a marker usage sample' },
+    exampleOf: 'react-google-maps',
   },
   {
     path: '/example2',
     exact: true,
     main: () => <Example2 />,
     link: { text: 'Example2', descr: 'react-geolocated usage example (but only for external routing for the port!). And also open console then drag & drop the map...' },
+    exampleOf: ['react-google-maps', 'react-geolocated'],
   },
   {
     path: '/example3',
     exact: true,
     main: () => <Example3 />,
     link: { text: 'Example3', descr: 'HOC & withStateHandlers () example' },
+    exampleOf: null,
   },
   {
     path: '/example4',
     exact: true,
     main: () => <Example4 />,
     link: { text: 'Example4', descr: `Markers and clustering. Markers taken from the store and put to HOC state as modified array. Big json data sample. Attention! Antipattern commented (use Example5 instead)` },
+    exampleOf: 'react-google-maps',
   },
   {
     path: '/example5',
     exact: true,
     main: () => <Example5 />,
     link: { text: 'Example5', descr: 'Better HOC pattern for Google Map instead of Example4. Map: minZoom & maxZoom as fixed options. Clusterer: maxZoom as fixed param.' },
+    exampleOf: 'react-google-maps',
   },
 ];
 
@@ -94,13 +100,25 @@ class Routes extends React.Component {
               placeholder='Input something...'
             />
             */}
-            <ul style={{ listStyleType: 'none', padding: 0 }}>
+            <ul style={{ listStyleType: 'none', padding: '0' }}>
               {
                 routes.map((route, index) => (
                   route.link ? (
-                    <li key={index}>
+                    <li key={index} style={{ padding: '0 0 5px 0' }}>
                       <Link to={route.path}>{route.link.text}</Link>
-                      {route.link.descr ? <Descr style={{ paddingLeft: '15px' }}>{route.link.descr}</Descr> : null}
+                      {
+                        route.exampleOf
+                        ? <ul style={{ marginTop: '10px' }}>{
+                          Array.isArray(route.exampleOf)
+                          ? (
+                            route.exampleOf.map((e) => <li key={Math.random()}><strong>{e}</strong></li>)
+                          ) : <li><strong>{route.exampleOf}</strong></li>
+                        }</ul>
+                        : null
+                      }
+                      {
+                        route.link.descr ? <Descr style={{ paddingLeft: '15px' }}>{route.link.descr}</Descr> : null
+                      }
                       {
                         route.link.text === 'Example5'
                         ? (
