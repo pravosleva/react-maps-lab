@@ -84,8 +84,9 @@ const MyMapComponent = compose(
     onMapLoaded: (props) => async (ref) => {
       await props.onMapLoaded(ref);
     },
-    onMarkerClustererClick: () => async (arg) => {
-      await specialLog('HOC | onMarkerClustererClick: () => (arg) => {}\narg.getMarkers ()', null, [arg.getMarkers()]);
+    onMarkerClustererClick: (props) => (arg) => {
+      // specialLog('HOC | onMarkerClustererClick: () => (arg) => {}\narg.getMarkers ()', null, [arg.getMarkers()]);
+      // props.handleClustererClick(arg);
     },
     mapMoved: (props) => async () => {
       console.clear();
@@ -102,7 +103,6 @@ const MyMapComponent = compose(
     onZoomChanged={async () => {
       await specialLog('onZoomChanged: () => {}\nrops.map.getZoom ()', null, [props.map.getZoom()]);
     }}
-    onChangeMapCenter={props.onChangeMapCenter}
     onDragEnd={props.mapMoved}
     disableDefaultUI
     defaultOptions={{
@@ -129,7 +129,7 @@ const MyMapComponent = compose(
       gridSize={100}
       minimumClusterSize={2}
       key={props.specialKey}
-      maxZoom={18} // Markers will be drawed separately up to val= 18
+      maxZoom={17} // Markers will be drawed separately up to val= 17
     >
     {
       props.items.map((marker) => {
@@ -183,8 +183,11 @@ class MyFancyComponent extends React.PureComponent {
   }
   handleMarkerClick = async (marker) => {
     await this.props.dispatch(updateActiveMarkerKey(marker.markerKey));
-    // panTo({ lat, lng })
+    this.state.map.panTo({ lat: marker.lat, lng: marker.lng });
   }
+  // handleClustererClick = function(clstr) {
+  //   console.log(clstr.getMarkers());
+  // }
   onCloseClick = async (marker) => {
     await this.props.dispatch(updateActiveMarkerKey('nothing'));
   }
@@ -192,10 +195,10 @@ class MyFancyComponent extends React.PureComponent {
     this.props.dispatch(updateActiveMarkerKey('nothing'));
     return Promise.resolve();
   }
-  onChangeMapCenter = (arg) => console.log(arg)
 
   // WAY 1
   // https://www.youtube.com/watch?v=p_m4TrYGtCo
+  // I'm using hoc.state because objects doesn't have repsonal id
   componentWillReceiveProps(nextProps) {
     if (nextProps.items.length !== this.state.items.length) {
       this.setState({
@@ -207,7 +210,7 @@ class MyFancyComponent extends React.PureComponent {
       });
     }
   }
-  // DEPRECATED in React 16.3
+  // BUT DEPRECATED in React 16.3
 
   // WAY 2
   // https://habr.com/post/353328/
@@ -235,8 +238,8 @@ class MyFancyComponent extends React.PureComponent {
         activeMarkerKey={this.props.activeMarkerKey}
         resetActiveMarkerKey={this.resetActiveMarkerKey}
         clusterStyles={clusterStyles}
-        onChangeMapCenter={this.onChangeMapCenter}
         specialKey={this.props.specialKey}
+        // handleClustererClick={this.handleClustererClick}
       />
     )
   }
