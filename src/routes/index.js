@@ -101,7 +101,7 @@ const routes = [
     link: { text: 'Example8', descr: 'Original sample.' },
     exampleOf: 'google-map-react',
     articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
-    github: 'https://github.com/Tim152/clustering-google-map-react',
+    githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
 ];
 const FlexHeader = styled('div')`
@@ -155,7 +155,7 @@ class Routes extends React.Component {
                         <Link to={route.path}>{route.link.text}</Link>
                         {
                           route.githubLink
-                          ? <a style={{ marginLeft: 'auto'}} href={route.githubLink} target='_blank'>github</a>
+                          ? <a style={{ marginLeft: 'auto'}} href={route.githubLink} target='_blank'><i style={{ fontSize: '25px' }} className='fa fa-github'></i></a>
                           : null
                         }
                       </FlexHeader>
