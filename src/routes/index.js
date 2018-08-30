@@ -16,6 +16,7 @@ import {
   Example3,
   Example4, // Bad pattern
   Example5, // Good pattern
+  Example6,
 } from '../components/Examples';
 // import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
@@ -76,6 +77,13 @@ const routes = [
     main: () => <Example5 />,
     link: { text: 'Example5', descr: 'Better HOC pattern for Google Map instead of Example4. Map: minZoom & maxZoom as fixed options. Clusterer: maxZoom as fixed param.' },
     exampleOf: 'react-google-maps',
+  },
+  {
+    path: '/example6',
+    exact: true,
+    main: () => <Example6 />,
+    link: { text: 'Example6', descr: 'Simple component experience.' },
+    exampleOf: 'google-map-react',
   },
 ];
 
