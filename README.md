@@ -1,4 +1,4 @@
-# Google Maps api usage with `react-google-maps`
+# Google Maps api usage with react libs
 
 ```
 $ npm i
@@ -16,6 +16,9 @@ HOC `withStateHandlers` example.
 HOC. Markers and MarkerClusterers.
 - [x] Example5
 HOC, but this pattern is better then Example4.
+- [x] Example6
+- [ ] Example7
+- [x] Example8
 
 # Original ReadMe
 
