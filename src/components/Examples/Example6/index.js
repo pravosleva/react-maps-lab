@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
+
 
 const AnyReactComponent = ({ text, style, onClick, onCloseClick }) => (
   <div onClick={() => onClick(text)} style={style}>

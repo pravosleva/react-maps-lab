@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "google-map-react": "^1.0.6",
+    "immutable": "^3.8.2",
+    "points-cluster": "^0.1.4",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

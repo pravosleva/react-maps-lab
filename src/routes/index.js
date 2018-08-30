@@ -17,6 +17,8 @@ import {
   Example4, // Bad pattern
   Example5, // Good pattern
   Example6,
+  // Example7,
+  Example8,
 } from '../components/Examples';
 // import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
@@ -83,6 +85,13 @@ const routes = [
     exact: true,
     main: () => <Example6 />,
     link: { text: 'Example6', descr: 'Simple component experience.' },
+    exampleOf: 'google-map-react',
+  },
+  {
+    path: '/example8',
+    exact: true,
+    main: () => <Example8 />,
+    link: { text: 'Example8', descr: 'Original sample like this https://habr.com/post/334644/.' },
     exampleOf: 'google-map-react',
   },
 ];
