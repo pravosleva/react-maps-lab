@@ -34,12 +34,6 @@ class SimpleMap extends Component {
           defaultZoom={this.props.zoom}
           // onGoogleApiLoaded={({map, maps}) => console.log(map, maps)}
         >
-          <code
-            lat={60.955413}
-            lng={30.337844}
-          >
-            TEST
-          </code>
           <AnyReactComponent
             lat={59.955413}
             lng={30.337844}

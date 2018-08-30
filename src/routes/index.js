@@ -20,14 +20,19 @@ import {
   // Example7,
   Example8,
 } from '../components/Examples';
-// import { InputSearch } from '../components/Input';
+/// import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
 import {
-  // updateSearchField,
+  updateSearchField,
   updateReactSelectSelectedOption,
 } from '../actions';
 
-const options = [
+const searchOptions = [
+  { value: 'all', label: 'all' },
+  { value: 'react-google-map', label: 'react-google-map' },
+  { value: 'google-map-react', label: 'google-map-react' },
+];
+const dataOptions = [
   { value: 'bigData_10k', label: 'Big data 700 kB' },
   { value: 'bigData_100k', label: 'Big data 7 MB' },
 ];
@@ -44,6 +49,8 @@ const routes = [
     main: () => <Home />,
     link: { text: 'Home' },
     exampleOf: 'react-google-maps',
+    // articlesLinks: str|arr, [{ link, text }]
+    // githubLink: srt,
   },
   {
     path: '/example1',
@@ -91,15 +98,22 @@ const routes = [
     path: '/example8',
     exact: true,
     main: () => <Example8 />,
-    link: { text: 'Example8', descr: 'Original sample like this https://habr.com/post/334644/.' },
+    link: { text: 'Example8', descr: 'Original sample.' },
     exampleOf: 'google-map-react',
+    articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
+    github: 'https://github.com/Tim152/clustering-google-map-react',
   },
 ];
+const FlexHeader = styled('div')`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
 
 class Routes extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-    searchField: PropTypes.string,
+    searchField: PropTypes.object.isRequired,
     selectedOption: PropTypes.object,
   }
 
@@ -117,12 +131,34 @@ class Routes extends React.Component {
               placeholder='Input something...'
             />
             */}
+            <div style={{ 'padding': '10px 10px 10px 15px' }}>
+              <Select
+                value={this.props.searchField}
+                onChange={(o) => this.props.dispatch(updateSearchField(o))}
+                options={searchOptions}
+              />
+            </div>
             <ul style={{ listStyleType: 'none', padding: '0' }}>
               {
-                routes.map((route, index) => (
+                routes.filter((r) => (
+                  this.props.searchField.value === 'all'
+                  ? true
+                  : (
+                    r.exampleOf
+                    ? r.exampleOf.includes(this.props.searchField.value)
+                    : false
+                  )
+                )).map((route, index) => (
                   route.link ? (
                     <li key={index} style={{ padding: '0 0 5px 0' }}>
-                      <Link to={route.path}>{route.link.text}</Link>
+                      <FlexHeader>
+                        <Link to={route.path}>{route.link.text}</Link>
+                        {
+                          route.githubLink
+                          ? <a style={{ marginLeft: 'auto'}} href={route.githubLink} target='_blank'>github</a>
+                          : null
+                        }
+                      </FlexHeader>
                       {
                         route.exampleOf
                         ? <ul style={{ marginTop: '10px' }}>{
@@ -137,6 +173,19 @@ class Routes extends React.Component {
                         route.link.descr ? <Descr style={{ paddingLeft: '15px' }}>{route.link.descr}</Descr> : null
                       }
                       {
+                        route.articlesLinks
+                        ? (
+                          Array.isArray(route.articlesLinks)
+                          ? (
+                            <ul>{
+                              route.articlesLinks.map((l) => (
+                                <li><a href={l.link} target='_blank'>{l.text}</a></li>
+                              ))
+                            }</ul>
+                          ) : <ul><li><a href={route.articlesLinks.link} target='_blank'>{route.articlesLinks.text}</a></li></ul>
+                        ) : null
+                      }
+                      {
                         route.link.text === 'Example5'
                         ? (
                           <div style={{ 'padding': '0 10px 10px 15px' }}>
@@ -146,7 +195,7 @@ class Routes extends React.Component {
                                 // console.log(e);
                                 await this.props.dispatch(updateReactSelectSelectedOption(e));
                               }}
-                              options={options}
+                              options={dataOptions}
                             />
                           </div>
                         ) : null
@@ -214,7 +263,6 @@ class Routes extends React.Component {
 };
 
 Routes.defaultProps = {
-  searchField: '',
   selectedOption: {},
 };
 
