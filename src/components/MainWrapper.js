@@ -14,12 +14,13 @@ export const MainFlexWrapper = styled('div')`
 
 export const MainFlexElement = styled('div')`
   &:first-child {
-    width: 350px;
+    min-width: 350px;
     max-width: 350px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
+    animation: transform 1s ease-in;
   }
   &:nth-child(2n) {
-    width: calc(100% - 350px);
+    width: calc(100%);
   }
   ${(props) => props.bordered && css`border: 1px dashed red;`}
 `;
