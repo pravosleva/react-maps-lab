@@ -11,6 +11,12 @@ import styled from 'styled-components';
 import { Home } from '../components/Home';
 import NotFound from '../components/NotFound';
 import {
+  LeftFlexContainer,
+  SearchSection,
+  ExamplesSection,
+  OriginalDocSection,
+} from '../components/LeftSide';
+import {
   Example1,
   Example2,
   Example3,
@@ -48,7 +54,7 @@ const routes = [
     exact: true,
     main: () => <Home />,
     link: { text: 'Home' },
-    exampleOf: 'react-google-maps',
+    // exampleOf: str|arr,
     // articlesLinks: str|arr, [{ link, text }]
     // githubLink: srt,
   },
@@ -124,88 +130,92 @@ class Routes extends React.Component {
       <BrowserRouter>
         <MainFlexWrapper>
           <MainFlexElement>
-            {/*
-            <InputSearch
-              value={this.props.searchField}
-              onChange={this.handler}
-              placeholder='Input something...'
-            />
-            */}
-            <div style={{ 'padding': '10px 10px 10px 15px' }}>
-              <Select
-                value={this.props.searchField}
-                onChange={(o) => this.props.dispatch(updateSearchField(o))}
-                options={searchOptions}
-              />
-            </div>
-            <ul style={{ listStyleType: 'none', padding: '0' }}>
-              {
-                routes.filter((r) => (
-                  this.props.searchField.value === 'all'
-                  ? true
-                  : (
-                    r.exampleOf
-                    ? r.exampleOf.includes(this.props.searchField.value)
-                    : false
-                  )
-                )).map((route, index) => (
-                  route.link ? (
-                    <li key={index} style={{ padding: '0 0 5px 0' }}>
-                      <FlexHeader>
-                        <Link to={route.path}>{route.link.text}</Link>
-                        {
-                          route.githubLink
-                          ? <a style={{ marginLeft: 'auto'}} href={route.githubLink} target='_blank'><i style={{ fontSize: '25px' }} className='fa fa-github'></i></a>
-                          : null
-                        }
-                      </FlexHeader>
-                      {
-                        route.exampleOf
-                        ? <ul style={{ marginTop: '10px' }}>{
-                          Array.isArray(route.exampleOf)
-                          ? (
-                            route.exampleOf.map((e) => <li key={Math.random()}><strong>{e}</strong></li>)
-                          ) : <li><strong>{route.exampleOf}</strong></li>
-                        }</ul>
-                        : null
-                      }
-                      {
-                        route.link.descr ? <Descr style={{ paddingLeft: '15px' }}>{route.link.descr}</Descr> : null
-                      }
-                      {
-                        route.articlesLinks
-                        ? (
-                          Array.isArray(route.articlesLinks)
-                          ? (
-                            <ul>{
-                              route.articlesLinks.map((l) => (
-                                <li><a href={l.link} target='_blank'>{l.text}</a></li>
-                              ))
+            <LeftFlexContainer>
+              <SearchSection>
+                {/*
+                <InputSearch
+                  value={this.props.searchField}
+                  onChange={this.handler}
+                  placeholder='Input something...'
+                />
+                */}
+                <Select
+                  value={this.props.searchField}
+                  onChange={(o) => this.props.dispatch(updateSearchField(o))}
+                  options={searchOptions}
+                />
+              </SearchSection>
+
+              <ExamplesSection>
+                <ul style={{ listStyleType: 'none', padding: '0', marginTop: '0' }}>
+                  {
+                    routes.filter((r) => (
+                      this.props.searchField.value === 'all'
+                      ? true
+                      : (
+                        r.exampleOf
+                        ? r.exampleOf.includes(this.props.searchField.value)
+                        : false
+                      )
+                    )).map((route, index) => (
+                      route.link ? (
+                        <li key={index} style={{ padding: '0 0 5px 0' }}>
+                          <FlexHeader>
+                            <Link to={route.path}>{route.link.text}</Link>
+                            {
+                              route.githubLink
+                              ? <a style={{ marginLeft: 'auto'}} href={route.githubLink} target='_blank'><i style={{ fontSize: '25px' }} className='fa fa-github'></i></a>
+                              : null
+                            }
+                          </FlexHeader>
+                          {
+                            route.exampleOf
+                            ? <ul style={{ marginTop: '10px' }}>{
+                              Array.isArray(route.exampleOf)
+                              ? (
+                                route.exampleOf.map((e) => <li key={Math.random()}><strong>{e}</strong></li>)
+                              ) : <li><strong>{route.exampleOf}</strong></li>
                             }</ul>
-                          ) : <ul><li><a href={route.articlesLinks.link} target='_blank'>{route.articlesLinks.text}</a></li></ul>
-                        ) : null
-                      }
-                      {
-                        route.link.text === 'Example5'
-                        ? (
-                          <div style={{ 'padding': '0 10px 10px 15px' }}>
-                            <Select
-                              value={this.props.selectedOption}
-                              onChange={async (e) => {
-                                // console.log(e);
-                                await this.props.dispatch(updateReactSelectSelectedOption(e));
-                              }}
-                              options={dataOptions}
-                            />
-                          </div>
-                        ) : null
-                      }
-                    </li>
-                  ) : null
-                ))
-              }
-              <li><hr className='style-two'/></li>
-              <li>
+                            : null
+                          }
+                          {
+                            route.link.descr ? <Descr style={{ paddingLeft: '15px' }}>{route.link.descr}</Descr> : null
+                          }
+                          {
+                            route.articlesLinks
+                            ? (
+                              Array.isArray(route.articlesLinks)
+                              ? (
+                                <ul>{
+                                  route.articlesLinks.map((l) => (
+                                    <li><a href={l.link} target='_blank'>{l.text}</a></li>
+                                  ))
+                                }</ul>
+                              ) : <ul><li><a href={route.articlesLinks.link} target='_blank'>{route.articlesLinks.text}</a></li></ul>
+                            ) : null
+                          }
+                          {
+                            route.link.text === 'Example5'
+                            ? (
+                              <div style={{ 'padding': '0 10px 10px 15px' }}>
+                                <Select
+                                  value={this.props.selectedOption}
+                                  onChange={async (e) => {
+                                    // console.log(e);
+                                    await this.props.dispatch(updateReactSelectSelectedOption(e));
+                                  }}
+                                  options={dataOptions}
+                                />
+                              </div>
+                            ) : null
+                          }
+                        </li>
+                      ) : null
+                    ))
+                  }
+                </ul>
+              </ExamplesSection>
+              <OriginalDocSection>
                 <a
                   href='/'
                   onClick={(e) => {
@@ -238,8 +248,8 @@ class Routes extends React.Component {
                   }
                 }
                 >Original doc</a>
-              </li>
-            </ul>
+              </OriginalDocSection>
+            </LeftFlexContainer>
           </MainFlexElement>
           <MainFlexElement>
             <Switch>
