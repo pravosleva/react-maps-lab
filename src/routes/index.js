@@ -38,10 +38,6 @@ const searchOptions = [
   { value: 'react-google-map', label: 'react-google-map' },
   { value: 'google-map-react', label: 'google-map-react' },
 ];
-const dataOptions = [
-  { value: 'bigData_10k', label: 'Big data 700 kB' },
-  { value: 'bigData_100k', label: 'Big data 7 MB' },
-];
 const Descr = styled('div')`
   font-style: italic;
   font-size: 14px;
@@ -120,7 +116,7 @@ class Routes extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     searchField: PropTypes.object.isRequired,
-    selectedOption: PropTypes.object,
+    selectedOption: PropTypes.object.isRequired,
   }
 
   // handler = (e) => this.props.dispatch(updateSearchField(e))
@@ -204,7 +200,7 @@ class Routes extends React.Component {
                                     // console.log(e);
                                     await this.props.dispatch(updateReactSelectSelectedOption(e));
                                   }}
-                                  options={dataOptions}
+                                  options={this.props.dataOptions}
                                 />
                               </div>
                             ) : null
@@ -272,13 +268,14 @@ class Routes extends React.Component {
   }
 };
 
-Routes.defaultProps = {
-  selectedOption: {},
-};
+// Routes.defaultProps = {
+//   selectedOption: {},
+// };
 
 function mapStateToProps ({ searchField, markers }) {
   return {
     searchField,
+    dataOptions: markers.dataOptions,
     selectedOption: markers.selectedOption,
     specialKey: markers.specialKey,
   }
