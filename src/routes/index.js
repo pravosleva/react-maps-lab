@@ -52,7 +52,7 @@ const routes = [
     main: () => <Home />,
     link: { text: 'Home' },
     // exampleOf: str|arr,
-    // articlesLinks: str|arr, [{ link, text }]
+    // articlesLinks: obj|arr, [{ link, text }]
     // githubLink: srt,
   },
   {
@@ -122,8 +122,7 @@ class Routes extends React.Component {
 
   // handler = (e) => this.props.dispatch(updateSearchField(e))
 
-  getRemoteData = (arg = {}) => {
-    const API_URL = 'https://pp.uservice.io';
+  getRemoteData = ({ url, method = 'GET', arg = {} }) => {
     const body = new FormData();
     const params = [
       // 'service_id',
@@ -131,8 +130,8 @@ class Routes extends React.Component {
 
     params.map((p) => arg[p] ? body.append([p], arg[p]) : false);
 
-    return fetch(`${API_URL}/customer/map/get-services/`, {
-      method: 'POST',
+    return fetch(url, {
+      method,
       body,
     })
       .then((res) => console.log(res))
@@ -143,8 +142,17 @@ class Routes extends React.Component {
         }
         throw (['res.ok is not ok']); // eslint-disable-line no-throw-literal
       })
-      .then((json) => console.log(json))
+      .then((json) => {
+        console.log(json);
+      })
       // Need to set markers to store by this.props.dispatch(updateMarkers(markers))
+      .then((json) => {
+        Swal({
+          title: 'Ok',
+          text: 'Response received, but this functional in process...',
+          type: 'info'
+        });
+      })
       // in process...
       .catch((err) => {
         Swal({
@@ -233,7 +241,7 @@ class Routes extends React.Component {
                                   onChange={async (option) => {
                                     // console.log(e);
                                     if (option.remote === true) {
-                                      this.getRemoteData();
+                                      this.getRemoteData({ url: 'https://pp.uservice.io/customer/map/get-services/', method: 'POST' });
                                       return;
                                     }
                                     await this.props.dispatch(updateReactSelectSelectedOption(option));
