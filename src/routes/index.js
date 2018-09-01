@@ -31,6 +31,7 @@ import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
 import {
   updateSearchField,
   updateReactSelectSelectedOption,
+  // updateMarkers,
 } from '../actions';
 
 const searchOptions = [
@@ -135,11 +136,20 @@ class Routes extends React.Component {
       body,
     })
       .then((res) => console.log(res))
+      .then((res) => {
+        if (res.ok) {
+          console.log('SUCCESS');
+          return res.json();
+        }
+        throw (['res.ok is not ok']); // eslint-disable-line no-throw-literal
+      })
+      .then((json) => console.log(json))
+      // Need to set markers to store by this.props.dispatch(updateMarkers(markers))
+      // in process...
       .catch((err) => {
-        // in process...
         Swal({
           title: 'Sorry',
-          text: err,
+          html: Array.isArray(err) ? `<ul style='list-style-type: none;'>${err.map((e) => `<li>${e}</li>`)}</ul>` : `<div>${err}</div>`,
           type: 'error'
         });
       });
