@@ -121,6 +121,30 @@ class Routes extends React.Component {
 
   // handler = (e) => this.props.dispatch(updateSearchField(e))
 
+  getRemoteData = (arg = {}) => {
+    const API_URL = 'https://pp.uservice.io';
+    const body = new FormData();
+    const params = [
+      // 'service_id',
+    ];
+
+    params.map((p) => arg[p] ? body.append([p], arg[p]) : false);
+
+    return fetch(`${API_URL}/customer/map/get-services/`, {
+      method: 'POST',
+      body,
+    })
+      .then((res) => console.log(res))
+      .catch((err) => {
+        // in process...
+        Swal({
+          title: 'Sorry',
+          text: err,
+          type: 'error'
+        });
+      });
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -196,9 +220,13 @@ class Routes extends React.Component {
                               <div style={{ 'padding': '0 10px 10px 15px' }}>
                                 <Select
                                   value={this.props.selectedOption}
-                                  onChange={async (e) => {
+                                  onChange={async (option) => {
                                     // console.log(e);
-                                    await this.props.dispatch(updateReactSelectSelectedOption(e));
+                                    if (option.remote === true) {
+                                      this.getRemoteData();
+                                      return;
+                                    }
+                                    await this.props.dispatch(updateReactSelectSelectedOption(option));
                                   }}
                                   options={this.props.dataOptions}
                                 />

@@ -17,6 +17,7 @@ const markers = (
       { value: 'default', label: '{ lat: 0, lng: 0 }', remote: false },
       { value: 'bigDataSample10k', label: 'Big data 700 kB', remote: false },
       // { value: 'bigDataSample100k', label: 'Big data 7 MB', remote: false },
+      { value: 'pp.uservice.io', label: 'pp.uservice.io', remote: true },
     ],
     selectedOption: { value: 'default', label: '{ lat: 0, lng: 0 }', remote: false },
     specialKey: Math.random(),
