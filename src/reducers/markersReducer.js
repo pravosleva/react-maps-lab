@@ -21,6 +21,16 @@ const markers = (
     ],
     selectedOption: { value: 'default', label: '{ lat: 0, lng: 0 }', remote: false },
     specialKey: Math.random(),
+    mapState: {
+      center: { lat: 53.8, lng: 27.5 },
+      zoom: 2,
+      bounds: {
+        ne: { lat: 86.42938051813411, lng: 139.12109375 },
+        nw: { lat: 86.42938051813411, lng: -84.12109375000001 },
+        se: { lat: -57.469181786263654, lng: 139.12109375 },
+        sw: { lat: -57.469181786263654, lng: -84.12109375000001 },
+      },
+    },
   },
   action,
 ) => {
@@ -34,6 +44,11 @@ const markers = (
       return {
         ...state,
         activeMarkerKey: action.payload,
+      };
+    case actionType.UPDATE_MAP_STATE:
+      return {
+        ...state,
+        mapState: action.payload,
       };
     case actionType.UPDATE_REACT_SELECT_SELECTED_OPTION:
       let data = null;

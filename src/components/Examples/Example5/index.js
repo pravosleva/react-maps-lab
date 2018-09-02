@@ -245,4 +245,4 @@ class MyFancyComponent extends React.PureComponent {
   }
 };
 
-export const Example5 = connect(mapState)(compose(MyFancyComponent));
+export const Example5 = connect(mapState)(MyFancyComponent);

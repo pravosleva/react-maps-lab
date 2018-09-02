@@ -4,5 +4,5 @@ export * from './Example3';
 export * from './Example4';
 export * from './Example5';
 export * from './Example6';
-// export * from './Example7';
+export * from './Example7';
 export * from './Example8';

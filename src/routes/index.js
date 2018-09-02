@@ -23,7 +23,7 @@ import {
   Example4, // Bad pattern
   Example5, // Good pattern
   Example6,
-  // Example7,
+  Example7,
   Example8,
 } from '../components/Examples';
 /// import { InputSearch } from '../components/Input';
@@ -52,7 +52,7 @@ const routes = [
     main: () => <Home />,
     link: { text: 'Home' },
     // exampleOf: str|arr,
-    // articlesLinks: obj|arr, [{ link, text }]
+    // articlesLinks: obj|arr, // For example: [{ link, text }]
     // githubLink: srt,
   },
   {
@@ -96,6 +96,14 @@ const routes = [
     main: () => <Example6 />,
     link: { text: 'Example6', descr: 'Simple component experience.' },
     exampleOf: 'google-map-react',
+  },
+  {
+    path: '/example7',
+    exact: true,
+    main: () => <Example7 />,
+    link: { text: 'Example7', descr: 'HOC test for example. supercluster test. In process...' },
+    exampleOf: 'google-map-react',
+    githubLink: 'https://github.com/mapbox/supercluster',
   },
   {
     path: '/example8',
@@ -242,6 +250,7 @@ class Routes extends React.Component {
                                     // console.log(e);
                                     if (option.remote === true) {
                                       this.getRemoteData({ url: 'https://pp.uservice.io/customer/map/get-services/', method: 'POST' });
+                                      // .then(() => ) // this.props.dispatch(updateReactSelectSelectedOption(option));
                                       return;
                                     }
                                     await this.props.dispatch(updateReactSelectSelectedOption(option));

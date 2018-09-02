@@ -10,6 +10,7 @@ export const MainFlexWrapper = styled('div')`
 
   width: 100%;
   height: calc(100vh);
+  overflow: hidden;
 `;
 
 export const MainFlexElement = styled('div')`
@@ -20,7 +21,7 @@ export const MainFlexElement = styled('div')`
     animation: transform 1s ease-in;
   }
   &:nth-child(2n) {
-    width: calc(100%);
+    width: calc(100% - 350px);
   }
   ${(props) => props.bordered && css`border: 1px dashed red;`}
 `;

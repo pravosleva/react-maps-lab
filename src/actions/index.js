@@ -35,3 +35,8 @@ export const updateReactSelectSelectedOption = (obj) => ({
   type: actionType.UPDATE_REACT_SELECT_SELECTED_OPTION,
   payload: obj,
 });
+
+export const updateMapState = (obj) => ({
+  type: actionType.UPDATE_MAP_STATE,
+  payload: obj,
+});
