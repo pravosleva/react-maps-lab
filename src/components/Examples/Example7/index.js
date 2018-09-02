@@ -18,8 +18,8 @@ const mapState = ({ markers, dispatch }) => ({
     markerKey: `MARKER_${Math.random()}`,
     description: 'bla bla bla'.repeat(1),
   })),
-  clusters: [],
   // activeMarkerKey: markers.activeMarkerKey,
+  // specialKey: markers.specialKey,
   center: markers.mapState.center,
   zoom: markers.mapState.zoom,
   bounds: markers.mapState.bounds,
@@ -52,7 +52,7 @@ const SimpleMap = compose(
           props.createClusters();
         })
         .then(() => {
-          specialLog('props.clusters', null, [props.clusters]);
+          specialLog('props', null, [props]);
         });
     },
   })),
@@ -99,6 +99,7 @@ const SimpleMap = compose(
             return (
               <Marker
                 key={item.id}
+                // key={`${props.specialKey}_${item.id}`}
                 lat={item.points[0].lat}
                 lng={item.points[0].lng}
               />
@@ -107,8 +108,8 @@ const SimpleMap = compose(
 
           return (
             <ClusterMarker
-              // key={item.id}
-              key={Math.random()}
+              key={item.id}
+              // key={`${props.specialKey}_${Math.random()}`}
               lat={item.lat}
               lng={item.lng}
               points={item.points}
@@ -123,7 +124,7 @@ const SimpleMap = compose(
 const IncreaseFunctional = withStateHandlers(
   { clusters: [] },
   {
-    createClusters: ({}, props) => () => {
+    createClusters: ({}, props) => () => { // eslint-disable-line no-empty-pattern
       specialLog('IncreaseFunctional of HOC\ncreateClusters: ({ items, center }, props) => () => {}\nprops', null, [props]);
 
       // FOR EXAMPLE:

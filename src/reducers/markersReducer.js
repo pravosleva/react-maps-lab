@@ -20,10 +20,10 @@ const markers = (
       { value: 'pp.uservice.io', label: 'pp.uservice.io', remote: true },
     ],
     selectedOption: { value: 'default', label: '{ lat: 0, lng: 0 }', remote: false },
-    specialKey: Math.random(),
+    specialKey: 0,
     mapState: {
       center: { lat: 53.8, lng: 27.5 },
-      zoom: 2,
+      zoom: 1,
       bounds: {
         ne: { lat: 86.42938051813411, lng: 139.12109375 },
         nw: { lat: 86.42938051813411, lng: -84.12109375000001 },
