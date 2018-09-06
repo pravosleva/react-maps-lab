@@ -19,7 +19,7 @@ const mapState = ({ markers, dispatch }) => ({
     description: 'bla bla bla'.repeat(1),
   })),
   // activeMarkerKey: markers.activeMarkerKey,
-  // specialKey: markers.specialKey,
+  specialKey: markers.specialKey,
   center: markers.mapState.center,
   zoom: markers.mapState.zoom,
   bounds: markers.mapState.bounds,
@@ -98,8 +98,9 @@ const SimpleMap = compose(
           if (item.numPoints === 1) {
             return (
               <Marker
-                key={item.id}
+                // key={item.id}
                 // key={`${props.specialKey}_${item.id}`}
+                key={`${props.specialKey}_${Math.random()}`}
                 lat={item.points[0].lat}
                 lng={item.points[0].lng}
               />
@@ -108,8 +109,8 @@ const SimpleMap = compose(
 
           return (
             <ClusterMarker
-              key={item.id}
-              // key={`${props.specialKey}_${Math.random()}`}
+              // key={item.id}
+              key={`${props.specialKey}_${Math.random()}`}
               lat={item.lat}
               lng={item.lng}
               points={item.points}

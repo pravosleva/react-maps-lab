@@ -20,7 +20,7 @@ const markers = (
       { value: 'pp.uservice.io', label: 'pp.uservice.io', remote: true },
     ],
     selectedOption: { value: 'default', label: '{ lat: 0, lng: 0 }', remote: false },
-    specialKey: 0,
+    specialKey: Math.random(),
     mapState: {
       center: { lat: 53.8, lng: 27.5 },
       zoom: 1,
@@ -39,6 +39,7 @@ const markers = (
       return {
         ...state,
         items: action.payload,
+        specialKey: Math.random(),
       };
     case actionType.UPDATE_ACTIVE_MARKER_KEY:
       return {
