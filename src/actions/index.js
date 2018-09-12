@@ -40,3 +40,8 @@ export const updateMapState = (obj) => ({
   type: actionType.UPDATE_MAP_STATE,
   payload: obj,
 });
+
+export const updateExample9response = (obj) => ({
+  type: actionType.UPDATE_EXAMPLE9_RESPONSE,
+  payload: obj,
+});

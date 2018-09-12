@@ -25,6 +25,7 @@ import {
   Example6,
   Example7,
   Example8,
+  Example9,
 } from '../components/Examples';
 /// import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
@@ -111,8 +112,17 @@ const routes = [
     main: () => <Example8 />,
     link: { text: 'Example8', descr: 'Original sample.' },
     exampleOf: 'google-map-react',
-    articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
+    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     githubLink: 'https://github.com/Tim152/clustering-google-map-react',
+  },
+  {
+    path: '/example9',
+    exact: true,
+    main: () => <Example9 />,
+    link: { text: 'Example9', descr: 'POST test' },
+    // exampleOf: 'Google js api test',
+    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
+    // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
 ];
 const FlexHeader = styled('div')`
@@ -165,7 +175,7 @@ class Routes extends React.Component {
       .catch((err) => {
         Swal({
           title: 'Sorry',
-          html: Array.isArray(err) ? `<ul style='list-style-type: none;'>${err.map((e) => `<li>${e}</li>`)}</ul>` : `<div>${err}</div>`,
+          html: Array.isArray(err) ? `<ul style='list-style-type: none; padding: 0;'>${err.map((e) => `<li>${e}</li>`)}</ul>` : `<div>${err}</div>`,
           type: 'error'
         });
       });
