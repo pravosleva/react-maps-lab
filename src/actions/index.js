@@ -45,3 +45,8 @@ export const updateExample9response = (obj) => ({
   type: actionType.UPDATE_EXAMPLE9_RESPONSE,
   payload: obj,
 });
+
+export const updateExample9ApiKey = (obj) => ({
+  type: actionType.UPDATE_EXAMPLE9_API_KEY,
+  payload: obj,
+});

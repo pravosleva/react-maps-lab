@@ -3,6 +3,7 @@ import counter from './counterReducer';
 import searchField from './searchFieldReducer';
 import markers from './markersReducer';
 import userGeoParams from './userGeoParamsReducer';
+import example9 from './example9';
 
 
 const mainReducer = combineReducers({
@@ -10,6 +11,7 @@ const mainReducer = combineReducers({
   searchField,
   markers,
   userGeoParams,
+  example9,
 })
 
 export default mainReducer;

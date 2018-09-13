@@ -5,16 +5,16 @@ const example9 = (state = {
   response: {
     // ...
   },
+  apiKey: '',
 }, action) => {
   switch (action.type) {
     case actionType.UPDATE_EXAMPLE9_RESPONSE:
-      return {
-        ...state,
-        response: action.payload,
-      };;
+      return { ...state, response: action.payload };
+    case actionType.UPDATE_EXAMPLE9_API_KEY:
+      return { ...state, apiKey: action.payload };
     default:
       return state
   }
 }
 
-export default counter;
+export default example9;

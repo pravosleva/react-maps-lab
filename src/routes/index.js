@@ -119,7 +119,7 @@ const routes = [
     path: '/example9',
     exact: true,
     main: () => <Example9 />,
-    link: { text: 'Example9', descr: 'POST test' },
+    link: { text: 'Example9', descr: 'Google Map API KEY test' },
     // exampleOf: 'Google js api test',
     // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
