@@ -26,6 +26,7 @@ import {
   Example7,
   Example8,
   Example9,
+  Example10,
 } from '../components/Examples';
 /// import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
@@ -37,7 +38,7 @@ import {
 
 const searchOptions = [
   { value: 'all', label: 'all' },
-  { value: 'react-google-map', label: 'react-google-map' },
+  { value: 'react-google-maps', label: 'react-google-maps' },
   { value: 'google-map-react', label: 'google-map-react' },
 ];
 const Descr = styled('div')`
@@ -120,7 +121,16 @@ const routes = [
     exact: true,
     main: () => <Example9 />,
     link: { text: 'Example9', descr: 'Google Map API KEY test' },
-    // exampleOf: 'Google js api test',
+    // exampleOf: '',
+    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
+    // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
+  },
+  {
+    path: '/example10',
+    exact: true,
+    main: () => <Example10 />,
+    link: { text: 'Example10', descr: 'SearchBox test' },
+    exampleOf: 'react-google-maps',
     // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },

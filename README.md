@@ -19,6 +19,8 @@ HOC, but this pattern is better then Example4.
 - [x] Example6
 - [ ] Example7
 - [x] Example8
+- [x] Example9: POST with API_KEY
+- [ ] Example10: SearchBox test
 
 # Original ReadMe
 
