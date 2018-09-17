@@ -28,6 +28,7 @@ import {
   Example9,
   Example10,
   Example11, // pigeon-maps with OpenStreetMap simplest sample
+  Example12,
 } from '../components/Examples';
 /// import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
@@ -140,6 +141,15 @@ const routes = [
     exact: true,
     main: () => <Example11 />,
     link: { text: 'Example11', descr: 'Simplest test' },
+    exampleOf: ['pigeon-map', 'OpenStreetMap'],
+    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
+    // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
+  },
+  {
+    path: '/example12',
+    exact: true,
+    main: () => <Example12 />,
+    link: { text: 'Example12', descr: 'Big data test. Clustering in process...' },
     exampleOf: ['pigeon-map', 'OpenStreetMap'],
     // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     // githubLink: 'https://github.com/Tim152/clustering-google-map-react',

@@ -6,28 +6,18 @@ $ npm start
 ```
 
 ## TODO:
-- [x] [Example1](http://localhost:3000/example1)
-`react-google-maps` & HOC. Simplest map with a marker usage sample.
-- [x] [Example2](http://localhost:3000/example2)
-`react-google-maps` & `react-geolocated` samples. And also open console then drag & drop the map...
-- [x] Example3
-HOC `withStateHandlers`.
-- [x] Example4
-`react-google-maps` with HOC. Markers and MarkerClusterers.
-- [x] Example5
-`react-google-maps` with HOC, but this pattern is better then Example4.
-- [x] Example6
-`google-map-react` sample.
-- [ ] Example7
-`google-map-react` with `supercluster` sample.
-- [x] Example8
-`google-map-react` sample.
-- [x] Example9
-POST with API_KEY test.
-- [ ] Example10
-`react-google-maps` with SearchBox test
-- [ ] Example11
-`pigeon-maps` with `OpenStreetMap` test
+- [x] **Example1** [http://localhost:3000/example1](http://localhost:3000/example1) `react-google-maps` & HOC. Simplest map with a marker usage sample.
+- [x] **Example2** `react-google-maps` & `react-geolocated` samples. And also open console then drag & drop the map...
+- [x] **Example3** HOC `withStateHandlers`.
+- [x] **Example4** `react-google-maps` with HOC. Markers and MarkerClusterers.
+- [x] **Example5** `react-google-maps` with HOC, but this pattern is better then Example4.
+- [x] **Example6** `google-map-react` sample.
+- [ ] **Example7** `google-map-react` with `supercluster` sample.
+- [x] **Example8** `google-map-react` sample.
+- [x] **Example9** POST with API_KEY test.
+- [ ] **Example10** `react-google-maps` with SearchBox test
+- [x] **Example11** `pigeon-maps` with `OpenStreetMap` simplest test.
+- [ ] **Example12** `pigeon-maps` with `OpenStreetMap` big data test. _Attantion! Without clustering yet..._
 
 # Original ReadMe
 
