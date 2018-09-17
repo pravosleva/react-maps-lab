@@ -7,20 +7,27 @@ $ npm start
 
 ## TODO:
 - [x] [Example1](http://localhost:3000/example1)
-HOC. Simplest map with a marker usage sample.
+`react-google-maps` & HOC. Simplest map with a marker usage sample.
 - [x] [Example2](http://localhost:3000/example2)
-HOC & `react-geolocated` usage example. And also open console then drag & drop the map...
+`react-google-maps` & `react-geolocated` samples. And also open console then drag & drop the map...
 - [x] Example3
-HOC `withStateHandlers` example.
+HOC `withStateHandlers`.
 - [x] Example4
-HOC. Markers and MarkerClusterers.
+`react-google-maps` with HOC. Markers and MarkerClusterers.
 - [x] Example5
-HOC, but this pattern is better then Example4.
+`react-google-maps` with HOC, but this pattern is better then Example4.
 - [x] Example6
+`google-map-react` sample.
 - [ ] Example7
+`google-map-react` with `supercluster` sample.
 - [x] Example8
-- [x] Example9: POST with API_KEY
-- [ ] Example10: SearchBox test
+`google-map-react` sample.
+- [x] Example9
+POST with API_KEY test.
+- [ ] Example10
+`react-google-maps` with SearchBox test
+- [ ] Example11
+`pigeon-maps` with `OpenStreetMap` test
 
 # Original ReadMe
 

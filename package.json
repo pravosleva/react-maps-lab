@@ -5,6 +5,9 @@
   "dependencies": {
     "google-map-react": "^1.0.6",
     "immutable": "^3.8.2",
+    "pigeon-maps": "^0.10.4",
+    "pigeon-marker": "^0.3.4",
+    "pigeon-overlay": "^0.2.2",
     "points-cluster": "^0.1.4",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
