@@ -42,6 +42,8 @@ const searchOptions = [
   { value: 'all', label: 'all' },
   { value: 'react-google-maps', label: 'react-google-maps' },
   { value: 'google-map-react', label: 'google-map-react' },
+  { value: 'pigeon-map', label: 'pigeon-map' },
+  { value: 'OpenStreetMap', label: 'OpenStreetMap' },
 ];
 const Descr = styled('div')`
   font-style: italic;
