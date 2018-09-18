@@ -151,8 +151,8 @@ const routes = [
     path: '/example12',
     exact: true,
     main: () => <Example12 />,
-    link: { text: 'Example12', descr: 'Big data test. Clustering in process...' },
-    exampleOf: ['pigeon-map', 'OpenStreetMap'],
+    link: { text: 'Example12', descr: 'In process...' },
+    // exampleOf: [],
     // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
@@ -242,7 +242,7 @@ class Routes extends React.Component {
                       ? true
                       : (
                         r.exampleOf
-                        ? r.exampleOf.includes(this.props.searchField.value)
+                        ? r.exampleOf.includes(this.props.searchField.value) // || r.link.descr.includes(this.props.searchField.value))
                         : false
                       )
                     )).map((route, index) => (
@@ -315,7 +315,7 @@ class Routes extends React.Component {
                     e.preventDefault();
                     Swal({
                       title: 'Are you sure?',
-                      text: 'You will be redirected to original article.',
+                      text: 'You will be redirected.',
                       type: 'warning',
                       showCancelButton: true,
                       confirmButtonText: 'Yes, I got it!',
@@ -324,23 +324,23 @@ class Routes extends React.Component {
                       if (result.value) {
                         // go head...
                       } else if (result.dismiss === Swal.DismissReason.cancel) {
-                        Swal(
-                          'Cancelled',
-                          'You will not be redirected.',
-                          'error'
-                        );
+                        // Swal(
+                        //   'Cancelled',
+                        //   'You will not be redirected.',
+                        //   'error'
+                        // );
                       }
                       return result;
                     }).then((result) => {
                       if (result.value) {
-                        window.location = 'https://tomchentw.github.io/react-google-maps/#usage--configuration';
+                        window.location = 'https://github.com/pravosleva/react-google-maps-samples';
                       } else {
                         return false;
                       }
                     });
                   }
                 }
-                >Original doc</a>
+                ><i style={{ fontSize: '25px' }} className='fa fa-github'></i></a>
               </OriginalDocSection>
             </LeftFlexContainer>
           </MainFlexElement>
