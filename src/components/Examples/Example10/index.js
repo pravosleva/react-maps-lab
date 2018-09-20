@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-  // compose, withProps, withHandlers,
+  // compose, withProps,
+  withHandlers,
   withStateHandlers,
   lifecycle,
 } from 'recompose'; // , withState,
@@ -31,6 +32,7 @@ const WrapperElement = styled('div')`
   margin: auto;
   max-width: 550px;
   width: 100%;
+  padding: 10px;
 
   display: flex;
   flex-direction: column;
@@ -38,7 +40,8 @@ const WrapperElement = styled('div')`
   align-items: center;
 `;
 
-const apiKey = 'AIzaSyDvWOdmtDGOybXpF7XEdixoIImLcCDTzdQ'; // AIzaSyCYfaJm84V9DuaghwTZLaP_KPcUJxgrD__
+const apiKey = 'AIzaSyDvWOdmtDGOybXpF7XEdixoIImLcCDTzdQ';
+// const apiKey = 'AIzaSyCYfaJm84V9DuaghwTZLaP_KPcUJxgrD__';
 
 const PlacesWithStandaloneSearchBox = compose(
   withProps({
@@ -58,13 +61,28 @@ const PlacesWithStandaloneSearchBox = compose(
         onPlacesChanged: () => {
           const places = refs.searchBox.getPlaces();
 
-          this.setState({
-            places,
-          }, () => console.log(places));
+          console.clear();
+          console.log(places);
+
+          this.setState({ places }, () => this.props.dispatch(updateExample10SearchBox({ ...this.props.searchBox, places })));
         },
       })
     },
   }),
+  // withStateHandlers(
+  //   { places: [] },
+  //   {
+  //     updatePlaces: ({ places }, props) => (arg) => {
+  //       // console.log(arg);
+  //       return { places };
+  //     },
+  //   }
+  // ),
+  // withHandlers(() => ({
+  //   onPlacesChanged: (props) => (arg) => {
+  //     console.log(props);
+  //   },
+  // })),
   withScriptjs
 )(props =>
   <WrapperContainer>
@@ -81,9 +99,9 @@ const PlacesWithStandaloneSearchBox = compose(
             boxSizing: 'border-box',
             border: '1px solid transparent',
             width: '100%',
-            textAnign: 'center',
-            height: '32px',
-            padding: '0 12px',
+            // textAlign: 'center',
+            // height: '32px',
+            padding: '10px 25px',
             borderRadius: '4px',
             boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
             fontSize: '14px',
@@ -94,14 +112,40 @@ const PlacesWithStandaloneSearchBox = compose(
       </StandaloneSearchBox>
       <ul style={{ padding: '0', listStyleType: 'none' }}>
         {
-          props.places.map(({ place_id, formatted_address, name }) =>( // , geometry: { location }
-            <li key={`${Math.random()}`}>
-              {/* {name || 'Nameless'}<br /> */}
-              {formatted_address || `formatted_address is ${String(formatted_address)}`}
-              {/* " at " */}
-              {/* ({location.lat()}, {location.lng()}) */}
-            </li>
-          ))
+          props.searchBox.places.map((place) => { // , geometry: { location }
+            const { place_id, formatted_address, name, address_components } = place;
+
+            return (
+              <li key={`${Math.random()}`}>
+                {/* {name || 'Nameless'}<br /> */}
+                {/* formatted_address || `formatted_address is ${String(formatted_address)}` */}
+                {/* " at " */}
+                {/* ({location.lat()}, {location.lng()}) */}
+                <strong>This place has {Object.keys(place).length} props</strong>
+                {
+                  Object.keys(place).length > 0
+                  ? <ol>
+                    {
+                      Object.keys(place).map((e) => <li key={Math.random()}><code>{e}</code></li>)
+                    }
+                  </ol>
+                  : <code>No props</code>
+                }
+                {/*
+                  address_components && address_components.length
+                  ? (
+                    <ul>
+                      {
+                        address_components.map((e) => {
+                          <li>{e.long.name}</li>
+                        })
+                      }
+                    </ul>
+                  ) : null
+                */}
+              </li>
+            )
+          })
         }
       </ul>
 
@@ -109,8 +153,9 @@ const PlacesWithStandaloneSearchBox = compose(
   </WrapperContainer>
 );
 
-// const mapState = ({ example9 }) => ({
-//   apiKey: example9.apiKey,
-// });
+const mapState = ({ example10, dispatch }) => ({
+  searchBox: example10.searchBox,
+  dispatch,
+});
 
-export const Example10 = PlacesWithStandaloneSearchBox;
+export const Example10 = connect(mapState)(PlacesWithStandaloneSearchBox);
