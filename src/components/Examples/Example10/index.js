@@ -73,6 +73,27 @@ const WrapperElement = styled('div')`
     /* margin-top: calc(50vh - 100px); */
 `;
 
+const theme = {
+  scheme: 'monokai',
+  author: 'wimer hazenberg (http://www.monokai.nl)',
+  base00: '#272822',
+  base01: '#383830',
+  base02: '#49483e',
+  base03: '#75715e',
+  base04: '#a59f85',
+  base05: '#f8f8f2',
+  base06: '#f5f4f1',
+  base07: '#f9f8f5',
+  base08: '#f92672',
+  base09: '#fd971f',
+  base0A: '#f4bf75',
+  base0B: '#a6e22e',
+  base0C: '#a1efe4',
+  base0D: '#66d9ef',
+  base0E: '#ae81ff',
+  base0F: '#cc6633'
+};
+
 const apiKey = 'AIzaSyDvWOdmtDGOybXpF7XEdixoIImLcCDTzdQ';
 // const apiKey = 'AIzaSyCYfaJm84V9DuaghwTZLaP_KPcUJxgrD__';
 
@@ -136,9 +157,16 @@ const YourPlace = compose(
           </LocationIcon>
           <LocationLabel>
             {
-              props.popupState.selectedPlace && props.popupState.selectedPlace.formatted_address
-              ? <span>{props.popupState.selectedPlace.formatted_address}</span>
-              : <span>Локация не определена</span>
+              props.popupState.selectedPlace
+              ? (
+                props.popupState.selectedPlace.formatted_address
+                ? <span>{props.popupState.selectedPlace.formatted_address}</span>
+                : (
+                  props.popupState.selectedPlace.name
+                  ? props.popupState.selectedPlace.name
+                  : <span>Локация не определена</span>
+                )
+              ) : <span>Локация не определена</span>
             }
           </LocationLabel>
         </LocationWrapper>
@@ -197,7 +225,18 @@ const YourPlace = compose(
                     // invalid={!!props.error}
                     type='text'
                     placeholder="Введите название города"
-                    defaultValue={props.popupState.selectedPlace ? (props.popupState.selectedPlace.formatted_address || '') : ''}
+                    defaultValue={
+                      props.popupState.selectedPlace
+                      ? (
+                        props.popupState.selectedPlace.formatted_address
+                        ? props.popupState.selectedPlace.formatted_address
+                        : (
+                          props.popupState.selectedPlace.name
+                          ? props.popupState.selectedPlace.name
+                          : ''
+                        )
+                      ) : ''
+                    }
                   />
                 </StandaloneSearchBox>
               </PopupContainer>
@@ -210,26 +249,7 @@ const YourPlace = compose(
           <div style={{ overflowY: 'auto', width: '100%', boxShadow: '0px 0px 5px lightgray', marginTop: '10px', padding: '20px', boxSizing: 'border-box' }}>
             <JSONTree
               data={props.popupState.selectedPlace}
-              theme={{
-                scheme: 'monokai',
-                author: 'wimer hazenberg (http://www.monokai.nl)',
-                base00: '#272822',
-                base01: '#383830',
-                base02: '#49483e',
-                base03: '#75715e',
-                base04: '#a59f85',
-                base05: '#f8f8f2',
-                base06: '#f5f4f1',
-                base07: '#f9f8f5',
-                base08: '#f92672',
-                base09: '#fd971f',
-                base0A: '#f4bf75',
-                base0B: '#a6e22e',
-                base0C: '#a1efe4',
-                base0D: '#66d9ef',
-                base0E: '#ae81ff',
-                base0F: '#cc6633'
-              }}
+              theme={theme}
               invertTheme
             />
           </div>
