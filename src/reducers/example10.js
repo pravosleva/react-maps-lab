@@ -2,14 +2,15 @@ import * as actionType from '../actions/ActionType';
 
 
 const example10 = (state = {
-  searchBox: {
-    places: [],
-    // ...
+  popupState: {
+    open: false,
+    step: 0,
+    selectedPlace: null,
   },
 }, action) => {
   switch (action.type) {
-    case actionType.UPDATE_EXAMPLE10_SEARCHBOX:
-      return { ...state, searchBox: action.payload };
+    case actionType.UPDATE_EXAMPLE10_POPUP_STATE:
+      return { ...state, popupState: action.payload };
     default:
       return state
   }

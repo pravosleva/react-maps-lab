@@ -51,7 +51,7 @@ export const updateExample9ApiKey = (obj) => ({
   payload: obj,
 });
 
-export const updateExample10SearchBox = (obj) => ({
-  type: actionType.UPDATE_EXAMPLE10_SEARCHBOX,
+export const updateExample10PopupState = (obj) => ({
+  type: actionType.UPDATE_EXAMPLE10_POPUP_STATE,
   payload: obj,
 });
