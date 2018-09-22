@@ -83,27 +83,27 @@ export const Example13 = connect(mapState)((props) => (
             onClick={(properties, coords, offset) => {
               console.clear();
               specialLog('Receive event onClick at properties', null, [properties, coords, offset]);
-            }
+            }}
             onMouseEnter={(properties, coords, offset) => {
               console.clear();
               specialLog('Receive event onMouseEnter at properties', null, [properties, coords, offset]);
-            }
+            }}
             onMouseLeave={(properties, coords, offset) => {
               console.clear();
               specialLog('Receive event onMouseLeave at properties', null, [properties, coords, offset]);
-            }
+            }}
             onClusterClick={(properties, coords, offset) => {
               console.clear();
               specialLog('Receive event onClusterClick at properties', null, [properties, coords, offset]);
-            }
+            }}
             onClusterMouseEnter={(properties, coords, offset) => {
               console.clear();
               specialLog('Receive event onClusterMouseEnter at properties', null, [properties, coords, offset]);
-            }
+            }}
             onClusterMouseLeave={(properties, coords, offset) => {
               console.clear();
               specialLog('Receive event onClusterMouseLeave at properties', null, [properties, coords, offset]);
-            }
+            }}
           />
         </Map>
       </WrapperElement>
