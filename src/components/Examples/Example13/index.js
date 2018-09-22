@@ -26,22 +26,22 @@ const WrapperElement = styled('div')`
   align-items: center;
 `;
 
-const dataSample = {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -120.05859375,
-          45.644768217751924
-        ]
-      }
-    }
-  ]
-};
+// const dataSample = {
+//   "type": "FeatureCollection",
+//   "features": [
+//     {
+//       "type": "Feature",
+//       "properties": {},
+//       "geometry": {
+//         "type": "Point",
+//         "coordinates": [
+//           -120.05859375,
+//           45.644768217751924
+//         ]
+//       }
+//     }
+//   ]
+// };
 
 const Map = ReactMapboxGl({
   // accessToken: process.env.MAPBOX_GL_TOKEN,
@@ -80,35 +80,29 @@ export const Example13 = connect(mapState)((props) => (
                 }
               }))
             }}
-            onClick={(properties, coords, offset) =>
-              console.log(
-                `Receive event onClick at properties: ${properties}, coords: ${coords}, offset: ${offset}`
-              )
+            onClick={(properties, coords, offset) => {
+              console.clear();
+              specialLog('Receive event onClick at properties', null, [properties, coords, offset]);
             }
-            onMouseEnter={(properties, coords, offset) =>
-              console.log(
-                `Receive event onMouseEnter at properties: ${properties}, coords: ${coords}, offset: ${offset}`
-              )
+            onMouseEnter={(properties, coords, offset) => {
+              console.clear();
+              specialLog('Receive event onMouseEnter at properties', null, [properties, coords, offset]);
             }
-            onMouseLeave={(properties, coords, offset) =>
-              console.log(
-                `Receive event onMouseLeave at properties: ${properties}, coords: ${coords}, offset: ${offset}`
-              )
+            onMouseLeave={(properties, coords, offset) => {
+              console.clear();
+              specialLog('Receive event onMouseLeave at properties', null, [properties, coords, offset]);
             }
-            onClusterClick={(properties, coords, offset) =>
-              console.log(
-                `Receive event onClusterClick at properties: ${properties}, coords: ${coords}, offset: ${offset}`
-              )
+            onClusterClick={(properties, coords, offset) => {
+              console.clear();
+              specialLog('Receive event onClusterClick at properties', null, [properties, coords, offset]);
             }
-            onClusterMouseEnter={(properties, coords, offset) =>
-              console.log(
-                `Receive event onClusterMouseEnter at properties: ${properties}, coords: ${coords}, offset: ${offset}`
-              )
+            onClusterMouseEnter={(properties, coords, offset) => {
+              console.clear();
+              specialLog('Receive event onClusterMouseEnter at properties', null, [properties, coords, offset]);
             }
-            onClusterMouseLeave={(properties, coords, offset) =>
-              console.log(
-                `Receive event onClusterMouseLeave at properties: ${properties}, coords: ${coords}, offset: ${offset}`
-              )
+            onClusterMouseLeave={(properties, coords, offset) => {
+              console.clear();
+              specialLog('Receive event onClusterMouseLeave at properties', null, [properties, coords, offset]);
             }
           />
         </Map>
