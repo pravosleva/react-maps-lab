@@ -49,7 +49,7 @@ const Map = ReactMapboxGl({
 });
 const mapProps = {
   center: [-95.7129, 37.0902],
-  zoom: [3],
+  zoom: [0],
   style: 'mapbox://styles/mapbox/streets-v8',
 };
 
@@ -59,8 +59,9 @@ const mapState = ({ markers }) => ({
 
 export const Example13 = connect(mapState)((props) => (
     <WrapperContainer>
-      <WrapperElement>
+      <WrapperElement key={String(`${props.items[0].lat}${props.items[0].lng}`)}>
         <Map
+          {...mapProps}
           style="mapbox://styles/mapbox/streets-v9"
           containerStyle={{
             height: "100vh",
