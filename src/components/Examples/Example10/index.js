@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  // compose, withProps,
+  compose, withProps,
   withHandlers,
   withStateHandlers,
   lifecycle,
@@ -9,8 +9,6 @@ import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
 import Swal from 'sweetalert2';
 import { connect } from 'react-redux';
-
-import { compose, withProps } from 'recompose';
 import { withScriptjs } from 'react-google-maps';
 import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
 import JSONTree from 'react-json-tree';

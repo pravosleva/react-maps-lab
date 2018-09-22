@@ -29,6 +29,7 @@ import {
   Example10,
   Example11, // pigeon-maps with OpenStreetMap simplest sample
   Example12,
+  Example13,
 } from '../components/Examples';
 /// import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
@@ -44,6 +45,7 @@ const searchOptions = [
   { value: 'google-map-react', label: 'google-map-react' },
   { value: 'pigeon-map', label: 'pigeon-map' },
   { value: 'OpenStreetMap', label: 'OpenStreetMap' },
+  { value: 'react-mapbox-gl', label: 'react-mapbox-gl' }
 ];
 const Descr = styled('div')`
   font-style: italic;
@@ -151,8 +153,17 @@ const routes = [
     path: '/example12',
     exact: true,
     main: () => <Example12 />,
-    link: { text: 'Example12', descr: 'In process...' },
-    // exampleOf: [],
+    link: { text: 'Example12', descr: 'Simplest test' },
+    exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
+    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
+    // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
+  },
+  {
+    path: '/example13',
+    exact: true,
+    main: () => <Example13 />,
+    link: { text: 'Example13', descr: 'Cluster test' },
+    exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
     // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
