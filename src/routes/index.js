@@ -30,6 +30,7 @@ import {
   Example11, // pigeon-maps with OpenStreetMap simplest sample
   Example12,
   Example13,
+  Example14,
 } from '../components/Examples';
 /// import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
@@ -67,7 +68,7 @@ const routes = [
     path: '/example1',
     exact: true,
     main: () => <Example1 />,
-    link: { text: 'Example1', descr: 'Simplest map with a marker usage sample' },
+    link: { text: 'Example1', descr: 'Simplest map with a marker usage sample.' },
     exampleOf: 'react-google-maps',
   },
   {
@@ -81,7 +82,7 @@ const routes = [
     path: '/example3',
     exact: true,
     main: () => <Example3 />,
-    link: { text: 'Example3', descr: 'HOC & withStateHandlers () example' },
+    link: { text: 'Example3', descr: 'HOC & withStateHandlers () example.' },
     exampleOf: null,
   },
   {
@@ -102,14 +103,14 @@ const routes = [
     path: '/example6',
     exact: true,
     main: () => <Example6 />,
-    link: { text: 'Example6', descr: 'Simple component experience.' },
+    link: { text: 'Example6', descr: 'Simple component experience. (FckUp)' },
     exampleOf: 'google-map-react',
   },
   {
     path: '/example7',
     exact: true,
     main: () => <Example7 />,
-    link: { text: 'Example7', descr: 'HOC test for example. supercluster test. In process...' },
+    link: { text: 'Example7', descr: 'HOC test for example. supercluster test. (FckUp)' },
     exampleOf: 'google-map-react',
     githubLink: 'https://github.com/mapbox/supercluster',
   },
@@ -126,7 +127,7 @@ const routes = [
     path: '/example9',
     exact: true,
     main: () => <Example9 />,
-    link: { text: 'Example9', descr: 'Google Map API KEY test' },
+    link: { text: 'Example9', descr: 'Google Map API KEY test.' },
     // exampleOf: '',
     // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
@@ -135,7 +136,7 @@ const routes = [
     path: '/example10',
     exact: true,
     main: () => <Example10 />,
-    link: { text: 'Example10', descr: 'SearchBox test' },
+    link: { text: 'Example10', descr: 'SearchBox test.' },
     exampleOf: 'react-google-maps',
     // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
@@ -144,7 +145,7 @@ const routes = [
     path: '/example11',
     exact: true,
     main: () => <Example11 />,
-    link: { text: 'Example11', descr: 'Simplest test' },
+    link: { text: 'Example11', descr: 'Marker, Overlay test.' },
     exampleOf: ['pigeon-map', 'OpenStreetMap'],
     // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
@@ -153,7 +154,7 @@ const routes = [
     path: '/example12',
     exact: true,
     main: () => <Example12 />,
-    link: { text: 'Example12', descr: 'Simplest test' },
+    link: { text: 'Example12', descr: 'Layer, Feature test.' },
     exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
     // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
@@ -162,10 +163,19 @@ const routes = [
     path: '/example13',
     exact: true,
     main: () => <Example13 />,
-    link: { text: 'Example13', descr: 'Cluster test' },
-    exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
+    link: { text: 'Example13', descr: 'ReactMapboxGlCluster test.' },
+    exampleOf: ['react-mapbox-gl', 'react-mapbox-gl-cluster', 'OpenStreetMap'],
     // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
+  },
+  {
+    path: '/example14',
+    exact: true,
+    main: () => <Example14 />,
+    link: { text: 'Example14', descr: 'Marker, Cluster, Popup. In process...' },
+    exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
+    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
+    githubLink: 'https://github.com/alex3165/react-mapbox-gl/blob/HEAD/docs/API.md#cluster',
   },
 ];
 const FlexHeader = styled('div')`
@@ -302,7 +312,7 @@ class Routes extends React.Component {
                                   onChange={async (option) => {
                                     // console.log(e);
                                     if (option.remote === true) {
-                                      this.getRemoteData({ url: 'https://pp.uservice.io/customer/map/get-services/', method: 'POST' });
+                                      this.getRemoteData({ url: 'http://dev.uservice.io/customer/map/get-services/', method: 'POST' });
                                       // .then(() => ) // this.props.dispatch(updateReactSelectSelectedOption(option));
                                       return;
                                     }
