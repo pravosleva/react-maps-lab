@@ -1,8 +1,8 @@
-# Google Maps api usage with react libs
+# Trying different types of web maps
 
 ```
-$ npm i
-$ npm start
+$ yarn install
+$ yarn start
 ```
 
 ## TODO:
@@ -11,8 +11,8 @@ $ npm start
 - [x] **Example3** HOC `withStateHandlers`.
 - [x] **Example4** `react-google-maps` with HOC. Markers and MarkerClusterers.
 - [x] **Example5** `react-google-maps` with HOC, but this pattern is better then Example4.
-- [x] **Example6** `google-map-react` sample. (FuckUp)
-- [x] **Example7** `google-map-react` with `supercluster` sample. (FuckUp)
+- [x] **Example6** `google-map-react` sample. _FuckUp_
+- [x] **Example7** `google-map-react` with `supercluster` sample. _FuckUp_
 - [x] **Example8** `google-map-react` sample.
 - [x] **Example9** POST with API_KEY test.
 - [x] **Example10** `react-google-maps` with SearchBox test
