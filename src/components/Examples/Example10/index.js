@@ -2,12 +2,12 @@ import React from 'react';
 import {
   compose, withProps,
   withHandlers,
-  withStateHandlers,
+  // withStateHandlers,
   lifecycle,
 } from 'recompose'; // , withState,
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import { connect } from 'react-redux';
 import { withScriptjs } from 'react-google-maps';
 import { StandaloneSearchBox } from 'react-google-maps/lib/components/places/StandaloneSearchBox';
@@ -28,6 +28,7 @@ import {
 } from './components';
 
 import { updateExample10PopupState } from '../../../actions';
+import withGoogleMapApiKey from '../withGoogleMapApiKey';
 
 
 // See also:
@@ -40,7 +41,7 @@ injectGlobal`
     box-shadow: 2px 2px 5px lightgray;
     animation: ${fadeIn} 0.3s ease-in-out;
 
-      /* &::after { content: none; } */
+    &::after { content: none; }
   }
   .pac-item { line-height: 40px; }
   .pac-icon-marker { margin-top: 10px; }
@@ -92,15 +93,12 @@ const theme = {
   base0F: '#cc6633'
 };
 
-const apiKey = 'AIzaSyDvWOdmtDGOybXpF7XEdixoIImLcCDTzdQ';
-// const apiKey = 'AIzaSyCYfaJm84V9DuaghwTZLaP_KPcUJxgrD__';
-
 const YourPlace = compose(
-  withProps({
-    googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=3.exp&libraries=geometry,drawing,places`,
+  withProps((p) => ({
+    googleMapURL: (() => `https://maps.googleapis.com/maps/api/js?key=${p.apiKey}&v=3.exp&libraries=geometry,drawing,places`)(),
     loadingElement: <div style={{ height: '100%' }} />,
     containerElement: <div style={{ height: '100%' }} />,
-  }),
+  })),
   withHandlers(() => ({
     pressYes: (props) => () => {
       props.dispatch(updateExample10PopupState({ ...props.popupState, open: false }));
@@ -262,4 +260,4 @@ const mapState = ({ example10, dispatch }) => ({
   dispatch,
 });
 
-export const Example10 = connect(mapState)(YourPlace);
+export const Example10 = withGoogleMapApiKey(connect(mapState)(YourPlace));

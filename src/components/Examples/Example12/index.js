@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import {
 //   compose,
 //   withHandlers,
@@ -11,7 +11,8 @@ import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { specialLog } from '../specialLog'; // specialLog('look', null, ['tst']);
+// import { specialLog } from '../specialLog'; // specialLog('look', null, ['tst']);
+import withMapboxApiKey from '../withMapboxApiKey';
 
 
 const WrapperContainer = styled('div')`
@@ -33,10 +34,7 @@ const WrapperElement = styled('div')`
   align-items: center;
 `;
 
-const Map = ReactMapboxGl({
-  // accessToken: process.env.MAPBOX_GL_TOKEN,
-  accessToken: 'pk.eyJ1IjoicHJhdm9zbGV2YSIsImEiOiJjam1kdmJ4azgxZnEzM3FwdGdiZzllOGJ1In0.D-3eFTb0FwfwD66kwlx7Bg',
-});
+// accessToken: process.env.MAPBOX_GL_TOKEN,
 const mapProps = {
   center: [-95.7129, 37.0902],
   zoom: [3],
@@ -47,14 +45,20 @@ const mapState = ({ markers }) => ({
   items: markers.items,
 });
 
-export const Example12 = connect(mapState)((props) => (
+export const Example12 = withMapboxApiKey(connect(mapState)((props) => {
+  const Map = ReactMapboxGl({
+    accessToken: props.apiKey,
+  });
+  return (
     <WrapperContainer>
       <WrapperElement>
         <Map
-          style="mapbox://styles/mapbox/streets-v9"
+          {...mapProps}
+          accessToken={props.apiKey}
+          style='mapbox://styles/mapbox/streets-v9' // eslint-disable-line react/style-prop-object
           containerStyle={{
-            height: "100vh",
-            width: "100vw"
+            height: '100vh',
+            width: '100vw',
           }}
         >
           <Layer
@@ -68,4 +72,4 @@ export const Example12 = connect(mapState)((props) => (
       </WrapperElement>
     </WrapperContainer>
   )
-);
+}));

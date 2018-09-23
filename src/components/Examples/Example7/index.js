@@ -11,6 +11,8 @@ import { updateMapState } from '../../../actions';
 import Marker from '../Example8/components/Marker';
 import ClusterMarker from '../Example8/components/ClusterMarker';
 
+import withGoogleMapApiKey from '../withGoogleMapApiKey';
+
 
 const mapState = ({ markers, dispatch }) => ({
   items: markers.items.map((e) => ({
@@ -60,7 +62,7 @@ const SimpleMap = compose(
   <div style={{ height: '100vh', width: '100%' }}>
     <GoogleMapReact
       onChange={props.onChange}
-      bootstrapURLKeys={{ key: 'AIzaSyDox7bTzfXEEd5HnD2AsRmO8VVf5HaJDVU' }}
+      bootstrapURLKeys={{ key: props.apiKey }}
       center={props.center}
       zoom={props.zoom}
       onGoogleApiLoaded={props.onMapLoaded}
@@ -158,4 +160,4 @@ const IncreaseFunctional = withStateHandlers(
   }
 );
 
-export const Example7 = connect(mapState)(IncreaseFunctional(SimpleMap));
+export const Example7 = withGoogleMapApiKey(connect(mapState)(IncreaseFunctional(SimpleMap)));

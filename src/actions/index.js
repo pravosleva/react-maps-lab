@@ -55,3 +55,8 @@ export const updateExample10PopupState = (obj) => ({
   type: actionType.UPDATE_EXAMPLE10_POPUP_STATE,
   payload: obj,
 });
+
+export const updateExample12 = (obj) => ({
+  type: actionType.UPDATE_EXAMPLE12,
+  payload: obj,
+});

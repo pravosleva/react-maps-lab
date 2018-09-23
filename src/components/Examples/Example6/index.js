@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 // import styled from 'styled-components';
 
+import withGoogleMapApiKey from '../withGoogleMapApiKey';
+
 
 const AnyReactComponent = ({ text, style, onClick, onCloseClick }) => (
   <div onClick={() => onClick(text)} style={style}>
@@ -29,7 +31,7 @@ class SimpleMap extends Component {
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyDox7bTzfXEEd5HnD2AsRmO8VVf5HaJDVU' }}
+          bootstrapURLKeys={{ key: this.props.apiKey }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
           // onGoogleApiLoaded={({map, maps}) => console.log(map, maps)}
@@ -64,4 +66,4 @@ class SimpleMap extends Component {
   }
 }
 
-export const Example6 = SimpleMap;
+export const Example6 = withGoogleMapApiKey(SimpleMap);

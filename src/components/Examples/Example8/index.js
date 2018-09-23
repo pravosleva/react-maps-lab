@@ -10,6 +10,8 @@ import ClusterMarker from './components/ClusterMarker';
 import mapStyles from './mapStyles.json';
 import { markersData, susolvkaCoords } from './fakeData';
 
+import withGoogleMapApiKey from '../withGoogleMapApiKey';
+
 
 const MAP = {
   defaultZoom: 8,
@@ -78,13 +80,13 @@ class TheMap extends Component {
           options={MAP.options}
           onChange={this.handleMapChange}
           yesIWantToUseGoogleMapApiInternals
-          bootstrapURLKeys={{ key: 'AIzaSyDox7bTzfXEEd5HnD2AsRmO8VVf5HaJDVU' }}
+          bootstrapURLKeys={{ key: this.props.apiKey }}
         >
           {this.state.clusters.map(item => {
             if (item.numPoints === 1) {
               return (
                 <Marker
-                  key={item.id}
+                  key={Math.random()}
                   lat={item.points[0].lat}
                   lng={item.points[0].lng}
                 />
@@ -93,7 +95,7 @@ class TheMap extends Component {
 
             return (
               <ClusterMarker
-                key={item.id}
+                key={Math.random()}
                 lat={item.lat}
                 lng={item.lng}
                 points={item.points}
@@ -106,4 +108,4 @@ class TheMap extends Component {
   }
 }
 
-export const Example8 = TheMap;
+export const Example8 = withGoogleMapApiKey(TheMap);

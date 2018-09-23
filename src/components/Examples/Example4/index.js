@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import { specialLog } from '../specialLog'; // specialLog('look', null, ['tst']);
 import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer';
 import { updateActiveMarkerKey } from '../../../actions';
+import withGoogleMapApiKey from '../withGoogleMapApiKey';
 
 
 const mapState = ({ markers, dispatch }) => ({
@@ -76,12 +77,12 @@ const clusterStyles = [
 const refs = { map: {} }; // Antipattern too (Example 5 is better!)
 
 const MyMapComponent = compose(
-  withProps({
-    googleMapURL: 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyDvWOdmtDGOybXpF7XEdixoIImLcCDTzdQ',
+  withProps((p) => ({
+    googleMapURL: (() => `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${p.apiKey}`)(),
     loadingElement: <div style={{ height: `100%` }} />,
     containerElement: <div style={{ height: `100vh` }} />,
     mapElement: <div style={{ height: `100%` }} />,
-  }),
+  })),
   withHandlers(() => ({
     onMapLoaded: () => (ref) => {
       refs.map = ref;
@@ -190,6 +191,7 @@ class MyFancyComponent extends React.PureComponent {
   render() {
     return (
       <MyMapComponent
+        {...this.props}
         onMarkerClick={this.handleMarkerClick}
         onCloseClick={this.onCloseClick}
         items={this.state.items}
@@ -205,4 +207,4 @@ class MyFancyComponent extends React.PureComponent {
   }
 };
 
-export const Example4 = connect(mapState)(compose(MyFancyComponent));
+export const Example4 = withGoogleMapApiKey(connect(mapState)(compose(MyFancyComponent)));

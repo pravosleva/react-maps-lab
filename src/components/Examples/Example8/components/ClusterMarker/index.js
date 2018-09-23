@@ -18,7 +18,7 @@ class ClusterMarker extends React.PureComponent {
       <MarkerGroup length={this.props.points.length}>
         {this.state.clusterFaceMarkers.map(marker =>
           <Marker
-            key={marker.id || marker.markerKey}
+            key={Math.random()} // marker.id || marker.markerKey
             lat={marker.lat}
             lng={marker.lng}
             name={marker.id || marker.markerKey}

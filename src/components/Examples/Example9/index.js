@@ -1,14 +1,18 @@
 import React from 'react';
-import {
-  // compose, withProps, withHandlers,
-  withStateHandlers,
-} from 'recompose'; // , withState,
+// import {
+//   compose, withProps, withHandlers,
+//   withStateHandlers,
+// } from 'recompose';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Swal from 'sweetalert2';
 import { connect } from 'react-redux';
 
-import { updateExample9response, updateExample9ApiKey } from '../../../actions';
+import {
+  // updateExample9response,
+  updateExample9ApiKey,
+} from '../../../actions';
+// import withGoogleMapApiKey from '../withGoogleMapApiKey';
 
 
 // https://developers.google.com/maps/documentation/geolocation/intro
@@ -87,14 +91,21 @@ const tstButton = (props) => {
               throw new Error(['res.ok is not ok, see console...']); // eslint-disable-line no-throw-literal
             })
             .then((res) => Swal({
+              position: 'top-end',
               title: 'Ok',
-              text: JSON.stringify(res),
-              type: 'info',
+              // text: JSON.stringify(res),
+              text: 'Successfully!',
+              // type: 'info',
+              showConfirmButton: false,
+              timer: 3000,
             }))
             .catch((err) => Swal({
+              position: 'top-end',
               title: 'Sorry',
               html: Array.isArray(err) ? `<ul style='list-style-type: none; padding: 0;'>${err.map((e) => `<li>${e}</li>`)}</ul>` : `<div>${err}</div>`,
-              type: 'error',
+              // type: 'error',
+              showConfirmButton: false,
+              timer: 3000,
             }));
 
           // props.dispatch(updateExample9response());
@@ -113,16 +124,5 @@ const mapState = ({ example9 }) => ({
   apiKey: example9.apiKey,
 });
 
-// withStateHandlers
-// const IncreaseFunctional = withStateHandlers(
-//   { localCount: 0 },
-//   {
-//     onClick: ({ localCount }, props) => () => {
-//       props.dispatch(addCounter());
-//       return { localCount: localCount + 1 }
-//     },
-//   }
-// );
-
-// export const Example9 = connect(mapState)(IncreaseFunctional(tstButton));
+// export const Example9 = withGoogleMapApiKey(connect(mapState)(tstButton));
 export const Example9 = connect(mapState)(tstButton);
