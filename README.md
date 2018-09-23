@@ -11,13 +11,14 @@ $ npm start
 - [x] **Example3** HOC `withStateHandlers`.
 - [x] **Example4** `react-google-maps` with HOC. Markers and MarkerClusterers.
 - [x] **Example5** `react-google-maps` with HOC, but this pattern is better then Example4.
-- [x] **Example6** `google-map-react` sample.
-- [ ] **Example7** `google-map-react` with `supercluster` sample.
+- [x] **Example6** `google-map-react` sample. (FuckUp)
+- [x] **Example7** `google-map-react` with `supercluster` sample. (FuckUp)
 - [x] **Example8** `google-map-react` sample.
 - [x] **Example9** POST with API_KEY test.
-- [ ] **Example10** `react-google-maps` with SearchBox test
+- [x] **Example10** `react-google-maps` with SearchBox test
 - [x] **Example11** `pigeon-maps` with `OpenStreetMap` simplest test.
-- [ ] **Example12** `pigeon-maps` with `OpenStreetMap` big data test. _Attantion! Without clustering yet..._
+- [x] **Example12**
+- [x] **Example13**
 
 # Original ReadMe
 

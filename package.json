@@ -1,5 +1,6 @@
 {
-  "name": "google-maps-usage-examples",
+  "name": "react-maps-lab",
+  "homepage": "https://github.com/pravosleva/react-maps-lab",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
