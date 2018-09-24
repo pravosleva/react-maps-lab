@@ -60,3 +60,8 @@ export const updateExample12 = (obj) => ({
   type: actionType.UPDATE_EXAMPLE12,
   payload: obj,
 });
+
+export const updateCurrentPage = (obj) => ({
+  type: actionType.UPDATE_CURRENT_PAGE,
+  payload: obj,
+});

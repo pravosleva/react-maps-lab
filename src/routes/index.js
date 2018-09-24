@@ -37,7 +37,7 @@ import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
 import {
   updateSearchField,
   updateReactSelectSelectedOption,
-  // updateMarkers,
+  updateCurrentPage,
 } from '../actions';
 
 const searchOptions = [
@@ -52,7 +52,7 @@ const Descr = styled('div')`
   font-style: italic;
   font-size: 14px;
   padding: 10px;
-  color: gray;
+    /* color: gray; */
 `;
 const routes = [
   {
@@ -193,6 +193,12 @@ class Routes extends React.Component {
 
   // handler = (e) => this.props.dispatch(updateSearchField(e))
 
+  componentDidMount() {
+    this.props.dispatch(updateCurrentPage({ routePath: window.location.pathname }));
+  }
+
+  isThisCurrentRoute = (route) => route.path === this.props.currentPage.routePath
+
   getRemoteData = ({ url, method = 'GET', arg = {} }) => {
     const body = new FormData();
     const params = [
@@ -256,7 +262,7 @@ class Routes extends React.Component {
               </SearchSection>
 
               <ExamplesSection>
-                <ul style={{ listStyleType: 'none', padding: '0', marginTop: '0' }}>
+                <ul style={{ listStyleType: 'none', padding: '0', marginTop: '0', marginBottom: '0' }}>
                   {
                     routes.filter((r) => (
                       this.props.searchField.value === 'all'
@@ -268,9 +274,12 @@ class Routes extends React.Component {
                       )
                     )).map((route, index) => (
                       route.link ? (
-                        <li key={index} style={{ padding: '0 0 5px 0' }}>
+                        <li key={index} style={{ padding: '10px 20px 10px 20px', color: this.isThisCurrentRoute(route) ? '#fff' : 'inherit', backgroundColor: this.isThisCurrentRoute(route) ? '#0399D0' : 'transparent' }}>
                           <FlexHeader>
-                            <Link to={route.path}>{route.link.text}</Link>
+                            <Link
+                              to={route.path}
+                              onClick={() => this.props.dispatch(updateCurrentPage({ routePath: route.path }))}
+                            >{route.link.text}</Link>
                             {
                               route.githubLink
                               ? <a style={{ marginLeft: 'auto'}} href={route.githubLink} target='_blank'><i style={{ fontSize: '25px' }} className='fa fa-github'></i></a>
@@ -288,7 +297,7 @@ class Routes extends React.Component {
                             : null
                           }
                           {
-                            route.link.descr ? <Descr style={{ paddingLeft: '15px' }}>{route.link.descr}</Descr> : null
+                            route.link.descr ? <Descr style={{ paddingLeft: '15px', color: this.isThisCurrentRoute(route) ? 'inherit' : 'gray' }}>{route.link.descr}</Descr> : null
                           }
                           {
                             route.articlesLinks
@@ -390,13 +399,14 @@ class Routes extends React.Component {
 //   selectedOption: {},
 // };
 
-function mapStateToProps ({ searchField, markers }) {
+function mapStateToProps ({ searchField, markers, currentPage }) {
   return {
     searchField,
     dataOptions: markers.dataOptions,
     selectedOption: markers.selectedOption,
     specialKey: markers.specialKey,
+    currentPage,
   }
 }
 
-export default connect(mapStateToProps)(Routes)
+export default connect(mapStateToProps)(Routes);

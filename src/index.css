@@ -17,5 +17,6 @@ hr.style-two { border: 0; height: 1px; background-image: linear-gradient(to righ
 }
 
 a {
-  color: #4558BB;
+  /* color: #4558BB; */
+  color: inherit;
 }

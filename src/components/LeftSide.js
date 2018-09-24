@@ -14,7 +14,7 @@ export const SearchSection = styled('div')`
 
 export const ExamplesSection = styled('div')`
   position: relative;
-  padding: 10px 20px 20px 20px;
+  padding: 0;
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   overflow-y: auto;
 `;
