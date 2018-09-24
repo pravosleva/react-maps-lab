@@ -3,7 +3,7 @@ import * as actionType from '../actions/ActionType';
 
 const currentPage = (state = {
   routePath: '/',
-  tst: 0,
+  listOpenedOnMobile: true,
 }, action) => {
   switch (action.type) {
     case actionType.UPDATE_CURRENT_PAGE:

@@ -7,7 +7,7 @@ export const RelativeLocationPlaceToDisplayInHeader = styled('div')`
   margin-left: 45px;
   font-size: 18px;
   font-weight: 500;
-  @media(max-width: 767px) { display: none }
+    /* @media(max-width: 767px) { display: none } */
 `;
 
 export const LocationWrapper = styled('div')`
@@ -30,10 +30,12 @@ export const fadeIn = keyframes`
 `;
 export const LocationPopup = styled('div')`
   position: absolute;
-    /* bottom: -85px; */
-  transform: translate(0, 35px);
+
   ${(p) => p.bottomOffsetValue && css`transform: translate(0, ${p.bottomOffsetValue});`}
-  left: -16px;
+  transform: translate(0, 35px);
+  @media(min-width:768px){
+    left: -16px;
+  }
   background-color: #fff;
   border-radius: 5px;
   padding: 10px 15px;
@@ -74,7 +76,7 @@ export const LocationArrow = styled('div')`
   border-bottom: none;
 `;
 
-export const PopupText = styled('dev')`
+export const PopupText = styled('div')`
   margin-right: 10px;
 `;
 
@@ -108,7 +110,11 @@ export const Input = styled('input')`
     color: #40B3E9;
   }
 
-  min-width: 308px;
+  box-sizing: border-box;
+  width: 100%;
+  @media(min-width:768px){
+    max-width: 308px;
+  }
 
   position: relative;
   z-index: 2;

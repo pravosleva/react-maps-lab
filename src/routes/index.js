@@ -16,6 +16,7 @@ import {
   ExamplesSection,
   OriginalDocSection,
 } from '../components/LeftSide';
+import { TogglerBtn } from '../components/TogglerBtn';
 import {
   Example1,
   Example2,
@@ -46,13 +47,12 @@ const searchOptions = [
   { value: 'google-map-react', label: 'google-map-react' },
   { value: 'pigeon-map', label: 'pigeon-map' },
   { value: 'OpenStreetMap', label: 'OpenStreetMap' },
-  { value: 'react-mapbox-gl', label: 'react-mapbox-gl' }
+  { value: 'react-mapbox-gl', label: 'react-mapbox-gl' },
 ];
 const Descr = styled('div')`
   font-style: italic;
   font-size: 14px;
   padding: 10px;
-    /* color: gray; */
 `;
 const routes = [
   {
@@ -62,7 +62,7 @@ const routes = [
     link: { text: 'Home' },
     // exampleOf: str|arr,
     // articlesLinks: obj|arr, // For example: [{ link, text }]
-    // githubLink: srt,
+    // githubLink: str,
   },
   {
     path: '/example1',
@@ -120,7 +120,6 @@ const routes = [
     main: () => <Example8 />,
     link: { text: 'Example8', descr: 'Original sample.' },
     exampleOf: 'google-map-react',
-    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
   {
@@ -128,9 +127,6 @@ const routes = [
     exact: true,
     main: () => <Example9 />,
     link: { text: 'Example9', descr: 'Google Map API KEY test.' },
-    // exampleOf: '',
-    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
-    // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
   {
     path: '/example10',
@@ -138,8 +134,6 @@ const routes = [
     main: () => <Example10 />,
     link: { text: 'Example10', descr: 'SearchBox test.' },
     exampleOf: 'react-google-maps',
-    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
-    // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
   {
     path: '/example11',
@@ -147,8 +141,6 @@ const routes = [
     main: () => <Example11 />,
     link: { text: 'Example11', descr: 'Marker, Overlay test.' },
     exampleOf: ['pigeon-map', 'OpenStreetMap'],
-    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
-    // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
   {
     path: '/example12',
@@ -156,8 +148,6 @@ const routes = [
     main: () => <Example12 />,
     link: { text: 'Example12', descr: 'Layer, Feature test.' },
     exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
-    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
-    // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
   {
     path: '/example13',
@@ -165,8 +155,6 @@ const routes = [
     main: () => <Example13 />,
     link: { text: 'Example13', descr: 'ReactMapboxGlCluster test.' },
     exampleOf: ['react-mapbox-gl', 'react-mapbox-gl-cluster', 'OpenStreetMap'],
-    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
-    // githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
   {
     path: '/example14',
@@ -174,7 +162,6 @@ const routes = [
     main: () => <Example14 />,
     link: { text: 'Example14', descr: 'Marker, Cluster, Popup. In process...' },
     exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
-    // articlesLinks: { link: 'https://habr.com/post/334644/', text: 'About it on habr' },
     githubLink: 'https://github.com/alex3165/react-mapbox-gl/blob/HEAD/docs/API.md#cluster',
   },
 ];
@@ -207,10 +194,7 @@ class Routes extends React.Component {
 
     params.map((p) => arg[p] ? body.append([p], arg[p]) : false);
 
-    return fetch(url, {
-      method,
-      body,
-    })
+    return fetch(url, { method, body })
       .then((res) => console.log(res))
       .then((res) => {
         if (res.ok) {
@@ -227,15 +211,17 @@ class Routes extends React.Component {
         Swal({
           title: 'Ok',
           text: 'Response received, but this functional in process...',
-          type: 'info'
+          type: 'info',
         });
       })
       // in process...
       .catch((err) => {
         Swal({
           title: 'Sorry',
-          html: Array.isArray(err) ? `<ul style='list-style-type: none; padding: 0;'>${err.map((e) => `<li>${e}</li>`)}</ul>` : `<div>${err}</div>`,
-          type: 'error'
+          html: Array.isArray(err)
+            ? `<ul style='list-style-type: none; padding: 0;'>${err.map((e) => `<li>${e}</li>`)}</ul>`
+            : `<div>${err}</div>`,
+          type: 'error',
         });
       });
   }
@@ -244,7 +230,7 @@ class Routes extends React.Component {
     return (
       <BrowserRouter>
         <MainFlexWrapper>
-          <MainFlexElement>
+          <MainFlexElement opened={this.props.currentPage.listOpenedOnMobile}>
             <LeftFlexContainer>
               <SearchSection>
                 {/*
@@ -274,11 +260,11 @@ class Routes extends React.Component {
                       )
                     )).map((route, index) => (
                       route.link ? (
-                        <li key={index} style={{ padding: '10px 20px 10px 20px', color: this.isThisCurrentRoute(route) ? '#fff' : 'inherit', backgroundColor: this.isThisCurrentRoute(route) ? '#0399D0' : 'transparent' }}>
+                        <li key={index} style={{ padding: '10px 20px 10px 20px', backgroundColor: this.isThisCurrentRoute(route) ? '#ABDFF3' : 'transparent' }}>
                           <FlexHeader>
                             <Link
                               to={route.path}
-                              onClick={() => this.props.dispatch(updateCurrentPage({ routePath: route.path }))}
+                              onClick={() => this.props.dispatch(updateCurrentPage({ ...this.props.currentPage , routePath: route.path }))}
                             >{route.link.text}</Link>
                             {
                               route.githubLink
@@ -305,9 +291,7 @@ class Routes extends React.Component {
                               Array.isArray(route.articlesLinks)
                               ? (
                                 <ul>{
-                                  route.articlesLinks.map((l) => (
-                                    <li><a href={l.link} target='_blank'>{l.text}</a></li>
-                                  ))
+                                  route.articlesLinks.map((l) => <li key={Math.random()}><a href={l.link} target='_blank'>{l.text}</a></li>)
                                 }</ul>
                               ) : <ul><li><a href={route.articlesLinks.link} target='_blank'>{route.articlesLinks.text}</a></li></ul>
                             ) : null
@@ -354,11 +338,7 @@ class Routes extends React.Component {
                       if (result.value) {
                         // go head...
                       } else if (result.dismiss === Swal.DismissReason.cancel) {
-                        // Swal(
-                        //   'Cancelled',
-                        //   'You will not be redirected.',
-                        //   'error'
-                        // );
+                        // Swal('Cancelled', 'You will not be redirected.', 'error');
                       }
                       return result;
                     }).then((result) => {
@@ -389,6 +369,11 @@ class Routes extends React.Component {
               <Route exact path='/*' component={NotFound} />
             </Switch>
           </MainFlexElement>
+          <TogglerBtn
+            onClick={() => this.props.dispatch(updateCurrentPage({ ...this.props.currentPage , listOpenedOnMobile: !this.props.currentPage.listOpenedOnMobile }))}
+          >
+            {this.props.currentPage.listOpenedOnMobile ? <i style={{ fontSize: '40px' }} className='fa fa-bars'></i> : <i style={{ fontSize: '40px' }} className='fa fa-times'></i>}
+          </TogglerBtn>
         </MainFlexWrapper>
       </BrowserRouter>
     )

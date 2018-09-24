@@ -19,11 +19,15 @@ import {
 
 const WrapperContainer = styled('div')`
   height: calc(100vh);
+  width: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
+
+  box-sizing: border-box;
+  padding: 10px;
 `;
 
 const WrapperElement = styled('div')`
@@ -53,9 +57,10 @@ const Input = styled('input')`
   padding: 10px;
   border-radius: 4px 0 0 4px;
   border: 1px solid #226078;
+  box-sizing: border-box;
   font-family: inherit;
-  margin-left: auto;
-  flex: 2 0 100px;
+    /* flex: 2 0 100px; */
+  width: 100%;
 `;
 
 const myHeaders = new Headers();

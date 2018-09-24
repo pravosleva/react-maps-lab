@@ -63,6 +63,9 @@ const WrapperElement = styled('div')`
   width: 100%;
   height: 100%;
   padding: 20px;
+  @media(max-width: 767px){
+    padding: 20px 10px 20px 10px;
+  }
   box-sizing: border-box;
     /* border: 1px dashed red; */
 
