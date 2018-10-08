@@ -1,3 +1,29 @@
+/* REACT-TOASTIFY */
+
+.Toastify__toast {
+  font-size: 13px;
+  line-height: 15px;
+  padding: 12px 25px 12px 25px;
+  position: relative;
+}
+.Toastify__close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.Toastify__progress-bar--warning {
+  background: linear-gradient(to right, #3c8dbc, transparent);
+}
+.Toastify__close-button--warning {
+  color: #45728D;
+}
+.Toastify__toast--warning {
+  background-color: #FFD29A;
+  color: #13547A;
+}
+
+/* OTHERS */
+
 body { margin: 0; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); }
 .swal2-container { font-family: Montserrat; }
 

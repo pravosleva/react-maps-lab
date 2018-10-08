@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 // import {
 //   compose, withProps, withHandlers,
 //   withStateHandlers,
 // } from 'recompose';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { connect } from 'react-redux';
 
 import {
@@ -28,6 +30,8 @@ const WrapperContainer = styled('div')`
 
   box-sizing: border-box;
   padding: 10px;
+
+  position: relative;
 `;
 
 const WrapperElement = styled('div')`
@@ -75,50 +79,58 @@ const opts = {
 
 const tstButton = (props) => {
   return (
-    <WrapperContainer>
-      <WrapperElement>
-        <Input
-          placeholder='YOUR_API_KEY'
-          value={props.apiKey}
-          onChange={(e) => {
-            props.dispatch(updateExample9ApiKey(e.target.value));
-          }}
-        />
-        <Button onClick={() => {
-          // await props.onClick();
+    <Fragment>
+      <WrapperContainer>
+        <WrapperElement>
+          <Input
+            placeholder='YOUR_API_KEY'
+            value={props.apiKey}
+            onChange={(e) => {
+              props.dispatch(updateExample9ApiKey(e.target.value));
+            }}
+          />
+          <Button onClick={() => {
+            // await props.onClick();
 
-          fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${props.apiKey}`, opts)
-            .then((res) => {
-              if (res.ok) {
-                // console.log('SUCCESS');
-                return res.json();
-              }
-              throw new Error(['res.ok is not ok, see console...']); // eslint-disable-line no-throw-literal
-            })
-            .then((res) => Swal({
-              position: 'top-end',
-              title: 'Ok',
-              // text: JSON.stringify(res),
-              text: 'Successfully!',
-              // type: 'info',
-              showConfirmButton: false,
-              timer: 3000,
-            }))
-            .catch((err) => Swal({
-              position: 'top-end',
-              title: 'Sorry',
-              html: Array.isArray(err) ? `<ul style='list-style-type: none; padding: 0;'>${err.map((e) => `<li>${e}</li>`)}</ul>` : `<div>${err}</div>`,
-              // type: 'error',
-              showConfirmButton: false,
-              timer: 3000,
-            }));
+            fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${props.apiKey}`, opts)
+              .then((res) => {
+                if (res.ok) {
+                  // console.log('SUCCESS');
+                  return res.json();
+                }
+                throw new Error(['res.ok is not ok, see console...']); // eslint-disable-line no-throw-literal
+              })
+              .then((res) => {
+                // Swal({
+                //   position: 'top-end',
+                //   title: 'Ok',
+                //   text: 'Successfully!',
+                //   showConfirmButton: false,
+                //   timer: 3000,
+                // });
+                toast.info('Ok.');
+              })
+              .catch((error) => {
+                // Swal({
+                //   position: 'top-end',
+                //   title: 'Sorry',
+                //   html: Array.isArray(err) ? `<ul style='list-style-type: none; padding: 0;'>${err.map((e) => `<li>${e}</li>`)}</ul>` : `<div>${err}</div>`,
+                //   // type: 'error',
+                //   showConfirmButton: false,
+                //   timer: 3000,
+                // });
+                toast.warn((Array.isArray(error) ? error.map((e) => e).join('\n') : String(error)));
+              });
 
-          // props.dispatch(updateExample9response());
-        }}>
-          Try to get data by POST
-        </Button>
-      </WrapperElement>
-    </WrapperContainer>
+            // props.dispatch(updateExample9response());
+          }}>
+            Try to get data by POST
+          </Button>
+
+        </WrapperElement>
+        <ToastContainer autoClose={5000} position='bottom-right' />
+      </WrapperContainer>
+    </Fragment>
   )
 };
 
