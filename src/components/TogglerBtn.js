@@ -11,7 +11,8 @@ export const TogglerBtn = styled('button')`
   color: #fff;
   border-radius: 50%;
   border: none;
-  box-shadow: 0 6px 10px 0 #666;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 
   font-size: 40px;
   color: white;
@@ -21,8 +22,7 @@ export const TogglerBtn = styled('button')`
   height: 56px;
 
   &:hover {
-    box-shadow: 0 6px 14px 0 #666;
-    transform: scale(1.05);
+    transform: scale(1.01);
   }
 
   @media(min-width:768px){

@@ -33,6 +33,7 @@ import {
   Example13,
   Example14,
 } from '../components/Examples';
+import { Issue1 } from '../components/Issues/Issue1';
 /// import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
 import {
@@ -163,6 +164,14 @@ const routes = [
     link: { text: 'Example14', descr: 'Marker, Cluster, Popup. In process...' },
     exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
     githubLink: 'https://github.com/alex3165/react-mapbox-gl/blob/HEAD/docs/API.md#cluster',
+  },
+  {
+    path: '/issue1',
+    exact: true,
+    main: () => <Issue1 />,
+    link: { text: 'Issue1', descr: 'HOC experience like uremont.com' },
+    // exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
+    // githubLink: 'https://github.com/alex3165/react-mapbox-gl/blob/HEAD/docs/API.md#cluster',
   },
 ];
 const FlexHeader = styled('div')`
