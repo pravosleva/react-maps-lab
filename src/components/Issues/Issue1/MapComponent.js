@@ -29,6 +29,7 @@ const SidebarToggler = styled(Fab)`
   right: 16px;
   z-index: 4;
   @media(min-width: 768px){display: none;}
+  outline: none;
 `;
 
 export default compose(
