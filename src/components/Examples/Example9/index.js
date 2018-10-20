@@ -6,8 +6,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // import Swal from 'sweetalert2';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import { connect } from 'react-redux';
 
 import {
@@ -108,7 +107,15 @@ const tstButton = (props) => {
                 //   showConfirmButton: false,
                 //   timer: 3000,
                 // });
-                toast.info('Ok.');
+                toast.info(
+                  Object.keys(res).map((k) => {
+                    if (typeof res[k] === 'object') {
+                      return `${k}: ${JSON.stringify(res[k])}`;
+                    }
+                    return `${k}: ${String(res[k])}`;
+                  }).join('\n'),
+                  { autoClose: 20000 },
+                );
               })
               .catch((error) => {
                 // Swal({
@@ -119,7 +126,7 @@ const tstButton = (props) => {
                 //   showConfirmButton: false,
                 //   timer: 3000,
                 // });
-                toast.warn((Array.isArray(error) ? error.map((e) => e).join('\n') : String(error)));
+                toast.warn((Array.isArray(error) ? error.map((e) => e).join('\n') : String(error)), { autoClose: 20000 });
               });
 
             // props.dispatch(updateExample9response());
@@ -128,7 +135,6 @@ const tstButton = (props) => {
           </Button>
 
         </WrapperElement>
-        <ToastContainer autoClose={5000} position='bottom-right' />
       </WrapperContainer>
     </Fragment>
   )

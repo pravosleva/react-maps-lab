@@ -44,10 +44,21 @@ export default compose(
   <GoogleMap
     defaultZoom={8}
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    defaultOptions={{
+      // these following 7 options turn certain controls off see link below
+      streetViewControl: false,
+      scaleControl: false,
+      mapTypeControl: false,
+      panControl: false,
+      zoomControl: false,
+      rotateControl: false,
+      fullscreenControl: false
+    }}
+    disableDefaultUI
   >
     {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
     <SidebarToggler onClick={() => props.sidebarToggler()}>
-      btn
+      <i className='fa fa-gear' style={{ fontSize: '30px' }} />
     </SidebarToggler>
   </GoogleMap>
 );

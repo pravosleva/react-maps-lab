@@ -19,6 +19,7 @@ export const MainFlexElement = styled('div')`
       min-width: 350px;
       max-width: 350px;
       box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
+      border-right: 1px solid lightgray;
     }
     &:nth-child(2n) {
       width: calc(100% - 350px);
@@ -42,6 +43,6 @@ export const MainFlexElement = styled('div')`
       width: 100%;
     }
   }
-  transition: transform 0.3s ease-in;
+  transition: transform 0.35s linear;
   ${(props) => props.bordered && css`border: 1px dashed red;`}
 `;

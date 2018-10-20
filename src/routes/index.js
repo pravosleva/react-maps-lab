@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 // https://github.com/ReactTraining/react-router/issues/5155
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 import { Home } from '../components/Home';
 import NotFound from '../components/NotFound';
@@ -381,8 +383,9 @@ class Routes extends React.Component {
           <TogglerBtn
             onClick={() => this.props.dispatch(updateCurrentPage({ ...this.props.currentPage , listOpenedOnMobile: !this.props.currentPage.listOpenedOnMobile }))}
           >
-            {this.props.currentPage.listOpenedOnMobile ? <i style={{ fontSize: '40px' }} className='fa fa-bars'></i> : <i style={{ fontSize: '40px' }} className='fa fa-times'></i>}
+            {this.props.currentPage.listOpenedOnMobile ? <i style={{ fontSize: '30px' }} className='fa fa-bars'></i> : <i style={{ fontSize: '30px' }} className='fa fa-times'></i>}
           </TogglerBtn>
+          <ToastContainer autoClose={7000} position='top-right' />
         </MainFlexWrapper>
       </BrowserRouter>
     )

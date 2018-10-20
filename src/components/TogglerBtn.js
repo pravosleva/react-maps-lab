@@ -14,10 +14,9 @@ export const TogglerBtn = styled('button')`
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 
-  font-size: 40px;
+  font-size: 30px;
   color: white;
   text-align: center;
-  line-height: 56px;
   width: 56px;
   height: 56px;
 

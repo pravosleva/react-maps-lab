@@ -6,6 +6,15 @@
   padding: 12px 25px 12px 25px;
   position: relative;
 }
+@media(min-width: 768px){
+  .Toastify__toast-container {
+    width: 100%;
+    max-width: 450px;
+  }
+}
+.Toastify__toast-body {
+  white-space: pre-line;
+}
 .Toastify__close-button {
   position: absolute;
   top: 10px;

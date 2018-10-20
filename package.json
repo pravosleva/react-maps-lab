@@ -6,6 +6,7 @@
   "dependencies": {
     "google-map-react": "^1.0.6",
     "immutable": "^3.8.2",
+    "local-storage": "^1.4.2",
     "pigeon-cluster": "^0.0.6",
     "pigeon-maps": "^0.10.4",
     "pigeon-marker": "^0.3.4",

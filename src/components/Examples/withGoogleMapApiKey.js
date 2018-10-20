@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
-
+import ls from 'local-storage';
+// https://www.npmjs.com/package/local-storage
+import { toast } from 'react-toastify';
 import { specialLog } from './specialLog';
 import { updateExample9ApiKey } from '../../actions';
 
@@ -22,6 +24,7 @@ const withApiKey = (ComposedComponent) => {
           inputAttributes: {
             autocapitalize: 'off'
           },
+          inputValue: ls.get('googleMapApiKey') || '',
           showCancelButton: true,
           confirmButtonText: 'Ok',
           // showLoaderOnConfirm: true,
@@ -49,17 +52,17 @@ const withApiKey = (ComposedComponent) => {
             //   type: 'info',
             // })
             this.props.dispatch(updateExample9ApiKey(result.value));
+            try {
+              if (ls.set('googleMapApiKey', result.value)) {
+                toast.info('Saved to localStorage.');
+              }
+            }
+            catch (er) {
+              toast.warn(er);
+            }
           }
         })
-        .catch((err) => Swal({
-          position: 'top-end',
-          title: 'FckUp!',
-          text: 'Sorry...',
-          // html: Array.isArray(err) ? `<ul style='list-style-type: none; padding: 0;'>${err.map((e) => `<li>${e}</li>`)}</ul>` : `<div>${err}</div>`,
-          // type: 'error',
-          showConfirmButton: false,
-          timer: 3000,
-        }));
+        .catch((er) => toast.warn(er));
       }
       specialLog('G\nCould be helpful', null, [atob('QUl6YVN5RHZXT2RtdERHT3liWHBGN1hFZGl4b0lJbUxjQ0RUemRR'), atob('QUl6YVN5Q1lmYUptODRWOUR1YWdod1RaTGFQX0tQY1VKeGdyRF9f')]);
 
