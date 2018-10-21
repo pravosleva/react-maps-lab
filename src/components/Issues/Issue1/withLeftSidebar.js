@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { compose, withStateHandlers } from 'recompose';
 import styled, { css } from 'styled-components';
 

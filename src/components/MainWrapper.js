@@ -20,6 +20,7 @@ export const MainFlexElement = styled('div')`
       max-width: 350px;
       box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
       border-right: 1px solid lightgray;
+      z-index: 1000;
     }
     &:nth-child(2n) {
       width: calc(100% - 350px);

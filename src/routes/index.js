@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // https://github.com/ReactTraining/react-router/issues/5155
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
 import { Home } from '../components/Home';

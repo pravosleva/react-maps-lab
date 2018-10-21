@@ -25,7 +25,7 @@ const Fab = styled('button')`
   background-color: #29B6F6;
   color: white;
 `;
-const SidebarToggler = styled(Fab)`
+const ListDesktopToggler = styled(Fab)`
   top: 16px;
   right: 16px;
   z-index: 4;
@@ -59,17 +59,17 @@ const Compt = compose(
     disableDefaultUI
   >
     {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
-    <SidebarToggler onClick={() => props.sidebarToggler()}>
-      <i className='fa fa-gear' style={{ fontSize: '30px' }} />
-    </SidebarToggler>
+    <ListDesktopToggler onClick={() => props.listToggler()}>
+      <i className='fa fa-list' style={{ fontSize: '30px' }} />
+    </ListDesktopToggler>
   </GoogleMap>
 );
 
 Compt.propTypes = {
-  sidebarToggler: PropTypes.func,
+  listToggler: PropTypes.func.isRequired,
 };
-Compt.defaultProps = {
-  sidebarToggler: () => {},
-};
+// Compt.defaultProps = {
+//   listDesktopToggler: () => {},
+// };
 
 export default Compt;
