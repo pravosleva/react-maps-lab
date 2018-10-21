@@ -98,6 +98,7 @@ const withLayout = (ComposedComponent) => compose(
 
 withLayout.propTypes = {
   listOpened: PropTypes.bool.isRequired,
+  listToggler: PropTypes.func.isRequired,
 };
 // withLayout.defaultProps = {
 //   listOpened: () => {},
