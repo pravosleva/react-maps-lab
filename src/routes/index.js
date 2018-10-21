@@ -37,6 +37,7 @@ import {
 } from '../components/Examples';
 import { Issue1 } from '../components/Issues/Issue1';
 import { Issue2 } from '../components/Issues/Issue2';
+import { Issue3 } from '../components/Issues/Issue3';
 /// import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
 import {
@@ -179,6 +180,12 @@ const routes = [
     exact: true,
     main: () => <Issue2 />,
     link: { text: 'Issue2', descr: 'Template #2 as HOC experience like uremont.com' },
+  },
+  {
+    path: '/issue3',
+    exact: true,
+    main: () => <Issue3 />,
+    link: { text: 'Issue3', descr: 'Template #3 as as templates #1 and #2 combination' },
   },
 ];
 const FlexHeader = styled('div')`
