@@ -58,6 +58,7 @@ const Descr = styled('div')`
   font-style: italic;
   font-size: 14px;
   padding: 10px;
+  white-space: pre-line;
 `;
 const routes = [
   {
@@ -80,7 +81,7 @@ const routes = [
     path: '/example2',
     exact: true,
     main: () => <Example2 />,
-    link: { text: 'Example2', descr: 'react-geolocated usage example (but only for external routing for the port!). And also open console then drag & drop the map...' },
+    link: { text: 'Example2', descr: 'react-geolocated usage example\n(but only for external routing for the port!)\nAnd also open console then drag & drop the map...' },
     exampleOf: ['react-google-maps', 'react-geolocated'],
   },
   {
@@ -94,28 +95,28 @@ const routes = [
     path: '/example4',
     exact: true,
     main: () => <Example4 />,
-    link: { text: 'Example4', descr: `Markers and clustering. Markers taken from the store and put to HOC state as modified array. Big json data sample. Attention! Antipattern commented (use Example5 instead)` },
+    link: { text: 'Example4', descr: `Markers and clustering.\nMarkers taken from the store and put to HOC state as modified array.\nBig json data sample. Attention! Antipattern commented (use Example5 instead)` },
     exampleOf: 'react-google-maps',
   },
   {
     path: '/example5',
     exact: true,
     main: () => <Example5 />,
-    link: { text: 'Example5', descr: 'Better HOC pattern for Google Map instead of Example4. Map: minZoom & maxZoom as fixed options. Clusterer: maxZoom as fixed param.' },
+    link: { text: 'Example5', descr: 'Better HOC pattern for Google Map instead of Example4.\nMap: minZoom & maxZoom as fixed options. Clusterer: maxZoom as fixed param.' },
     exampleOf: 'react-google-maps',
   },
   {
     path: '/example6',
     exact: true,
     main: () => <Example6 />,
-    link: { text: 'Example6', descr: 'Simple component experience. (FckUp)' },
+    link: { text: 'Example6', descr: 'Simple component experience.\n(FckUp)' },
     exampleOf: 'google-map-react',
   },
   {
     path: '/example7',
     exact: true,
     main: () => <Example7 />,
-    link: { text: 'Example7', descr: 'HOC test for example. supercluster test. (FckUp)' },
+    link: { text: 'Example7', descr: 'HOC test for example. supercluster test.\n(FckUp)' },
     exampleOf: 'google-map-react',
     githubLink: 'https://github.com/mapbox/supercluster',
   },
@@ -173,19 +174,19 @@ const routes = [
     path: '/issue1',
     exact: true,
     main: () => <Issue1 />,
-    link: { text: 'Issue1', descr: 'Template #1 as HOC experience like uremont.com' },
+    link: { text: 'Issue1', descr: 'LeftSidebar\n(retractable for max-width 767px).\nHOC experience like uremont.com' },
   },
   {
     path: '/issue2',
     exact: true,
     main: () => <Issue2 />,
-    link: { text: 'Issue2', descr: 'Template #2 as HOC experience like uremont.com' },
+    link: { text: 'Issue2', descr: 'Retractable List.\nHOC experience like uremont.com' },
   },
   {
     path: '/issue3',
     exact: true,
     main: () => <Issue3 />,
-    link: { text: 'Issue3', descr: 'Template #3 as as templates #1 and #2 combination' },
+    link: { text: 'Issue3', descr: 'Issues #1 and #2 combination' },
   },
 ];
 const FlexHeader = styled('div')`

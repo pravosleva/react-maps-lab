@@ -30,7 +30,7 @@ export const MainFlexElement = styled('div')`
     &:first-child {
       position: absolute;
       z-index: 2;
-      width: 100wh;
+      width: 100%;
       background-color: #fff;
       opacity: 0.8;
       height: 100%;

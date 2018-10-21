@@ -23,6 +23,7 @@ const Sidebar = styled('div')`
     z-index: 3;
     ${(p) => !p.opened && css`transform: translateX(-100%);`}
     transition: transform 0.3s ease-in-out;
+    opacity: 0.8;
   }
 
   display: flex;

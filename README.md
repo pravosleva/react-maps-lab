@@ -19,6 +19,8 @@ $ yarn start
 - [x] **Example11** `pigeon-maps` with `OpenStreetMap` simplest test.
 - [x] **Example12**
 - [x] **Example13**
+- [x] **Example14**
+- [ ] _Next examples will be created as issues._
 
 # Original ReadMe
 

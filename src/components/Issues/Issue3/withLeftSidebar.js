@@ -23,12 +23,12 @@ const Sidebar = styled('div')`
     z-index: 2;
     ${(p) => !p.opened && css`transform: translateX(-100%);`}
     transition: transform 0.3s ease-in-out;
+    opacity: 0.8;
   }
 
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: 0.8;
 `;
 
 const withLayout = (ComposedComponent) => compose(

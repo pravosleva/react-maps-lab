@@ -67,7 +67,7 @@ const Content = styled('div')`
 const withLayout = (ComposedComponent) => compose(
   withStateHandlers(
     {
-      listOpened: true,
+      listOpened: false,
     },
     {
       listToggler: ({ listOpened }, props) => () => ({ listOpened: !listOpened }),
@@ -81,7 +81,11 @@ const withLayout = (ComposedComponent) => compose(
           opened={props.listOpened} // For opacity control only
           style={{ textAlign: 'center' }}
         >
+          <strong>Items list should be set here</strong>
+          <br />
           listOpened= {String(props.listOpened)}
+          <br />
+          <em style={{ opacity: '0.5' }}>Relevant for all devices</em>
         </Content>
         <ListDesktopToggler onClick={() => props.listToggler()}>
           {
