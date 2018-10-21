@@ -36,6 +36,7 @@ import {
   Example14,
 } from '../components/Examples';
 import { Issue1 } from '../components/Issues/Issue1';
+import { Issue2 } from '../components/Issues/Issue2';
 /// import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
 import {
@@ -171,9 +172,13 @@ const routes = [
     path: '/issue1',
     exact: true,
     main: () => <Issue1 />,
-    link: { text: 'Issue1', descr: 'HOC experience like uremont.com' },
-    // exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
-    // githubLink: 'https://github.com/alex3165/react-mapbox-gl/blob/HEAD/docs/API.md#cluster',
+    link: { text: 'Issue1', descr: 'Template #1 as HOC experience like uremont.com' },
+  },
+  {
+    path: '/issue2',
+    exact: true,
+    main: () => <Issue2 />,
+    link: { text: 'Issue2', descr: 'Template #2 as HOC experience like uremont.com' },
   },
 ];
 const FlexHeader = styled('div')`
@@ -354,7 +359,7 @@ class Routes extends React.Component {
                       return result;
                     }).then((result) => {
                       if (result.value) {
-                        window.location = 'https://github.com/pravosleva/react-google-maps-samples';
+                        window.location = 'https://github.com/pravosleva/react-maps-lab';
                       } else {
                         return false;
                       }

@@ -9,7 +9,7 @@ const Wrapper = styled('div')`
 
   display: flex;
 `;
-const Panel = styled('div')`
+const Sidebar = styled('div')`
   background-color: white;
 
   @media(min-width: 768px){
@@ -45,7 +45,7 @@ const withLayout = (ComposedComponent) => compose(
   ),
 )((props) => (
   <Wrapper>
-    <Panel opened={props.sidebarOpened}>
+    <Sidebar opened={props.sidebarOpened}>
       <p style={{ textAlign: 'center' }}>
         <strong>Input fields should be set here</strong>
         <br />
@@ -53,7 +53,7 @@ const withLayout = (ComposedComponent) => compose(
         <br />
         <em style={{ opacity: '0.5' }}>Relevant for max-width 767px</em>
       </p>
-    </Panel>
+    </Sidebar>
     <ComposedComponent {...props} />
   </Wrapper>
 ));
