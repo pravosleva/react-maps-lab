@@ -8,6 +8,7 @@ const Wrapper = styled('div')`
   height: 100%;
   @media(max-width: 767px){
     top: 0; bottom: 0; /* tst */
+    position: relative;
   }
 
   display: flex;
