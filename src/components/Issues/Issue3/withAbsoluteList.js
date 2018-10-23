@@ -7,6 +7,9 @@ import styled, { css } from 'styled-components';
 const Wrapper = styled('div')`
   width: 100%;
   height: 100%;
+  @media(max-width: 767px){
+    top: 0; bottom: 0; /* tst */
+  }
 
   position: relative;
 `;

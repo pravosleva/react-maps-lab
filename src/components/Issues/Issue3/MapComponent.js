@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withProps } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 /*
   FAB EXAMPLES:
   https://codepen.io/ruslan_khomiak/pen/QGmwMP
@@ -23,13 +23,14 @@ const Fab = styled('button')`
   border: none;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
     /* background-color: #29B6F6; */
-  background-color: #6AC5E8;
+  background-color: lightgray;
   color: white;
 `;
 const ListMobileToggler = styled(Fab)`
   top: 16px;
   right: 16px;
   z-index: 4;
+  ${(p) => p.opened && css`background-color: #6AC5E8;`}
   @media(min-width: 768px){display: none;}
   outline: none;
 `;
@@ -37,6 +38,7 @@ const SidebarMobileToggler = styled(Fab)`
   top: calc(32px + 56px);
   right: 16px;
   z-index: 4;
+  ${(p) => p.opened && css`background-color: #6AC5E8;`}
   @media(min-width: 768px){display: none;}
   outline: none;
 `;
@@ -67,10 +69,10 @@ const Compt = compose(
     disableDefaultUI
   >
     {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
-    <ListMobileToggler onClick={() => props.listToggler()}>
+    <ListMobileToggler onClick={() => props.listToggler()} opened={props.listOpened}>
       <i className='fa fa-list' style={{ fontSize: '30px' }} />
     </ListMobileToggler>
-    <SidebarMobileToggler onClick={() => props.sidebarToggler()}>
+    <SidebarMobileToggler onClick={() => props.sidebarToggler()} opened={props.sidebarOpened}>
       <i className='fa fa-gear' style={{ fontSize: '30px' }} />
     </SidebarMobileToggler>
   </GoogleMap>
@@ -78,7 +80,9 @@ const Compt = compose(
 
 Compt.propTypes = {
   listToggler: PropTypes.func.isRequired,
+  listOpened: PropTypes.bool.isRequired,
   sidebarToggler: PropTypes.func.isRequired,
+  sidebarOpened: PropTypes.bool.isRequired,
 };
 // Compt.defaultProps = {
 //   ListMobileToggler: () => {},
