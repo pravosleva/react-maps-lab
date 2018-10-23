@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 export const TogglerBtn = styled('button')`
-  position: absolute;
+  position: fixed;
   z-index: 3;
   right: 16px;
   bottom: 16px;
