@@ -25,7 +25,7 @@ const List = styled('div')`
   @media(max-width: 767px){
     min-width: 100%;
     width: 100%;
-    opacity: 0.7;
+    opacity: 0.8;
   }
 
   ${(p) => !p.opened && css`transform: translateX(-100%);`}

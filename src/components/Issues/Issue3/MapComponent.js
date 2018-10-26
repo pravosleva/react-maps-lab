@@ -69,10 +69,22 @@ const Compt = compose(
     disableDefaultUI
   >
     {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
-    <ListMobileToggler onClick={() => props.listToggler()} opened={props.listOpened}>
+    <ListMobileToggler
+      onClick={() => {
+        if (!props.listOpened && props.sidebarOpened) { props.sidebarToggler(false); }
+        props.listToggler();
+      }}
+      opened={props.listOpened}
+    >
       <i className='fa fa-list' style={{ fontSize: '30px' }} />
     </ListMobileToggler>
-    <SidebarMobileToggler onClick={() => props.sidebarToggler()} opened={props.sidebarOpened}>
+    <SidebarMobileToggler
+      onClick={() => {
+        if (!props.sidebarOpened && props.listOpened) { props.listToggler(false); }
+        props.sidebarToggler();
+      }}
+      opened={props.sidebarOpened}
+    >
       <i className='fa fa-gear' style={{ fontSize: '30px' }} />
     </SidebarMobileToggler>
   </GoogleMap>

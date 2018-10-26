@@ -26,7 +26,7 @@ const Sidebar = styled('div')`
     position: absolute;
     z-index: 2;
     ${(p) => !p.opened && css`transform: translateX(-100%);`}
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.5s ease-in-out;
     opacity: 0.8;
   }
 
@@ -41,9 +41,9 @@ const withLayout = (ComposedComponent) => compose(
       sidebarOpened: true,
     },
     {
-      sidebarToggler: ({ sidebarOpened }, props) => () => {
+      sidebarToggler: ({ sidebarOpened }, props) => (val) => {
         // props.dispatch(addCounter());
-        return { sidebarOpened: !sidebarOpened }
+        return { sidebarOpened: val ? val : !sidebarOpened }
       },
     }
   ),

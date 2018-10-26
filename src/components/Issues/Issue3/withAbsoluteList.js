@@ -25,15 +25,17 @@ const List = styled('div')`
   @media(min-width: 768px){
     min-width: 310px;
     width: 310px;
+    transition: transform 0.3s ease-in-out, background-color 0.3s linear;
   }
   @media(max-width: 767px){
     min-width: 100%;
     width: 100%;
-    opacity: 0.7;
+    opacity: 0.8;
+    transition: transform 0.5s ease-in-out, background-color 0.3s linear;
   }
 
   ${(p) => !p.opened && css`transform: translateX(-100%); background-color: transparent;`}
-  transition: transform 0.3s ease-in-out, background-color 0.3s linear;
+
 
   display: flex;
   justify-content: center;
@@ -74,7 +76,7 @@ const withLayout = (ComposedComponent) => compose(
       listOpened: false,
     },
     {
-      listToggler: ({ listOpened }, props) => () => ({ listOpened: !listOpened }),
+      listToggler: ({ listOpened }, props) => (val) => ({ listOpened: val ? val : !listOpened }),
     }
   ),
 )((props) => (
