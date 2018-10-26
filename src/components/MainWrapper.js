@@ -28,13 +28,13 @@ export const MainFlexElement = styled('div')`
   }
   @media(max-width:767px){
     &:first-child {
-      position: absolute;
+      position: fixed; top: 0; bottom: 0;
       z-index: 2;
       width: 100%;
       background-color: #fff;
       opacity: 0.8;
-      height: 100%;
-      max-height: 100vh;
+      /* min-height: 100vh; */
+      height: 100vh;
       ${(p) => p.opened && css`
         transform: translateX(-100%);
       `}

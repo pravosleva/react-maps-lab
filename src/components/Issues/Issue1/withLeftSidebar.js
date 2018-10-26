@@ -6,6 +6,10 @@ import styled, { css } from 'styled-components';
 const Wrapper = styled('div')`
   width: 100%;
   height: 100%;
+  @media(max-width: 767px){
+    top: 0; bottom: 0; /* tst */
+    position: relative;
+  }
 
   display: flex;
 `;
@@ -17,13 +21,12 @@ const Sidebar = styled('div')`
     width: 310px;
   }
   @media(max-width: 767px){
-    height: 100%;
+    min-height: 100%;
     min-width: 100%;
     position: absolute;
     z-index: 3;
     ${(p) => !p.opened && css`transform: translateX(-100%);`}
     transition: transform 0.3s ease-in-out;
-    opacity: 0.8;
   }
 
   display: flex;

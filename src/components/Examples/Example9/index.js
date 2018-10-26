@@ -53,7 +53,9 @@ const Button = styled('button')`
   }
   font-family: inherit;
   margin-right: auto;
-  width: 200px;
+  width: 250px;
+  outline: none;
+  cursor: pointer;
 `;
 
 const Input = styled('input')`
@@ -64,6 +66,8 @@ const Input = styled('input')`
   font-family: inherit;
     /* flex: 2 0 100px; */
   width: 100%;
+  outline: none;
+  cursor: pointer;
 `;
 
 const myHeaders = new Headers();
