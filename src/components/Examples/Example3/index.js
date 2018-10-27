@@ -101,7 +101,7 @@ const Content = (props) => {
           await props.onClick();
           // await props.dispatch(addCounter());
         }}>
-          <span>{`props.localCount= ${props.localCount} | props.globalCount= ${props.globalCount}`}</span>
+          <span>{`localCount= ${props.localCount} | globalCount= ${props.globalCount}`}</span>
         </Button>
       </WrapperElement>
       <WrapperElement carousel>
