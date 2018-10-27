@@ -85,7 +85,7 @@ function SamplePrevArrow(props) {
 const sliderSettings = {
   dots: true,
   infinite: true,
-  speed: 500,
+  speed: 300,
   slidesToShow: 1,
   slidesToScroll: 1,
   nextArrow: <SampleNextArrow />,
@@ -101,7 +101,7 @@ const Content = (props) => {
           await props.onClick();
           // await props.dispatch(addCounter());
         }}>
-          <strong>{`props.localCount= ${props.localCount} | props.globalCount= ${props.globalCount}`}</strong>
+          <span>{`props.localCount= ${props.localCount} | props.globalCount= ${props.globalCount}`}</span>
         </Button>
       </WrapperElement>
       <WrapperElement carousel>

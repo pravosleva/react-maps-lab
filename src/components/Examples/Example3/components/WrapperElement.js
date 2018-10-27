@@ -5,7 +5,8 @@ import styled, { css } from 'styled-components';
 export const WrapperElement = styled('div')`
     /* margin: auto; */
   box-sizing: border-box;
-  padding: 50px;
+  @media(min-width: 768px){ padding: 50px; }
+  @media(max-width: 767px){ padding: 30px; }
   width: 100%;
   border: none;
     /*
@@ -14,15 +15,13 @@ export const WrapperElement = styled('div')`
     */
 
   ${(p) => !p.carousel && css`display: flex; justify-content: center; align-items: center;`}
-  ${(p) => p.carousel && css`
-    padding: 50px 50px 50px 50px;
-  `}
 
   position: relative; /* For titles only */
 `;
 
 export const Title = styled('h2')`
   position: absolute;
-  top: -15px; left: 25px;
+  @media(min-width: 768px){ top: -15px; left: 25px; }
+  @media(max-width: 767px){ top: -30px; left: 5px; }
   color: gray; opacity: 0.2;
 `;
