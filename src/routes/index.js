@@ -53,6 +53,7 @@ const searchOptions = [
   { value: 'pigeon-map', label: 'pigeon-map' },
   { value: 'OpenStreetMap', label: 'OpenStreetMap' },
   { value: 'react-mapbox-gl', label: 'react-mapbox-gl' },
+  { value: 'react-slick', label: 'react-slick' },
 ];
 const Descr = styled('div')`
   font-style: italic;
@@ -88,8 +89,8 @@ const routes = [
     path: '/example3',
     exact: true,
     main: () => <Example3 />,
-    link: { text: 'Example3', descr: 'HOC & withStateHandlers () example.' },
-    exampleOf: null,
+    link: { text: 'Example3', descr: 'HOC & withStateHandlers () example. Slider test.' },
+    exampleOf: ['react-slick'],
   },
   {
     path: '/example4',

@@ -32,7 +32,7 @@ export const MainFlexElement = styled('div')`
       z-index: 2;
       width: 100%;
       background-color: #fff;
-      opacity: 0.8;
+        /* opacity: 0.8; */
       /* min-height: 100vh; */
       height: 100vh;
       ${(p) => p.opened && css`
