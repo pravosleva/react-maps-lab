@@ -13,4 +13,5 @@ export const Button = styled('button')`
   }
   font-family: inherit;
   cursor: pointer;
+  outline: none;
 `;

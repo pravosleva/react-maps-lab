@@ -11,15 +11,20 @@ import { addCounter } from '../../../actions';
 import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
 import { WrapperContainer } from './components/WrapperContainer';
-import { WrapperElement } from './components/WrapperElement';
+import { WrapperElement, Title } from './components/WrapperElement';
 import { Button } from './components/Button';
 
 
 injectGlobal`
-  .slick-next::before { content: '' !important; }
-  .slick-next {
+  .slick-prev::before, .slick-next::before { content: '' !important; }
+  .slick-prev, .slick-next {
     font-size: inherit !important;
     color: gray !important;
+    z-index: 2;
+  }
+  .slick-list {
+    padding: 0 25px 0 25px !important; /* В зависимости от размера стрелок */
+    border: 1px dashed lightgray;
   }
 `;
 
@@ -40,10 +45,10 @@ function SampleNextArrow(props) {
       }}
       onClick={onClick}
     >
-      &#10097;&#10097;
       <div style={{ position: 'relative' }}>
+        &#10097;&#10097;
         <div
-          style={{ position: 'absolute', top: '0', left: '0', transform: 'translate(-62px, 85px) rotate(-90deg)', cursor: 'default' }}
+          style={{ position: 'absolute', top: '0', left: '0', transform: 'translate(-50px, 90px) rotate(-90deg)', cursor: 'default' }}
           onClick={(e) => e.stopPropagation()}
         >
           customized&#160;&#10142;
@@ -58,9 +63,23 @@ function SamplePrevArrow(props) {
   return (
     <div
       className={className}
-      style={{ ...style, display: "block", background: "green" }}
+      style={{
+        ...style, display: 'block', border: '1px solid gray', width: '40px', height: '40px',
+        // TEST
+        display: 'flex', justifyContent: 'center', alignItems: 'center',
+      }}
       onClick={onClick}
-    />
+    >
+      <div style={{ position: 'relative' }}>
+        &#10096;&#10096;
+        <div
+          style={{ position: 'absolute', top: '0', left: '0', transform: 'translate(-50px, 90px) rotate(-90deg)', cursor: 'default' }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          customized&#160;&#10142;
+        </div>
+      </div>
+    </div>
   );
 }
 const sliderSettings = {
@@ -77,6 +96,7 @@ const Content = (props) => {
   return (
     <WrapperContainer>
       <WrapperElement>
+        <Title>HOC state & global prop tst</Title>
         <Button onClick={async () => {
           await props.onClick();
           // await props.dispatch(addCounter());
@@ -85,6 +105,7 @@ const Content = (props) => {
         </Button>
       </WrapperElement>
       <WrapperElement carousel>
+        <Title>Slider tst</Title>
         <Slider {...sliderSettings}>
           <div>
             <h3>First slide</h3>
