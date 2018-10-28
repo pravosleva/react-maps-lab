@@ -1,7 +1,7 @@
 import * as actionType from '../actions/ActionType';
 
 
-const searchField = (state = { value: 'all', label: 'all' }, action) => {
+export const searchField = (state = { value: 'all', label: 'all' }, action) => {
   switch (action.type) {
     case actionType.UPDATE_SEARCH_FIELD:
       return action.payload;
@@ -10,4 +10,11 @@ const searchField = (state = { value: 'all', label: 'all' }, action) => {
   }
 }
 
-export default searchField;
+export const searchFieldValue = (state = '', action) => {
+  switch (action.type) {
+    case actionType.UPDATE_SEARCH_FIELD_VALUE:
+      return action.payload;
+    default:
+      return state
+  }
+}

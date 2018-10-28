@@ -38,10 +38,11 @@ import {
 import { Issue1 } from '../components/Issues/Issue1';
 import { Issue2 } from '../components/Issues/Issue2';
 import { Issue3 } from '../components/Issues/Issue3';
-/// import { InputSearch } from '../components/Input';
+import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
 import {
   updateSearchField,
+  updateSearchFieldValue,
   updateReactSelectSelectedOption,
   updateCurrentPage,
 } from '../actions';
@@ -203,7 +204,7 @@ class Routes extends React.Component {
     selectedOption: PropTypes.object.isRequired,
   }
 
-  // handler = (e) => this.props.dispatch(updateSearchField(e))
+  handler = (e) => this.props.dispatch(updateSearchFieldValue(e.target.value))
 
   componentDidMount() {
     this.props.dispatch(updateCurrentPage({ routePath: window.location.pathname }));
@@ -258,29 +259,29 @@ class Routes extends React.Component {
           <MainFlexElement opened={this.props.currentPage.listOpenedOnMobile}>
             <LeftFlexContainer>
               <SearchSection>
-                {/*
                 <InputSearch
-                  value={this.props.searchField}
+                  value={this.props.searchFieldValue}
                   onChange={this.handler}
                   placeholder='Input something...'
                 />
-                */}
+                {/*
                 <Select
                   value={this.props.searchField}
                   onChange={(o) => this.props.dispatch(updateSearchField(o))}
                   options={searchOptions}
                 />
+                */}
               </SearchSection>
 
               <ExamplesSection>
                 <ul style={{ listStyleType: 'none', padding: '0', marginTop: '0', marginBottom: '0' }}>
                   {
                     routes.filter((r) => (
-                      this.props.searchField.value === 'all'
+                      !this.props.searchFieldValue
                       ? true
                       : (
                         r.exampleOf
-                        ? r.exampleOf.includes(this.props.searchField.value) // || r.link.descr.includes(this.props.searchField.value))
+                        ? r.exampleOf.includes(this.props.searchFieldValue) // || r.link.descr.includes(this.props.searchField.value))
                         : false
                       )
                     )).map((route, index) => (
@@ -410,9 +411,10 @@ class Routes extends React.Component {
 //   selectedOption: {},
 // };
 
-function mapStateToProps ({ searchField, markers, currentPage }) {
+function mapStateToProps ({ searchField, searchFieldValue, markers, currentPage }) {
   return {
     searchField,
+    searchFieldValue,
     dataOptions: markers.dataOptions,
     selectedOption: markers.selectedOption,
     specialKey: markers.specialKey,

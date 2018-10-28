@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import counter from './counterReducer';
-import searchField from './searchFieldReducer';
+import { searchField, searchFieldValue } from './searchFieldReducer';
 import markers from './markersReducer';
 import userGeoParams from './userGeoParamsReducer';
 import example9 from './example9';
@@ -12,6 +12,7 @@ import currentPage from './currentPage';
 const mainReducer = combineReducers({
   counter,
   searchField,
+  searchFieldValue,
   markers,
   userGeoParams,
   example9,

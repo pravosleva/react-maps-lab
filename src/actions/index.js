@@ -15,6 +15,10 @@ export const updateSearchField = (e) => ({
   type: actionType.UPDATE_SEARCH_FIELD,
   payload: e,
 });
+export const updateSearchFieldValue = (e) => ({
+  type: actionType.UPDATE_SEARCH_FIELD_VALUE,
+  payload: e,
+});
 
 export const updateMarkers = (markers) => ({
   type: actionType.UPDATE_MARKERS,

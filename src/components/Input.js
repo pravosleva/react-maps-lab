@@ -5,9 +5,12 @@ export const InputSearch = styled('input')`
   font-family: inherit;
     /*padding: 10px 5px;*/
   padding: 11px 10px 11px 42px;
-  margin: 0 0 20px 0;
+  margin: 0;
     /*width: 100%;*/
+  font-size: 16px;
   font-weight: 500;
+  width: 100%;
+  box-sizing: border-box;
 
   outline: none;
   border: 1px solid rgba(0, 0, 0, 0.2);
