@@ -10,6 +10,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
+import './_prot';
 import { Home } from '../components/Home';
 import NotFound from '../components/NotFound';
 import {
@@ -46,6 +47,9 @@ import {
   updateReactSelectSelectedOption,
   updateCurrentPage,
 } from '../actions';
+
+
+// console.log(typeof String.prototype.checkTheSubstr);
 
 const searchOptions = [
   { value: 'all', label: 'all' },
@@ -262,7 +266,7 @@ class Routes extends React.Component {
                 <InputSearch
                   value={this.props.searchFieldValue}
                   onChange={this.handler}
-                  placeholder='Input something...'
+                  placeholder='Search by substring...'
                 />
                 {/*
                 <Select
@@ -278,12 +282,12 @@ class Routes extends React.Component {
                   {
                     routes.filter((r) => (
                       !this.props.searchFieldValue
-                      ? true
-                      : (
-                        r.exampleOf
-                        ? r.exampleOf.includes(this.props.searchFieldValue) // || r.link.descr.includes(this.props.searchField.value))
-                        : false
-                      )
+                        ? true
+                        : r.link.descr &&  this.props.searchFieldValue.checkAsSubstrByWords(r.link.descr)
+                          ? true
+                            : r.exampleOf
+                              ? r.exampleOf.includes(this.props.searchFieldValue)
+                              : false
                     )).map((route, index) => (
                       route.link ? (
                         <li key={index} style={{ padding: '10px 20px 10px 20px', backgroundColor: this.isThisCurrentRoute(route) ? '#ABDFF3' : 'transparent' }}>
