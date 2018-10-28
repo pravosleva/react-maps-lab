@@ -19,12 +19,14 @@ injectGlobal`
   .slick-prev::before, .slick-next::before { content: '' !important; }
   .slick-prev, .slick-next {
     font-size: inherit !important;
-    color: gray !important;
+    color: white !important;
     z-index: 2;
   }
   .slick-list {
+    border: 1px dashed white;
+  }
+  .slick-slide > div {
     padding: 0 25px 0 25px !important; /* В зависимости от размера стрелок */
-    border: 1px dashed lightgray;
   }
 `;
 
@@ -39,20 +41,16 @@ function SampleNextArrow(props) {
     <div
       className={className}
       style={{
-        ...style, display: 'block', border: '1px solid gray', width: '40px', height: '40px',
+        ...style, display: 'block', border: '1px solid white', width: '40px', height: '40px',
         // TEST
         display: 'flex', justifyContent: 'center', alignItems: 'center',
+        boxShadow: '0 0 6px rgba(0, 0, 0, 0.5)',
       }}
       onClick={onClick}
     >
       <div style={{ position: 'relative' }}>
-        &#10097;&#10097;
-        <div
-          style={{ position: 'absolute', top: '0', left: '0', transform: 'translate(-50px, 90px) rotate(-90deg)', cursor: 'default' }}
-          onClick={(e) => e.stopPropagation()}
-        >
-          customized&#160;&#10142;
-        </div>
+        {/* &#10097;&#10097; */}
+        <i className='fa fa-arrow-circle-right' style={{ fontSize: '30px' }} />
       </div>
     </div>
   );
@@ -64,7 +62,7 @@ function SamplePrevArrow(props) {
     <div
       className={className}
       style={{
-        ...style, display: 'block', border: '1px solid gray', width: '40px', height: '40px',
+        ...style, display: 'block', border: '1px solid white', width: '40px', height: '40px',
         // TEST
         display: 'flex', justifyContent: 'center', alignItems: 'center',
       }}
@@ -94,7 +92,7 @@ const sliderSettings = {
 
 const Content = (props) => {
   return (
-    <WrapperContainer>
+    <WrapperContainer style={{ backgroundImage: 'linear-gradient(to right, rgba(98, 178, 208, 0.9), rgba(32, 107, 235, 0.9))' }}>
       <WrapperElement>
         <Title>HOC state & global prop tst</Title>
         <Button onClick={async () => {
