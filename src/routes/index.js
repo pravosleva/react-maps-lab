@@ -10,6 +10,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
+import debounce from 'lodash.debounce';
 import './_prot';
 import { Home } from '../components/Home';
 import NotFound from '../components/NotFound';
@@ -208,7 +209,23 @@ class Routes extends React.Component {
     selectedOption: PropTypes.object.isRequired,
   }
 
-  handler = (e) => this.props.dispatch(updateSearchFieldValue(e.target.value))
+  // DEFAULT HANDLER:
+  // handler = (text) => {
+  //   this.props.dispatch(updateSearchFieldValue(text));
+  // }
+
+  // DEBOUNCE WAY 1:
+  handler = debounce(
+    (text) => {
+      this.props.dispatch(updateSearchFieldValue(text));
+    },
+    2000,
+  )
+
+  // DEBOUNCE WAY 1:
+  componentWillUnmount() {
+    this.handler.cancel();
+  }
 
   componentDidMount() {
     this.props.dispatch(updateCurrentPage({ routePath: window.location.pathname }));
@@ -265,7 +282,7 @@ class Routes extends React.Component {
               <SearchSection>
                 <InputSearch
                   value={this.props.searchFieldValue}
-                  onChange={this.handler}
+                  onChange={(e) => this.handler(e.target.value)}
                   placeholder='Search by substring...'
                 />
                 {/*
