@@ -51,7 +51,30 @@ hr.style-two { border: 0; height: 1px; background-image: linear-gradient(to righ
   color: white;
 }
 
+/* LINKS
+  See also https://www.youtube.com/watch?v=U5n7E3Lfojo&list=PL3LQJkGQtzc56HquxrkwPdQt9Q1wHm21P&index=11
+*/
 a {
-  /* color: #4558BB; */
-  color: inherit;
+  color: #4558BB;
+    /* color: inherit; */
+  text-decoration: none;
+  position: relative; /* Для фич - точнее, для псевдоэлементов =) */
+}
+a::before {
+  content: '';
+  bottom: 0;
+  left: 0; /* WAY 1: Подчеркивание: низ слева направо */
+    /* right: 0; WAY 2: Подчеркивание: низ справа налево */
+  position: absolute;
+  width: 0%; /* width: 100%; WAY 3: center */
+  height: 1px;
+  background-color: #4558BB;
+  transition: 0.5s;
+
+  /* transform: scale(0); WAY 3: center */
+}
+a:hover::before {
+  width: 100%; /* WAY 3: center - should be comented */
+
+  /* transform: scale(1); WAY 3: center */
 }
