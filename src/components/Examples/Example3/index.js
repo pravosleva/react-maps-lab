@@ -44,7 +44,7 @@ function SampleNextArrow(props) {
         ...style, display: 'block', border: '1px solid white', width: '40px', height: '40px',
         // TEST
         display: 'flex', justifyContent: 'center', alignItems: 'center',
-        boxShadow: '0 0 6px rgba(0, 0, 0, 0.5)',
+        boxShadow: '0 0 6px rgba(255, 255, 255, 0.4)',
       }}
       onClick={onClick}
     >
@@ -65,6 +65,7 @@ function SamplePrevArrow(props) {
         ...style, display: 'block', border: '1px solid white', width: '40px', height: '40px',
         // TEST
         display: 'flex', justifyContent: 'center', alignItems: 'center',
+        boxShadow: '0 0 6px rgba(0, 0, 0, 0.4)',
       }}
       onClick={onClick}
     >
