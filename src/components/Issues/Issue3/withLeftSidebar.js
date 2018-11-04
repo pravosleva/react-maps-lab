@@ -20,22 +20,27 @@ const Sidebar = styled('div')`
   @media(min-width: 768px){
     min-width: 310px;
     width: 310px;
+    /* Should be opened always */
   }
   @media(max-width: 767px){
     min-height: 100%; height: 100%;
     min-width: 100%; width: 100%;
     position: absolute;
-    z-index: 2;
-    ${(p) => !p.opened && css`transform: translateX(-100%);`}
     transition: transform 0.5s ease-in-out;
     opacity: 0.8;
+    translateX(0);
+    ${(p) => !p.opened && css`transform: translateX(-100%);`}
   }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /*
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  */
   overflow-y: auto;
   box-sizing: border-box;
+
+  z-index: 3;
 `;
 
 const withLayout = (ComposedComponent) => compose(
@@ -53,13 +58,23 @@ const withLayout = (ComposedComponent) => compose(
 )((props) => (
   <Wrapper>
     <Sidebar opened={props.sidebarOpened}>
-      <p style={{ textAlign: 'center' }}>
-        <strong>Input fields should be set here</strong>
-        <br />
-        sidebarOpened= {String(props.sidebarOpened)}
-        <br />
-        <em style={{ opacity: '0.5' }}>Relevant for max-width 767px</em>
-      </p>
+      <div style={{ padding: '0 10px 0 10px' }}>
+        <p style={{ textAlign: 'center' }}>
+          <strong>Input fields should be set here</strong>
+          <br />
+          sidebarOpened= {String(props.sidebarOpened)}
+          <br />
+          <em style={{ opacity: '0.5' }}>Relevant for max-width 767px</em>
+        </p>
+        <p>{`${'bla '.repeat(100)}bla.`}</p>
+        <p>{`${'bla '.repeat(100)}bla.`}</p>
+        <p>{`${'bla '.repeat(100)}bla.`}</p>
+        <p>{`${'bla '.repeat(100)}bla.`}</p>
+        <p>{`${'bla '.repeat(100)}bla.`}</p>
+        <p>{`${'bla '.repeat(100)}bla.`}</p>
+        <p>{`${'bla '.repeat(100)}bla.`}</p>
+        <p>{`${'bla '.repeat(100)}bla.`}</p>
+      </div>
     </Sidebar>
     <ComposedComponent {...props} />
   </Wrapper>

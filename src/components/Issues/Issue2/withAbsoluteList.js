@@ -9,6 +9,7 @@ const Wrapper = styled('div')`
   height: 100%;
 
   position: relative;
+  box-sizing: border-box;
 `;
 const List = styled('div')`
   background-color: white;
@@ -62,6 +63,12 @@ const ListDesktopToggler = styled('button')`
 const Content = styled('div')`
   opacity: 1;
   ${(p) => !p.opened && css`opacity 0;`}
+
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px dashed lightgray;
+  overflow-y: auto;
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const withLayout = (ComposedComponent) => compose(

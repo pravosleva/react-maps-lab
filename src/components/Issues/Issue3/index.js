@@ -8,6 +8,6 @@ import withGoogleMapApiKey from '../../Examples/withGoogleMapApiKey';
 
 export const Issue3 = compose(
   withGoogleMapApiKey,
-  withLeftSidebar,
   withAbsoluteList,
+  withLeftSidebar,
 )((ps) => <MapComponent isMarkerShown {...ps} />);

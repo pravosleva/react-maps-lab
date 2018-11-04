@@ -12,33 +12,39 @@ const Wrapper = styled('div')`
   }
 
   position: relative;
+  box-sizing: border-box;
 `;
 const List = styled('div')`
   background-color: white;
+  box-sizing: border-box;
   border-left: 1px solid lightgray;
 
   position: absolute;
   top: 0; left: 0;
   z-index: 2;
   height: 100%;
+  ${(p) => p.test && css`border: 1px dashed red;`}
 
   @media(min-width: 768px){
     min-width: 310px;
     width: 310px;
+    transform: translateX(100%);
+    ${(p) => !p.opened && css`transform: translateX(0); background-color: white;`}
     transition: transform 0.3s ease-in-out, background-color 0.3s linear;
   }
   @media(max-width: 767px){
     min-width: 100%;
     width: 100%;
     opacity: 0.8;
-    transition: transform 0.5s ease-in-out, background-color 0.3s linear;
+    transform: translateX(0);
+    ${(p) => !p.opened && css`transform: translateX(-100%); background-color: white;`}
+    transition: transform 0.5s ease-in-out, background-color 0.5s linear;
   }
-
-  ${(p) => !p.opened && css`transform: translateX(-100%); background-color: transparent;`}
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    /*
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    */
 `;
 const InternalListWrapper = styled('div')`
   position: relative;
@@ -46,10 +52,12 @@ const InternalListWrapper = styled('div')`
   height: 100%;
 
   background-color: transparent;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    /*
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    */
+  box-sizing: border-box;
 `;
 const ListDesktopToggler = styled('button')`
   position: absolute;
@@ -66,7 +74,11 @@ const ListDesktopToggler = styled('button')`
 `;
 const Content = styled('div')`
   opacity: 1;
-  ${(p) => !p.opened && css`opacity 0;`}
+  ${(p) => p.test && css`border: 1px dashed red;`}
+
+  box-sizing: border-box;
+  min-height: 100%; height: 100%;
+  overflow-y: auto;
 `;
 
 const withLayout = (ComposedComponent) => compose(
@@ -81,16 +93,25 @@ const withLayout = (ComposedComponent) => compose(
 )((props) => (
   <Wrapper>
     <List opened={props.listOpened}>
-      <InternalListWrapper>
-        <Content
-          opened={props.listOpened} // For opacity control only
-          style={{ textAlign: 'center' }}
-        >
-          <strong>Items list should be set here</strong>
-          <br />
-          listOpened= {String(props.listOpened)}
-          <br />
-          <em style={{ opacity: '0.5' }}>Relevant for all devices</em>
+      <InternalListWrapper opened={props.listOpened}>
+        <Content>
+          <div style={{ padding: '0 10px 0 10px' }}>
+            <p style={{ textAlign: 'center' }}>
+              <strong>Items list should be set here</strong>
+              <br />
+              listOpened= {String(props.listOpened)}
+              <br />
+              <em style={{ opacity: '0.5' }}>Relevant for all devices</em>
+            </p>
+            <p>{`${'bla '.repeat(100)}bla.`}</p>
+            <p>{`${'bla '.repeat(100)}bla.`}</p>
+            <p>{`${'bla '.repeat(100)}bla.`}</p>
+            <p>{`${'bla '.repeat(100)}bla.`}</p>
+            <p>{`${'bla '.repeat(100)}bla.`}</p>
+            <p>{`${'bla '.repeat(100)}bla.`}</p>
+            <p>{`${'bla '.repeat(100)}bla.`}</p>
+            <p>{`${'bla '.repeat(100)}bla.`}</p>
+          </div>
         </Content>
         <ListDesktopToggler onClick={() => props.listToggler()}>
           {
