@@ -12,6 +12,7 @@ const Wrapper = styled('div')`
   }
 
   display: flex;
+  box-sizing: border-box;
 `;
 const Sidebar = styled('div')`
   background-color: white;
@@ -21,8 +22,8 @@ const Sidebar = styled('div')`
     width: 310px;
   }
   @media(max-width: 767px){
-    min-height: 100%;
-    min-width: 100%;
+    min-height: 100%; height: 100%;
+    min-width: 100%; width: 100%;
     position: absolute;
     z-index: 2;
     ${(p) => !p.opened && css`transform: translateX(-100%);`}
@@ -33,6 +34,8 @@ const Sidebar = styled('div')`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
+  box-sizing: border-box;
 `;
 
 const withLayout = (ComposedComponent) => compose(

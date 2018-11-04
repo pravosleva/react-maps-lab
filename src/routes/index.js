@@ -193,7 +193,7 @@ const routes = [
     path: '/issue3',
     exact: true,
     main: () => <Issue3 />,
-    link: { text: 'Issue3', descr: 'Issues #1 and #2 combination' },
+    link: { text: 'Issue3', descr: 'Issues #1 and #2 combination. In process...' },
   },
 ];
 const FlexHeader = styled('div')`

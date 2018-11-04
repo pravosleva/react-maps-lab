@@ -36,7 +36,6 @@ const List = styled('div')`
 
   ${(p) => !p.opened && css`transform: translateX(-100%); background-color: transparent;`}
 
-
   display: flex;
   justify-content: center;
   align-items: center;
