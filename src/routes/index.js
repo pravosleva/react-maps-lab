@@ -277,6 +277,7 @@ class Routes extends React.Component {
         <MainFlexWrapper>
           <MainFlexElement opened={this.props.currentPage.listOpenedOnMobile}>
             <LeftFlexContainer>
+
               <SearchSection>
                 <InputSearch
                   value={this.props.searchFieldValue}
@@ -367,6 +368,7 @@ class Routes extends React.Component {
                   }
                 </ul>
               </ExamplesSection>
+
               <OriginalDocSection>
                 <a
                   href='/'
@@ -397,6 +399,7 @@ class Routes extends React.Component {
                 }
                 ><i style={{ fontSize: '25px' }} className='fa fa-github'></i></a>
               </OriginalDocSection>
+
             </LeftFlexContainer>
           </MainFlexElement>
           <MainFlexElement>

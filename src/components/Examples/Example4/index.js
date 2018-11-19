@@ -164,7 +164,7 @@ const MyMapComponent = compose(
   </GoogleMap>
 );
 
-class MyFancyComponent extends React.PureComponent {
+class MyFancyComponent extends React.Component {
   state={
     items: this.props.items.map((e) => ({
       ...e,
@@ -173,6 +173,24 @@ class MyFancyComponent extends React.PureComponent {
     })),
     // zoom: 20,
   }
+
+  // static getDerivedStateFromProps(props, state) {
+  //   // Any time the current user changes,
+  //   // Reset any parts of state that are tied to that user.
+  //   // In this simple example, that's just the email.
+  //
+  //   if (props.items[0].lat !== state.items[0].lat) {
+  //     return {
+  //       items: props.items.map((e) => ({
+  //         ...e,
+  //         markerKey: Math.random(),
+  //         description: 'bla bla bla', // .repeat(50),
+  //       })),
+  //       // zoom: 20,
+  //     };
+  //   }
+  //   return null;
+  // }
 
   handleMarkerClick = async (marker) => {
     await this.props.dispatch(updateActiveMarkerKey(marker.markerKey));
@@ -207,4 +225,7 @@ class MyFancyComponent extends React.PureComponent {
   }
 };
 
-export const Example4 = withGoogleMapApiKey(connect(mapState)(compose(MyFancyComponent)));
+export const Example4 = compose(
+  withGoogleMapApiKey,
+  connect(mapState),
+)(MyFancyComponent);
