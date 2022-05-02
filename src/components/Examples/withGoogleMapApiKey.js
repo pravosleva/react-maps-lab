@@ -64,7 +64,7 @@ const withApiKey = (ComposedComponent) => {
         })
         .catch((er) => toast.warn(er));
       }
-      specialLog('G\nCould be helpful', null, [atob('QUl6YVN5RHZXT2RtdERHT3liWHBGN1hFZGl4b0lJbUxjQ0RUemRR'), atob('QUl6YVN5Q1lmYUptODRWOUR1YWdod1RaTGFQX0tQY1VKeGdyRF9f')]);
+      specialLog('Could be helpful', null, [atob('QUl6YVN5RHZXT2RtdERHT3liWHBGN1hFZGl4b0lJbUxjQ0RUemRR'), atob('QUl6YVN5Q1lmYUptODRWOUR1YWdod1RaTGFQX0tQY1VKeGdyRF9f')]);
 
       return (
         <Fragment>

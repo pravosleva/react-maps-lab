@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-google-maps/api": "^1.9.7",
     "google-map-react": "^1.0.6",
     "immutable": "^3.8.2",
     "local-storage": "^1.4.2",
@@ -14,8 +15,8 @@
     "pigeon-overlay": "^0.2.2",
     "points-cluster": "^0.1.4",
     "prop-types": "^15.6.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-geolocated": "^2.4.0",
     "react-google-maps": "^9.4.5",
     "react-json-tree": "^0.11.0",

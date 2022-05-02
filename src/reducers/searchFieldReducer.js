@@ -10,7 +10,7 @@ export const searchField = (state = { value: 'all', label: 'all' }, action) => {
   }
 }
 
-export const searchFieldValue = (state = '', action) => {
+export const searchFieldValue = (state = '2022', action) => {
   switch (action.type) {
     case actionType.UPDATE_SEARCH_FIELD_VALUE:
       return action.payload;

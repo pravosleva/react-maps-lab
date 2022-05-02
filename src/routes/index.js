@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom'; // , Redirect
 import Select from 'react-select';
 import { connect } from 'react-redux';
@@ -40,6 +40,7 @@ import {
 import { Issue1 } from '../components/Issues/Issue1';
 import { Issue2 } from '../components/Issues/Issue2';
 import { Issue3 } from '../components/Issues/Issue3';
+import { Issue4 } from '../components/Issues/Issue4';
 import { InputSearch } from '../components/Input';
 import { MainFlexWrapper, MainFlexElement } from '../components/MainWrapper';
 import {
@@ -48,7 +49,10 @@ import {
   updateReactSelectSelectedOption,
   updateCurrentPage,
 } from '../actions';
+import { GoogleAPIContext } from '../common/context/GoogleAPI'
 
+
+const REACT_APP_GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY || ''
 
 // console.log(typeof String.prototype.checkTheSubstr);
 
@@ -81,49 +85,49 @@ const routes = [
     path: '/example1',
     exact: true,
     main: () => <Example1 />,
-    link: { text: 'Example1', descr: 'Simplest map with a marker usage sample.' },
+    link: { text: 'Example 1', descr: 'Simplest map with a marker usage sample.' },
     exampleOf: 'react-google-maps',
   },
   {
     path: '/example2',
     exact: true,
     main: () => <Example2 />,
-    link: { text: 'Example2', descr: 'react-geolocated usage example\n(but only for external routing for the port!)\nAnd also open console then drag & drop the map...' },
+    link: { text: 'Example 2', descr: 'react-geolocated usage example\n(but only for external routing for the port!)\n\nAnd also open console then drag & drop the map...' },
     exampleOf: ['react-google-maps', 'react-geolocated'],
   },
   {
     path: '/example3',
     exact: true,
     main: () => <Example3 />,
-    link: { text: 'Example3', descr: 'HOC & withStateHandlers () example. Slider test.' },
+    link: { text: 'Example 3', descr: 'HOC & withStateHandlers () example. Slider test.' },
     exampleOf: ['react-slick'],
   },
   {
     path: '/example4',
     exact: true,
     main: () => <Example4 />,
-    link: { text: 'Example4', descr: `Markers and clustering.\nMarkers taken from the store and put to HOC state as modified array.\nBig json data sample. Attention! Antipattern commented (use Example5 instead)` },
+    link: { text: 'Example 4', descr: `Markers and clustering.\nMarkers taken from the store and put to HOC state as modified array.\n\nBig json data sample. Attention! Antipattern commented (use Example5 instead)` },
     exampleOf: 'react-google-maps',
   },
   {
     path: '/example5',
     exact: true,
     main: () => <Example5 />,
-    link: { text: 'Example5', descr: 'Better HOC pattern for Google Map instead of Example4.\nMap: minZoom & maxZoom as fixed options. Clusterer: maxZoom as fixed param.' },
+    link: { text: 'Example 5', descr: 'Better HOC pattern for Google Map instead of Example4.\n\nMap: minZoom & maxZoom as fixed options. Clusterer: maxZoom as fixed param.' },
     exampleOf: 'react-google-maps',
   },
   {
     path: '/example6',
     exact: true,
     main: () => <Example6 />,
-    link: { text: 'Example6', descr: 'Simple component experience.\n(FckUp)' },
+    link: { text: 'Example 6', descr: 'Simple component experience.\n(FckUp)' },
     exampleOf: 'google-map-react',
   },
   {
     path: '/example7',
     exact: true,
     main: () => <Example7 />,
-    link: { text: 'Example7', descr: 'HOC test for example. supercluster test.\n(FckUp)' },
+    link: { text: 'Example 7', descr: 'HOC test for example. supercluster test.\n(FckUp)' },
     exampleOf: 'google-map-react',
     githubLink: 'https://github.com/mapbox/supercluster',
   },
@@ -131,7 +135,7 @@ const routes = [
     path: '/example8',
     exact: true,
     main: () => <Example8 />,
-    link: { text: 'Example8', descr: 'Original sample.' },
+    link: { text: 'Example 8', descr: 'Original sample.' },
     exampleOf: 'google-map-react',
     githubLink: 'https://github.com/Tim152/clustering-google-map-react',
   },
@@ -139,41 +143,41 @@ const routes = [
     path: '/example9',
     exact: true,
     main: () => <Example9 />,
-    link: { text: 'Example9', descr: 'Google Map API KEY test.' },
+    link: { text: 'Example 9', descr: 'Google Map API KEY test.' },
   },
   {
     path: '/example10',
     exact: true,
     main: () => <Example10 />,
-    link: { text: 'Example10', descr: 'SearchBox test.' },
+    link: { text: 'Example 10', descr: 'SearchBox test.' },
     exampleOf: 'react-google-maps',
   },
   {
     path: '/example11',
     exact: true,
     main: () => <Example11 />,
-    link: { text: 'Example11', descr: 'Marker, Overlay test.' },
+    link: { text: 'Example 11', descr: 'Marker, Overlay test.' },
     exampleOf: ['pigeon-map', 'OpenStreetMap'],
   },
   {
     path: '/example12',
     exact: true,
     main: () => <Example12 />,
-    link: { text: 'Example12', descr: 'Layer, Feature test.' },
+    link: { text: 'Example 12', descr: 'Layer, Feature test.' },
     exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
   },
   {
     path: '/example13',
     exact: true,
     main: () => <Example13 />,
-    link: { text: 'Example13', descr: 'ReactMapboxGlCluster test.' },
+    link: { text: 'Example 13', descr: 'ReactMapboxGlCluster test.' },
     exampleOf: ['react-mapbox-gl', 'react-mapbox-gl-cluster', 'OpenStreetMap'],
   },
   {
     path: '/example14',
     exact: true,
     main: () => <Example14 />,
-    link: { text: 'Example14', descr: 'Marker, Cluster, Popup. In process...' },
+    link: { text: 'Example 14', descr: 'Marker, Cluster, Popup. In process...' },
     exampleOf: ['react-mapbox-gl', 'OpenStreetMap'],
     githubLink: 'https://github.com/alex3165/react-mapbox-gl/blob/HEAD/docs/API.md#cluster',
   },
@@ -181,19 +185,26 @@ const routes = [
     path: '/issue1',
     exact: true,
     main: () => <Issue1 />,
-    link: { text: 'Issue1', descr: 'LeftSidebar\n(retractable for max-width 767px).\nHOC experience like uremont.com' },
+    link: { text: 'Issue 1', descr: 'LeftSidebar\n(retractable for max-width 767px).\nHOC experience like uremont.com' },
   },
   {
     path: '/issue2',
     exact: true,
     main: () => <Issue2 />,
-    link: { text: 'Issue2', descr: 'Retractable List.\nHOC experience like uremont.com' },
+    link: { text: 'Issue 2', descr: 'Retractable List.\nHOC experience like uremont.com' },
   },
   {
     path: '/issue3',
     exact: true,
     main: () => <Issue3 />,
-    link: { text: 'Issue3', descr: 'Issues #1 and #2 combination.\nHOC experience like uremont.com' },
+    link: { text: 'Issue 3', descr: 'Issues #1 and #2 combination.\nHOC experience like uremont.com' },
+  },
+  {
+    path: '/issue4',
+    exact: true,
+    main: () => <Issue4 />,
+    exampleOf: ['@react-google-maps/api'],
+    link: { text: 'Issue 4 (2022)', descr: 'react-google-maps hooks and <code>getBound()</code> sample <a target=\'_blank\' href=\'https://stackoverflow.com/questions/62819850/react-google-maps-hooks-and-getbound/62821071#62821071\'>Read more ➡️</a>' },
   },
 ];
 const FlexHeader = styled('div')`
@@ -202,36 +213,27 @@ const FlexHeader = styled('div')`
   align-items: center;
 `;
 
-class Routes extends React.Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    searchField: PropTypes.object.isRequired,
-    selectedOption: PropTypes.object.isRequired,
-  }
+const Routes = ({
+  dataOptions,
+  dispatch,
+  searchField,
+  selectedOption,
+  currentPage,
+  searchFieldValue,
+}) => {
+  const handler = useCallback(
+    (text) => dispatch(updateSearchFieldValue(text)) // ,
+  );
 
-  // DEFAULT HANDLER:
-  // handler = (text) => {
-  //   this.props.dispatch(updateSearchFieldValue(text));
-  // }
+  useEffect(() => {
+    dispatch(updateCurrentPage({ routePath: window.location.pathname }));
+  }, [])
 
-  // DEBOUNCE WAY 1:
-  handler = // debounce(
-    (text) => this.props.dispatch(updateSearchFieldValue(text)) // ,
-  //   2000,
-  // )
+  const isThisCurrentRoute = useCallback((route) => {
+    route.path === currentPage.routePath;
+  }, [])
 
-  // DEBOUNCE WAY 1:
-  // componentWillUnmount() {
-  //   this.handler.cancel();
-  // }
-
-  componentDidMount() {
-    this.props.dispatch(updateCurrentPage({ routePath: window.location.pathname }));
-  }
-
-  isThisCurrentRoute = (route) => route.path === this.props.currentPage.routePath
-
-  getRemoteData = ({ url, method = 'GET', arg = {} }) => {
+  const getRemoteData = useCallback(({ url, method = 'GET', arg = {} }) => {
     const body = new FormData();
     const params = [
       // 'service_id',
@@ -269,20 +271,24 @@ class Routes extends React.Component {
           type: 'error',
         });
       });
-  }
+  }, [])
+  const mapRef = useRef()
+  const setMapRef = useCallback((map) => {
+    mapRef.current = map;
+  }, [])
 
-  render() {
-    return (
+  return (
+    <GoogleAPIContext.Provider value={{ mapRef, setMapRef, googleMapsApiKey: REACT_APP_GOOGLE_MAPS_API_KEY }}>
       <BrowserRouter>
         <MainFlexWrapper>
-          <MainFlexElement opened={this.props.currentPage.listOpenedOnMobile}>
+          <MainFlexElement opened={currentPage.listOpenedOnMobile}>
             <LeftFlexContainer>
 
               <SearchSection>
                 <InputSearch
-                  value={this.props.searchFieldValue}
-                  onChange={(e) => this.handler(e.target.value)}
-                  placeholder='Search by substring...'
+                  value={searchFieldValue}
+                  onChange={(e) => handler(e.target.value)}
+                  placeholder='Search by lib name substr'
                 />
                 {/*
                 <Select
@@ -297,20 +303,20 @@ class Routes extends React.Component {
                 <ul style={{ listStyleType: 'none', padding: '0', marginTop: '0', marginBottom: '0' }}>
                   {
                     routes.filter((r) => (
-                      !this.props.searchFieldValue
+                      !searchFieldValue
                         ? true
-                        : r.link.descr &&  this.props.searchFieldValue.checkAsSubstrByWords(r.link.descr)
+                        : r.link.descr && ((!!r.exampleOf && searchFieldValue.checkAsSubstrByWords(r.exampleOf)) || searchFieldValue.checkAsSubstrByWords(r.link.descr) || searchFieldValue.checkAsSubstrByWords(r.link.text))
                           ? true
                             : r.exampleOf
-                              ? r.exampleOf.includes(this.props.searchFieldValue)
+                              ? r.exampleOf.includes(searchFieldValue)
                               : false
                     )).map((route, index) => (
                       route.link ? (
-                        <li key={index} style={{ padding: '10px 20px 10px 20px', backgroundColor: this.isThisCurrentRoute(route) ? '#ABDFF3' : 'transparent' }}>
+                        <li key={index} style={{ padding: '10px 20px 10px 20px', backgroundColor: isThisCurrentRoute(route) ? '#ABDFF3' : 'transparent' }}>
                           <FlexHeader>
                             <Link
                               to={route.path}
-                              onClick={() => this.props.dispatch(updateCurrentPage({ ...this.props.currentPage , routePath: route.path }))}
+                              onClick={() => dispatch(updateCurrentPage({ ...currentPage , routePath: route.path }))}
                             >{route.link.text}</Link>
                             {
                               route.githubLink
@@ -329,7 +335,12 @@ class Routes extends React.Component {
                             : null
                           }
                           {
-                            route.link.descr ? <Descr style={{ paddingLeft: '15px', color: this.isThisCurrentRoute(route) ? 'inherit' : 'gray' }}>{route.link.descr}</Descr> : null
+                            route.link.descr ? (
+                              <Descr
+                                style={{ paddingLeft: '15px', color: isThisCurrentRoute(route) ? 'inherit' : 'gray' }}
+                                dangerouslySetInnerHTML={{ __html: route.link.descr }}
+                              />
+                            ) : null
                           }
                           {
                             route.articlesLinks
@@ -347,17 +358,17 @@ class Routes extends React.Component {
                             ? (
                               <div style={{ 'padding': '0 10px 10px 15px' }}>
                                 <Select
-                                  value={this.props.selectedOption}
+                                  value={selectedOption}
                                   onChange={async (option) => {
                                     // console.log(e);
                                     if (option.remote === true) {
-                                      this.getRemoteData({ url: 'http://dev.uservice.io/customer/map/get-services/', method: 'POST' });
+                                      getRemoteData({ url: 'http://dev.uservice.io/customer/map/get-services/', method: 'POST' });
                                       // .then(() => ) // this.props.dispatch(updateReactSelectSelectedOption(option));
                                       return;
                                     }
-                                    await this.props.dispatch(updateReactSelectSelectedOption(option));
+                                    await dispatch(updateReactSelectSelectedOption(option));
                                   }}
-                                  options={this.props.dataOptions}
+                                  options={dataOptions}
                                 />
                               </div>
                             ) : null
@@ -418,20 +429,16 @@ class Routes extends React.Component {
             </Switch>
           </MainFlexElement>
           <TogglerBtn
-            onClick={() => this.props.dispatch(updateCurrentPage({ ...this.props.currentPage , listOpenedOnMobile: !this.props.currentPage.listOpenedOnMobile }))}
+            onClick={() => dispatch(updateCurrentPage({ ...currentPage , listOpenedOnMobile: !currentPage.listOpenedOnMobile }))}
           >
-            {this.props.currentPage.listOpenedOnMobile ? <i style={{ fontSize: '30px' }} className='fa fa-bars'></i> : <i style={{ fontSize: '30px' }} className='fa fa-times'></i>}
+            {currentPage.listOpenedOnMobile ? <i style={{ fontSize: '30px' }} className='fa fa-bars'></i> : <i style={{ fontSize: '30px' }} className='fa fa-times'></i>}
           </TogglerBtn>
           <ToastContainer autoClose={7000} position='top-right' />
         </MainFlexWrapper>
       </BrowserRouter>
-    )
-  }
+    </GoogleAPIContext.Provider>
+  )
 };
-
-// Routes.defaultProps = {
-//   selectedOption: {},
-// };
 
 function mapStateToProps ({ searchField, searchFieldValue, markers, currentPage }) {
   return {
